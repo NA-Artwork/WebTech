@@ -2,6 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
   lang="en-GB" xml:lang="en-GB">
 <head>
+  <script>
+  function changeImage() {
+      var image = document.getElementById('myImage');
+      if (image.src.match("elva1")) {
+          image.src = "Client/images/content/elva2.jpg";
+      } else {
+          image.src = "Client/images/content/elva1.jpg";
+      }
+  }
+  </script>
 <meta charset="UTF-8"/>
 <link rel="stylesheet" type="text/css" href="Client/style.css"/>
   <title> Elva Arce Artist </title>
@@ -35,7 +45,7 @@
 
   <div class="content">
     <div class="grid">
-        <img src="Client/images/content/elva1.jpg" alt="Photo of elva in her coconut bra"/>
+        <img id="myImage" onclick="changeImage()" src="Client/images/content/elva1.jpg" alt="Photo of elva in her coconut bra"/>
     </div>
     <div class="grid">
       <img src="Client/images/content/elva2.jpg" alt="malakies" />
@@ -57,5 +67,6 @@
   aakahakjahakaj<br/>  <dfn>sslksjslksjsl</dfn>
   </div>
   <a href="Client/home.html">HOME</a>
+
 </body>
 </html>
