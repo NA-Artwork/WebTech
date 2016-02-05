@@ -2,16 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
   lang="en-GB" xml:lang="en-GB">
 <head>
-  <script>
-  function changeImage() {
-      var image = document.getElementById('myImage');
-      if (image.src.match("elva1")) {
-          image.src = "Client/images/content/elva2.jpg";
-      } else {
-          image.src = "Client/images/content/elva1.jpg";
-      }
-  }
-  </script>
+  <script src="myscripts.js" type="text/javascript" />
 <meta charset="UTF-8"/>
 <link rel="stylesheet" type="text/css" href="Client/style.css"/>
   <title> Elva Arce Artist </title>
@@ -28,7 +19,9 @@
       <a href="mailto:elvarceteixeira@gmail.com?Subject=Site%20contact">
       <img src="Client/images/email.png" alt="mailto:elvarceteixeira@gmail.com" width="40" height="40" />
     </a>
-    <img src="Client/images/tel.png" alt="0775465651651" width="40" height="40" />
+  <div class="tooltip"><span class="tooltiptext">0775465651</span>
+  <img src="Client/images/tel.png" alt="0775465651651" width="40" height="40" />
+</div>
 </div>
 <nav>
   <ul>
@@ -45,13 +38,14 @@
 
   <div class="content">
     <div class="grid">
-        <img id="myImage" onclick="changeImage()" src="Client/images/content/elva1.jpg" alt="Photo of elva in her coconut bra"/>
+    <button type="button" onclick="changeImage()">SWAP</button>
+        <img  src="Client/images/content/1.jpg" alt="Photo of elva in her coconut bra"/>
     </div>
     <div class="grid">
-      <img src="Client/images/content/elva2.jpg" alt="malakies" />
+      <img src="Client/images/content/2.jpg" alt="malakies" />
     </div>
     <div class="grid">
-      <img src="Client/images/content/elva3.jpg" alt="malakies" />
+      <img id="myImage" onclick="changeImage()" src="Client/images/content/1.jpg" alt="malakies" />
     </div>
     <div class="grid">
     <img src="Client/images/content/elva4.jpg" alt="malakies" />
