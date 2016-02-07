@@ -27,7 +27,12 @@ nav li{
 float: left;
 margin-right: 1em;
 }
-
+#butn{
+  position: fixed;
+  top:400px;
+  left:55%;
+  margin-top: 20px;
+}
 #contact{
   display:inline;
   margin:0;
@@ -47,9 +52,20 @@ body{
   background-color: #FFF;
   text-align: center;
 }
+
+/*--------------------------------------------------------------------
+* ----------------------------- Intro.html Style--------------------*/
 div{
   margin:0;
   padding:0;
+}
+.introTitle{
+  position: fixed;
+  top:200px;
+}
+.app{
+  position: fixed;
+  top:100px;
 }
 .content{
   margin: 15% 15% auto;
@@ -73,8 +89,7 @@ a {
   border-width: 2px;
   margin:0;
   margin-bottom: 10%;
-  height:30%;
-  width:30%;
+  width:60%;
 }
 figurecaption{
   color:#B44;

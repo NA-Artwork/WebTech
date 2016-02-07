@@ -1,12 +1,19 @@
+
+    var images = {folder:"Client/images/content/", num:1, ext:".jpg"};
 function changeImage() {
     var image = document.getElementById('myImage');
-    var imagefolder="Client/images/content/";
-    var imageExt=".jpg";
-    var imageNum= /\d+$/.exec(image.src);
-    var imageInt=parseInt(imageNum);
-    if (image.src.match("Client/images/content/1.jpg")) {
-        image.src = imagefolder+imageNum+imageExt;
-    } else {
-        image.src = "Client/images/content/1.jpg";
+    images.num++;
+    if (images.num > 3) {
+        images.num = 1;
     }
+    image.src = images.folder+images.num+images.ext;
+
 }
+
+var uniqueID = (function() {
+   var id = 0; // This is the private persistent value
+   // The outer function returns a nested function that has access
+   // to the persistent value.  It is this nested function we're storing
+   // in the variable uniqueID above.
+   return function() {return id++;};  // Return and increment
+})(); // Invoke the outer function after defining it.
