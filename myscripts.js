@@ -9,7 +9,7 @@ function changeImage() {
     image.src = images.folder+images.num+images.ext;
 
 }
-
+/*
 var uniqueID = (function() {
    var id = 0; // This is the private persistent value
    // The outer function returns a nested function that has access
@@ -17,3 +17,4 @@ var uniqueID = (function() {
    // in the variable uniqueID above.
    return function() {return id++;};  // Return and increment
 })(); // Invoke the outer function after defining it.
+*/
