@@ -1,5 +1,5 @@
 
-    var images = {folder:"Client/images/content/", num:1, ext:".jpg"};
+    var images = {folder:"client/images/content/", num:1, ext:".jpg"};
 function changeImage() {
     var image = document.getElementById('myImage');
     images.num++;
