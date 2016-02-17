@@ -1,75 +1,50 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
-
 <head>
-  <script src="myscripts.js" type="text/javascript" />
-  <meta charset="UTF-8"/>
-  <link rel="stylesheet" type="text/css" href="style.css"/>
-  <title> Elva Arce Artist </title>
+	<title>How to create a valid HTML Photo Gallery for All Browsers</title>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<script type="text/javascript" src="gallery.js"></script>
 </head>
 
 <body>
 
-  <header>
-    <div class="titleBar"><img src="images/title.png" alt="ELVA ARCE TEIXEIRA" />
-      <div id="contact">
-        <a href="http://www.facebook.com/elva.teixeira">
-          <img src="images/faceb.png" alt="facebook" width="45" height="45" />
-        </a>
-        <a href="mailto:elvarceteixeira@gmail.com?Subject=Site%20contact">
-          <img src="images/email.png" alt="mailto:elvarceteixeira@gmail.com" width="40" height="40" />
-        </a>
-        <div class="tooltip"><span class="tooltiptext">0775465651</span>
-          <img src="images/tel.png" alt="0775465651651" width="40" height="40" />
-        </div>
-      </div>
-      <div class="dropdown">
-  <span>Mouse over me</span>
-  <div class="dropdown-content">
-    <p><a href="../index.html">Home</a></p>
-  </div>
-</div>
-      <nav>
-        <ul>
-          <li><a href="intro.html">HOME</a></li>
-          <li>ABOUT</li>
-          <li>PORTFOLIO</li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<h2>How to create a valid HTML Photo Gallery for All Browsers</h2>
 
-  <div class="content">
-    <div id="butn">
-      <button type="button" onclick="changeImage()">SWAP</button>
-      <br/>
-    </div>
-    <div class="grid">
-      <img  src="images/content/1.jpg" alt="Photo of elva in her coconut bra"/>
-    </div>
-    <div class="grid">
-      <img src="images/content/2.jpg" alt="malakies" />
-    </div>
-    <div class="grid">
-      <img id="myImage" onclick="changeImage()" src="images/content/1.jpg" alt="malakies" />
-    </div>
-    <div class="grid">
-      <img src="images/content/elva4.jpg" alt="malakies" />
-    </div>
-    <div class="grid">
-      <img src="images/content/elva4.jpg" alt="malakies" />
-    </div>
-    <div class="grid">
-      <img src="images/content/elva4.jpg" alt="malakies" />
-    </div>
-  </div>
-  <div class="grid">
-    aakahakjahakaj
-    <br/>
-    <dfn>sslksjslksjsl</dfn>
-  </div>
-  <a href="home.html">HOME</a>
+<p><strong>View whole tutorial here:</strong> <a href="http://www.extremestudio.ro/blog/?p=4577">http://www.extremestudio.ro/blog/?p=4577</a></p>
+
+<small>Valid in all browser including IE6 and IE7.</small>
+
+<div id="gallery">
+	<div id="thumbs">
+		<a href="javascript: changeImage(1);"><img src="images/image1.png" alt="" /></a>
+		<a href="javascript: changeImage(2);"><img src="images/image2.png" alt="" /></a>
+		<a href="javascript: changeImage(3);"><img src="images/image3.png" alt="" /></a>
+		<a href="javascript: changeImage(4);"><img src="images/image4.png" alt="" /></a>
+		<a href="javascript: changeImage(5);"><img src="images/image5.png" alt="" /></a>
+	</div>
+
+	<div id="bigimages">
+		<div id="normal1">
+			<img src="images/bigimage1.png" alt=""/>
+		</div>
+
+		<div id="normal2">
+			<img src="images/bigimage2.png" alt=""/>
+		</div>
+
+		<div id="normal3">
+			<img src="images/bigimage3.png" alt=""/>
+		</div>
+
+		<div id="normal4">
+			<img src="images/bigimage4.png" alt=""/>
+		</div>
+
+		<div id="normal5">
+			<img src="images/bigimage5.png" alt=""/>
+		</div>
+	</div>
+</div>
 
 </body>
-
 </html>
