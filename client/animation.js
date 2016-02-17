@@ -1,31 +1,38 @@
-function animate() {
+var animate = function() {
     var image1 = document.getElementById('drop1');
     var image2 = document.getElementById('drop2');
+    var image3 = document.getElementById('drop3');
+    var image4 = document.getElementById('drop4');
+    var image5 = document.getElementById('drop5');
     var mainImage = document.getElementById('logo');
-    var posX1 = 0;
-    var posY1 = 0;
-    var posX2 = 0;
-    var posY2 = 0;
-    // image.height = image.height+5;
-    // image.width = image.width+5;
-    image1.style.opacity = 1;
-    image2.style.opacity = 1;
-    mainImage.style.opacity = 1;
-    var id = setInterval(frame, 10);
-    function frame() {
-           if (posY2 == 350) {
+    var counter = 0;
+    var id = setInterval(frame, 500);
+      function frame() {
+            if (mainImage.style.opacity == 1) {
                clearInterval(id);
-           } else {
-               posY1++;
-               posX1=2*posY1*(.01*posY1);
-               posY2=.1*posY1;
-               posX2=3*posY1*(.01*posY1);
-
-               image1.style.top = posY1 + 'px';
-               image1.style.left = posX1 + 'px';
-               image2.style.top = posY2 + 'px';
-               image2.style.left = posX2 + 'px';
-
+           } else if (counter== 0){
+             image1.style.opacity = 1;
+             counter++;
+           } else if (counter == 1){
+             image2.style.opacity = 1;
+             counter++;
            }
+           else if (counter == 2){
+             image3.style.opacity = 1;
+             counter++;
+           }
+           else if (counter == 3){
+             image4.style.opacity = 1;
+             counter++;
+           }
+           else if (counter == 4){
+             image5.style.opacity = 1;
+             counter++;
+           }
+           else if(counter ==5){
+             mainImage.style.opacity = 1;
+           }
+
     }
 }
+window.onload = animate;
