@@ -27,11 +27,19 @@ nav ul{
   margin-right: auto;
 }
 nav li{
-border-top: thick double #ff0000;
+border-top: solid #0033cc;
 float: left;
 margin-right: 10px;
 padding-right: 10em;
 }
+
+nav body{
+  font-family: Arial, Helvetica, sans-serif;
+  margin:0px auto;
+  background-color: #FFF;
+  text-align: center;
+}
+
 #butn{
   position: fixed;
   top:400px;
