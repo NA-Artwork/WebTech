@@ -117,14 +117,13 @@ div{
 }
 .content-artwork .grid{
   height: 15%;
-  width: 45%;
+  width: 25%;
   display: inline-block;
   margin: 10% 0 0 0;
   padding-right: 0;
 }
 .content-artwork .grid img{
-  border-style: dashed;
-  border-color: #ccc;
+  box-shadow: 1px 1px ;
   border-width: 2px;
   margin:0;
   margin-bottom: 10%;
