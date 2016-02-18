@@ -67,7 +67,7 @@ float:right;
 body{
   font-family: 'Fredericka the Great', cursive;
   margin:0px auto;
-  background-image: url('client/images/back.jpg');
+  background-image: url('images/back.jpg');
   background-color: #FFF;
   text-align: center;
 }
