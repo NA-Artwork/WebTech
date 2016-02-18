@@ -4,6 +4,7 @@
 <head>
   <script src="myscripts.js" type="text/javascript" />
   <meta charset="UTF-8"/>
+  <link href='https://fonts.googleapis.com/css?family=Fredericka+the+Great' rel='stylesheet' type='text/css'/>
   <link rel="stylesheet" type="text/css" href="style.css"/>
   <title> Elva Arce Artist </title>
 </head>
@@ -11,41 +12,36 @@
 <body>
 
   <header>
-    <div class="titleBar"><img src="images/title.png" alt="ELVA ARCE TEIXEIRA" />
-      <div id="contact">
-        <a href="http://www.facebook.com/elva.teixeira">
-          <img src="images/faceb.png" alt="facebook" width="45" height="45" />
-        </a>
-        <a href="mailto:elvarceteixeira@gmail.com?Subject=Site%20contact">
-          <img src="images/email.png" alt="mailto:elvarceteixeira@gmail.com" width="40" height="40" />
-        </a>
-        <div class="tooltip"><span class="tooltiptext">0775465651</span>
-          <img src="images/tel.png" alt="0775465651651" width="40" height="40" />
-        </div>
-      </div>
-      <div class="dropdown">
-  <span>Mouse over me</span>
-  <div class="dropdown-content">
-    <p><a href="../index.html">Home</a></p>
-  </div>
-</div>
+    <div class="titleEAT"><a href ="//localhost:8081">ELVA <br/> ARCE <h1>TEIXEIRA</h1></a></div>
       <nav>
         <ul>
+
+          <!-- <hr/>  hr creates a line above the text -->
           <li><a href="intro.html">HOME</a></li>
-          <li>ABOUT</li>
-          <li>PORTFOLIO</li>
+          <li><a href="about.html">ABOUT</a></li>
+          <!-- drop down menu start -->
+          <div class="dropdown">
+
+
+            <li><a href="">ARTWORK</a></li>
+            <div class="dropdown-content">
+              <li><a href="painting.html">PAINTINGS</a></li>
+              <li><a href="wall_painting.html">MIXED TECHNIQUES</a></li>
+              <li><a href="islamic_art.html">ISLAMIC ART</a></li>
+            </div>
+          </div>
+                    <div class="dropdown">
+          <li><a href="about.html">CONTACT</a></li>
+        </div>
+          <!-- drop down menu finish  -->
         </ul>
       </nav>
-    </div>
   </header>
 
-  <div class="content">
-    <div id="butn">
-      <button type="button" onclick="changeImage()">SWAP</button>
-      <br/>
-    </div>
+  <div class="content-artwork">
     <div class="grid">
-      <img  src="images/content/1.jpg" alt="Photo of elva in her coconut bra"/>
+      <a href= "info.html">
+      <img  src="images/content/1.jpg" alt="Photo of elva in her coconut bra"/></a>
     </div>
     <div class="grid">
       <img src="images/content/2.jpg" alt="malakies" />
