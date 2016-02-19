@@ -1,4 +1,3 @@
-use "strict";
 var Slider = function(options){
     var bar,
         slider,
