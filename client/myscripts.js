@@ -1,4 +1,4 @@
-
+use "strict";
     var images = {folder:"images/content/", num:1, ext:".jpg"};
 function changeImage() {
     var image = document.getElementById('myImage');
