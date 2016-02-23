@@ -7,7 +7,7 @@ var animate = function() {
     var mainImage = document.getElementById('logo');
     var animDiv = document.getElementsByClassName('animation');
     var counter = 0;
-    var counter2 = 10.0;
+    var counter2 = 10;
     var posY = 45;
     var posX = 40;
     mainImage.style.top = posY +"%";
@@ -45,16 +45,16 @@ var animate = function() {
            }
            counter++;
     }
-     id = setInterval(frame2, 100);
+     var id2 = setInterval(frame2, 100);
         function frame2() {
-          if(counter2 <= 0.0){
-            clearInterval(id);
+          if(counter2 <= 0){
+            clearInterval(id2);
           }
-          else if (counter2 >0.0){
-            counter2--;
-            mainImage.style.opacity = mainImage.style.opacity - .1;
+          else if (counter2 >0){
+            counter2=counter2-1;
+            mainImage.style.opacity =0;
           }
         }
 }
 window.onload = animate;
-setTimeout( "window.location.href = 'home.html'",5000);
+setTimeout( "window.location.href = 'home.html'",8000);

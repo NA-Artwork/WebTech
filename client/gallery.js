@@ -1,11 +1,20 @@
-function changeImage(current) {
-	var imagesNumber = 3;
+var modal = document.getElementById('myModal');
 
-	for (i=1; i<=imagesNumber; i++) {
-		if (i == current) {
-			document.getElementById("normal" + current).style.display = "block";
-		} else {
-			document.getElementById("normal" + i).style.display = "none";
-		}
-	}
+var span = document.getElementById('close');
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+
+var images = document.getElementsByTagName('img');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+var i;
+for (i = 0; i < images.length; i++) {
+   images[i].onclick = function(){
+       modal.style.display = "block";
+       modalImg.src = this.src;
+       modalImg.alt = this.alt;
+       captionText.innerHTML = this.nextElementSibling.innerHTML;
+   }
 }

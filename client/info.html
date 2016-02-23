@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
 
 <head>
-  <script src="myscripts.js" type="text/javascript" />
+
   <meta charset="UTF-8"/>
   <link href='https://fonts.googleapis.com/css?family=Fredericka+the+Great' rel='stylesheet' type='text/css'/>
   <link rel="stylesheet" type="text/css" href="style.css"/>
-  <link rel="stylesheet" type="text/css" href="artwork.css"/>
+  <link rel="stylesheet" type="text/css" href="gallery.css"/>
   <title> Elva Arce Artist </title>
 </head>
 
@@ -40,28 +40,52 @@
       </nav>
   </header>
 
-  <div class="content-info">
-
-    <div class="grid">
-      <img  src="images/content/1.jpg" alt="Photo of elva in her coconut bra"/>
-    </div>
-    <div class="grid">
-      <img src="images/content/2.jpg" alt="malakies" />
-    </div>
-    <div class="grid">
-    </div>
-    <div class="grid">
-      <img src="images/content/elva4.jpg" alt="malakies" />
-    </div>
-    <div class="grid">
-    </div>
-    <div class="grid">
-      <img src="images/content/elva4.jpg" alt="malakies" />
-    </div>
+<div class="responsive">
+  <div class="img">
+      <img src="images/content/1.jpg" alt="Trolltunga Norway" width="300" height="200"/>
+    <div class="desc">Trolltunga Norway</div>
   </div>
+</div>
 
-<div class="content"/>
-<br/><br/><br/><br/><br/>
+
+<div class="responsive">
+  <div class="img">
+    <img src="images/content/2.jpg" alt="Forest" width="300" height="200"/>
+    <div class="desc">Forest Bridge</div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="img">
+    <img src="images/content/3.jpg" alt="Northern Lights" width="300" height="200"/>
+    <div class="desc">Northern Lights, Norway</div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="img">
+    <img src="images/content/4.jpg" alt="Mountains" width="300" height="200"/>
+    <div class="desc">Beautiful Mountains</div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span id="close">×</span>
+  <img class="modal-content" id="img01"/>
+  <div id="caption"></div>
+</div>
+  <script src="gallery.js" type="text/javascript" />
+
+
+
+
+
+
+<!-- qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq -->
+
 </body>
 
 </html>

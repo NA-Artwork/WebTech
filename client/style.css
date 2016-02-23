@@ -198,3 +198,8 @@ figurecaption{
     display: block;
 }
 /* end of drop down menu */
+/*-------------------Gallery stuff----------------------------------*/
+#thumbs img{
+  align-self: center;
+  width:80px;
+}
