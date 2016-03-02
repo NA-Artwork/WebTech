@@ -9,8 +9,8 @@ var https = require('https');
 var fs = require('fs');
 var path = require('path');
 
-// The default port numbers are the standard ones [8081,8443] for convenience.
-// Change them to e.g. [80818081,88443] to avoid privilege or clash problems.
+// The default port numbers are the standard ones [80,8443] for convenience.
+// Change them to e.g. [8080,88443] to avoid privilege or clash problems.
 var ports = [8081, 8443];
 
 // The most common standard file extensions are supported.
