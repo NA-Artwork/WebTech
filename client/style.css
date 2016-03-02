@@ -163,9 +163,8 @@ figurecaption{
   z-index: 1;
 }
 .titleEAT{
-  position:absolute;
+  position:fixed;
   top:  40px;
-  left: 60px;
   height: inherit;
   color: #274287;
   font-family: 'Fredericka the Great', cursive;
@@ -175,6 +174,7 @@ figurecaption{
 /*end Title block*/
 /* start of drop down menu */
 .dropdown {
+  margin:15% auto;
   font-family: 'Fredericka the Great', cursive;
     position: relative;
     display: inline-block;
@@ -183,7 +183,7 @@ figurecaption{
 .dropdown-content {
     font-size: .7em;
     display: none;
-    margin-top: 1.5em;
+    margin: 1.5em auto;
     position: absolute;
     padding-top: 1em;
     background-color: #f9f9f9;
