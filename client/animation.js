@@ -5,11 +5,14 @@ var animate = function() {
     var image4 = document.getElementById('drop4');
     var image5 = document.getElementById('drop5');
     var mainImage = document.getElementById('logo');
+    var maintitle = document.getElementById('titleEAT');
     var animDiv = document.getElementsByClassName('animation');
     var counter = 0;
     var counter2 = 10;
     var posY = 45;
     var posX = 40;
+    maintitle.style.top = posY +"%";
+    maintitle.style.left = posX +"%";
     mainImage.style.top = posY +"%";
     mainImage.style.left = posX +"%";
     image1.style.top = (posY+10) +"%";
@@ -24,7 +27,7 @@ var animate = function() {
     image5.style.left = (posX+11) +"%";
     var id = setInterval(frame, 250);
       function frame() {
-            if (mainImage.style.opacity == 1) {
+            if (maintitle.style.opacity == 1) {
                clearInterval(id);
            } else if (counter== 0){
              image1.style.opacity = 1;
@@ -42,6 +45,9 @@ var animate = function() {
            }
            else if(counter ==10){
              mainImage.style.opacity = 1;
+           }
+           else if(counter ==11){
+             maintitle.style.opacity = 1;
            }
            counter++;
     }
