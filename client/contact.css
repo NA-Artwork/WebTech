@@ -1,0 +1,18 @@
+.form{
+
+}
+.form ul{
+  list-style-type: none;
+  text-align: right;
+  margin-right: 45%
+}
+
+input {
+  position:relative;
+  width:20%;
+  height: 5%;
+
+}
+textarea{
+  position: relative;
+}
