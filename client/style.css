@@ -147,19 +147,34 @@ figurecaption{
 }
 /*end Title block*/
 /* start of drop down menu */
+
+
 .dropdown {
   font-family: 'Fredericka the Great', cursive;
     position: relative;
     display: inline-block;
-
 }
 
 .dropdown-content {
-    display: none;
     font-size: .7em;
-    text-align: center;
-    z-index: -1;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: inherit;
+    z-index: 1;
 }
+.dropdown-content li {
+  margin-top: .5em;
+
+}
+.dropdown-content a:hover {
+  color:green;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 
 .dropdown-content ul{
     background-color: rgba(255, 255, 255, 1);
@@ -172,14 +187,6 @@ figurecaption{
   z-index: -1;
 }
 
-.dropdown-content a:hover {
-  color:green;
-}
-
-
-.dropdown:hover .dropdown-content {
-    display:block;
-}
 /* end of drop down menu */
 /*-------------------Gallery stuff----------------------------------*/
 #thumbs img{
