@@ -8,10 +8,11 @@ color:green;
 header{
   position: fixed;
   top:0;
+  left:0;
   width:100%;
-  height: 30%;
+  height: 25%;
   background-color: #FFF;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
   box-shadow: 0px 0px 10px 1px lightgrey;
 }
@@ -25,9 +26,7 @@ footer{
   box-shadow: 0px 0px 10px 1px lightgrey;
 
 }
-.menuBut{
-  margin-right: 20px;
-}
+
 nav{
   font-family: 'Fredericka the Great', cursive;
   position:fixed;
@@ -45,10 +44,9 @@ nav ul{
   text-align: center;
 }
 nav li{
-  /*float: left;*/
-  margin-right: 50px;
+  margin-right: 3em;
   padding: 0 0 0 0;
-  display: inline-block;
+  display: inline-flex;
 }
 nav body{
   margin:0px auto;
@@ -59,19 +57,6 @@ nav body{
   top:400px;
   left:55%;
   margin-top: 20px;
-}
-#contact{
-  display:inline;
-  margin:0;
-  width:5%;
-float:right;
-}
-.titleBar {
-  height: 30%;
-  margin: 0 0 0 0;
-  position: fixed;
-  top:0%;
-  background:#FFF;
 }
 body{
   font-family: 'Fredericka the Great', cursive;
@@ -92,7 +77,7 @@ svg{
   top:200px;
   width: 20%;
   height: 20%;
-  z-index: 2;
+  z-index: 0;
 }
 .message{
   height:400px;
@@ -165,35 +150,35 @@ figurecaption{
 .dropdown {
   font-family: 'Fredericka the Great', cursive;
     position: relative;
-    display: inline-block;
+    display: inline;
+
 }
 
 .dropdown-content {
-    font-size: .7em;
     display: none;
-    margin: 1.5em auto;
-    position: relative;
-    padding-top: 1em;
-    background-color: #f9f9f9;
-    min-width: 400px;
-    z-index: 1;
+    font-size: .7em;
+    text-align: center;
+    z-index: -1;
 }
+
 .dropdown-content ul{
- float: right;
-  position: fixed;
-  padding: 1em auto;
+    background-color: rgba(255, 255, 255, 1);
+    /*width:100px;*/
+  text-align: center;
+  padding-top: 1em;
+  margin: 0 0 0 0;
+  display: block;
+  box-shadow: 0px 0px 10px 1px lightgrey;
+  z-index: -1;
 }
+
 .dropdown-content a:hover {
   color:green;
 }
-.dropdown-content:hover li{
-  position:relative;
- display: inline;
 
-}
 
 .dropdown:hover .dropdown-content {
-    display: inline;
+    display:block;
 }
 /* end of drop down menu */
 /*-------------------Gallery stuff----------------------------------*/
