@@ -13,48 +13,51 @@
 
 
 <body>
-    <header>
+  <header>
 
-      <div class="titleEAT"><a href ="//localhost:8081">ELVA ARCE</a></div>
-        <nav>
-          <ul>
-            <li><a href="intro.html">HOME</a></li>
-            <li><a href="about.html">ABOUT</a></li>
-            <!-- drop down menu start -->
-              <li>
-            <div class="dropdown">
-                <a href="">ARTWORK</a>
-              <div class="dropdown-content">
-                <ul>
-                <li><a href="painting.html">PAINTINGS</a></li>
-                <li><a href="wall_painting.html">MIXED TECHNIQUES</a></li>
-                <li><a href="islamic_art.html">ISLAMIC ART</a></li>
-              </ul>
-              </div>
-            </div>
-              </li>
+    <div class="titleEAT"><a href ="//localhost:8081">ELVA ARCE</a></div>
+      <nav>
+        <ul>
+
+          <!-- <hr/>  hr creates a line above the text -->
+          <li><a href="intro.html">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <!-- drop down menu start -->
+
+
             <li>
-                      <div class="dropdown">
-              <a href="contact.html">CONTACT</a>
+          <div class="dropdown">
+              <a href="">ARTWORK</a>
+            <div class="dropdown-content">
+              <a href="painting.html">PAINTINGS</a>
+              <a href="wall_painting.html">MIXED TECHNIQUES</a>
+              <a href="islamic_art.html">ISLAMIC ART</a>
+            </div>
           </div>
             </li>
-            <!-- drop down menu finish  -->
-          </ul>
-        </nav>
-    </header>
+          <li>
+                    <div class="dropdown">
+            <a href="contact.html">CONTACT</a>
+        </div>
+          </li>
+          <!-- drop down menu finish  -->
+        </ul>
+      </nav>
+  </header>
 <div class="content-info">
   <div class="form">
   <form action="demo_form.asp">
     <ul>
-  <li>First name: <input type="text" name="FirstName" value="Mickey"/></li>
-  <li>Last name: <input type="text" name="LastName" value="Mouse"/></li>
-  <li>Email:     <input type="text" name="Contact Email value" value="Mouse"/></li>
-</ul>
-
-<br/><textarea rows="14" cols="80"> "Please insert message here"
+  <li>First name: <input type="text" name="FirstName" value=""/></li>
+  <li>Last name: <input type="text" name="LastName" value=""/></li>
+  <li>Email:     <input type="text" name="ContactEmail" value=""/></li>
+<li><br/>
+<textarea rows="14" cols="80"> "Please insert message here"
 </textarea>
+</li><br/>
+<input type="submit" value="Send"/>
+</ul>
   </form>
-  <input type="submit" value="Submit"/>
 
 </div>
 

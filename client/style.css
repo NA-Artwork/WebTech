@@ -169,10 +169,14 @@ figurecaption{
   width:80px;
 }
 /*----------contact.html page-------------------------------------*/
+.form{
+  display: block;
+  width: 70%;
+}
 .form ul{
   list-style-type: none;
   text-align: right;
-  margin-right: 45%
+  margin: 1em auto;
 }
 .about-text{
   float: right;
@@ -186,9 +190,6 @@ figurecaption{
 }
 input {
   position:relative;
-  width:20%;
-  height: 5%;
-
 }
 textarea{
   position: relative;
