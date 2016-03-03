@@ -28,7 +28,7 @@ var animate = function() {
     var posY = 35;
     var posX = 35;
     maintitle.style.top = (posY+5) +"%";
-    maintitle.style.left = (posX+5) +"%";
+    maintitle.style.left = (posX+8) +"%";
     mainImage.style.top = (posY-3) +"%";
     mainImage.style.left = posX +"%";
     image1.style.top = (posY+10) +"%";
@@ -129,7 +129,7 @@ var animate = function() {
              image20.style.opacity = 0.81;
            }
            else if(counter ==41){
-             mainImage.style.opacity = 0.81;
+             mainImage.style.opacity = 0.6;
            }
            else if(counter ==42){
              maintitle.style.opacity = 1;
