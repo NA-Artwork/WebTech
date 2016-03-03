@@ -148,4 +148,4 @@ var animate = function() {
         }
 }
 window.onload = animate;
-setTimeout( "window.location.href = 'home.html'",8000);
+// setTimeout( "window.location.href = 'home.html'",12000);
