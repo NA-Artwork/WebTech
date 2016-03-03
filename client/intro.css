@@ -1,0 +1,7 @@
+body{
+  background-image: url('images/back.jpg');
+}
+footer{
+  position: fixed;
+  bottom:0px;
+}
