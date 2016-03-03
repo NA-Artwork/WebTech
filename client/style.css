@@ -150,7 +150,7 @@ figurecaption{
 .dropdown {
   font-family: 'Fredericka the Great', cursive;
     position: relative;
-    display: inline;
+    display: inline-block;
 
 }
 
