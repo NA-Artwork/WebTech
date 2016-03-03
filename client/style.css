@@ -10,14 +10,15 @@ header{
   top:0;
   left:0;
   width:100%;
-  height: 25%;
   background-color: #FFF;
   z-index: 2;
-  overflow: hidden;
   box-shadow: 0px 0px 10px 1px lightgrey;
+  padding-bottom: 0;
 }
 footer{
-  position:relative;
+  position:fixed;
+  bottom:0;
+  left:0;
   width:100%;
   height: 5%;
   background-color: #FFF;
@@ -26,31 +27,23 @@ footer{
   box-shadow: 0px 0px 10px 1px lightgrey;
 
 }
-
 nav{
   font-family: 'Fredericka the Great', cursive;
-  position:fixed;
-  top:15%;
-  left:10%;
+  position:relative;
   font-size: 1.5em;
   text-align: center;
-  width: 80%;
-  margin:0 auto;
-
 }
 nav ul{
   color:#8b2b1c;
   list-style-type: none;
   text-align: center;
+  padding: 0 0 0 0;
+  margin:  0 0 0 0;
 }
 nav li{
   margin-right: 3em;
   padding: 0 0 0 0;
   display: inline-flex;
-}
-nav body{
-  margin:0px auto;
-  background-color: #FFF;
 }
 #butn{
   position: fixed;
@@ -60,7 +53,8 @@ nav body{
 }
 body{
   font-family: 'Fredericka the Great', cursive;
-  margin-top: 20%;
+  position: relative;
+  padding-top: 100px;
   background-image: url('images/back.jpg');
   background-color: #FFF;
   text-align: center;
@@ -69,8 +63,8 @@ body{
 /*--------------------------------------------------------------------
 * ----------------------------- Intro.html Style--------------------*/
 div{
-  margin:0;
-  padding:0;
+  margin:0 0 0 0;
+  padding:0 0 0 0;
 }
 svg{
   position: fixed;
@@ -93,11 +87,8 @@ svg{
 }
 .content-info{
   position: relative;
-  margin: 100px auto;
+  top:2em;
   width:100%;
-  height: 2000px;
-  /*background-color: rgba(255, 0, 0, 0);*/
-
 }
 .content-info .grid{
   height: 15%;
@@ -139,11 +130,10 @@ figurecaption{
 .titleEAT{
  text-align: center;
   position:relative;
-  margin: 3% auto;
+  margin: 3% 0 0 0;
   color: #274287;
   font-family: 'Fredericka the Great', cursive;
   font-size: 42pt;
-  z-index: 2;
 }
 /*end Title block*/
 /* start of drop down menu */
@@ -152,39 +142,24 @@ figurecaption{
 .dropdown {
   font-family: 'Fredericka the Great', cursive;
     position: relative;
-    display: inline-block;
+    display: block;
+    text-align: center;
 }
 
 .dropdown-content {
+    text-align: center;
     font-size: .7em;
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
-    width: inherit;
-    z-index: 1;
-}
-.dropdown-content li {
-  margin-top: .5em;
-
-}
-.dropdown-content a:hover {
-  color:green;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-
-.dropdown-content ul{
+    left:-0.5em;
     background-color: rgba(255, 255, 255, 1);
-    /*width:100px;*/
-  text-align: center;
-  padding-top: 1em;
-  margin: 0 0 0 0;
+    /*margin: 1em 0 0 0;*/
+    padding: 1em 1em 1em 1em;
+    box-shadow: 0px 0px 10px 2px lightgrey;
+
+}
+.dropdown:hover .dropdown-content {
   display: block;
-  box-shadow: 0px 0px 10px 1px lightgrey;
-  z-index: -1;
 }
 
 /* end of drop down menu */
@@ -192,4 +167,29 @@ figurecaption{
 #thumbs img{
   align-self: center;
   width:80px;
+}
+/*----------contact.html page-------------------------------------*/
+.form ul{
+  list-style-type: none;
+  text-align: right;
+  margin-right: 45%
+}
+.about-text{
+  float: right;
+  width:40%;
+  text-align: right;
+}
+.animation{
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+input {
+  position:relative;
+  width:20%;
+  height: 5%;
+
+}
+textarea{
+  position: relative;
 }

@@ -1,9 +1,10 @@
-body{
+/*body{
   background-image: url('images/back.jpg');
 }
 footer{
   position: fixed;
   bottom:0px;
+<<<<<<< HEAD
 }
 
 
@@ -82,3 +83,6 @@ svg {
   width: 100%;
   height: $rotation-height;
 }
+=======
+}*/
+>>>>>>> 5a769041da39f28e7046e7655bebee9439693374
