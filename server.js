@@ -9,9 +9,9 @@ var https = require('https');
 var fs = require('fs');
 var path = require('path');
 
-// The default port numbers are the standard ones [80,8443] for convenience.
-// Change them to e.g. [8080,88443] to avoid privilege or clash problems.
-var ports = [8081, 8443];
+// The default port numbers are the standard ones [80,443] for convenience.
+// Change them to e.g. [8080,8443] to avoid privilege or clash problems.
+var ports = [8081, 443];
 
 // The most common standard file extensions are supported.
 // The most common non-standard file extensions are excluded, with a message.
@@ -60,7 +60,7 @@ function printAddresses() {
     if (ports[0] != 8081) httpAddress += ":" + ports[0];
     httpAddress += "/";
     var httpsAddress = "https://localhost";
-    if (ports[1] != 8443) httpsAddress += ":" + ports[1];
+    if (ports[1] != 443) httpsAddress += ":" + ports[1];
     httpsAddress += "/";
     console.log('Server running at', httpAddress, 'and', httpsAddress);
 }
@@ -129,7 +129,7 @@ function findType(request, extension) {
 
 // Check whether a string starts with a prefix, or ends with a suffix
 function starts(s, x) { return s.lastIndexOf(x, 0) == 0; }
-function ends(s, x) { return s.indexOf(x, s.length-x.length) == 0; }
+function ends(s, x) { return s.indexOf(x, s.length-x.length) >= 0; }
 
 // Check that a file is inside the site.  This is essential for security.
 var site = fs.realpathSync('.') + path.sep;
