@@ -153,38 +153,25 @@ figurecaption{
   font-family: 'Fredericka the Great', cursive;
     position: relative;
     display: inline-block;
+    text-align: center;
+    height: 100px;
 }
 
 .dropdown-content {
+    text-align: center;
     font-size: .7em;
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
-    width: inherit;
     z-index: 1;
-}
-.dropdown-content li {
-  margin-top: .5em;
+    background-color: rgba(255, 255, 255, 1);
+    margin: 1em auto;
+    padding: 5em auto;
+    box-shadow: 0px 0px 10px 2px lightgrey;
 
-}
-.dropdown-content a:hover {
-  color:green;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
-}
-
-
-.dropdown-content ul{
-    background-color: rgba(255, 255, 255, 1);
-    /*width:100px;*/
-  text-align: center;
-  padding-top: 1em;
-  margin: 0 0 0 0;
-  display: block;
-  box-shadow: 0px 0px 10px 1px lightgrey;
-  z-index: -1;
 }
 
 /* end of drop down menu */
