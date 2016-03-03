@@ -152,7 +152,7 @@ figurecaption{
 .dropdown {
   font-family: 'Fredericka the Great', cursive;
     position: relative;
-    display: inline-block;
+    display: block;
     text-align: center;
     height: 100px;
 }
@@ -162,16 +162,16 @@ figurecaption{
     font-size: .7em;
     display: none;
     position: absolute;
+    left:-0.5em;
     z-index: 1;
     background-color: rgba(255, 255, 255, 1);
-    margin: 1em auto;
-    padding: 5em auto;
+    margin: 1em 0 0 0;
+    padding: 1em 1em 1em 1em;
     box-shadow: 0px 0px 10px 2px lightgrey;
 
 }
-
 .dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 
 /* end of drop down menu */
