@@ -45,12 +45,6 @@ nav li{
   padding: 0 0 0 0;
   display: inline-flex;
 }
-#butn{
-  position: fixed;
-  top:400px;
-  left:55%;
-  margin-top: 20px;
-}
 body{
   font-family: 'Fredericka the Great', cursive;
   position: relative;
@@ -59,9 +53,6 @@ body{
   background-color: #FFF;
   text-align: center;
 }
-
-/*--------------------------------------------------------------------
-* ----------------------------- Intro.html Style--------------------*/
 div{
   margin:0 0 0 0;
   padding:0 0 0 0;
@@ -73,44 +64,44 @@ svg{
   height: 20%;
   z-index: 0;
 }
-.message{
-  height:400px;
-  width: 50%
+/*--------------------------------------------------------------------
+* ----------------------------- Intro.html Style--------------------*/
+audio{
+  position:fixed;
+  left:0px;
 }
-.introTitle{
+.animation{
+  height: 100%;
+  width: 100%;
   position: fixed;
-  top:200px;
-}
-.app{
-  position: fixed;
-  top:100px;
 }
 .content-info{
   position: relative;
-  top:2em;
+  top:3em;
   width:100%;
 }
 .content-info .grid{
   height: 15%;
   width: 45%;
   display: inline-block;
-  margin: 15% 0 0 0;
+  margin-bottom: 15%;
   padding-right: 0;
 }
 .content-info .grid img{
   width:60%;
 }
-.content-artwork{
-  margin: 15% auto;
+.content-artwork {
+  margin: auto;
   width:100%;
   /*background-color: rgba(255, 0, 0, 0);*/
 
 }
 .content-artwork .grid{
+  float: left;
   height: 15%;
   width: 28%;
   display: inline-block;
-  margin: 5% 0 0 0;
+  margin: 5% auto;
   padding-right: 0;
 }
 .content-artwork .grid img{
@@ -136,9 +127,7 @@ figurecaption{
   font-size: 42pt;
 }
 /*end Title block*/
-/* start of drop down menu */
-
-
+/*------------- start of drop down menu ----------------------------*/
 .dropdown {
   font-family: 'Fredericka the Great', cursive;
     position: relative;
@@ -183,15 +172,9 @@ figurecaption{
   width:40%;
   text-align: right;
 }
-.animation{
-  height: 100%;
-  width: 100%;
-  position: fixed;
-}
 input {
   position:relative;
 }
-
 textarea{
   position: relative;
 }
