@@ -19,6 +19,7 @@ var animate = function() {
     var image18 = document.getElementById('drop18');
     var image19 = document.getElementById('drop19');
     var image20 = document.getElementById('drop20');
+    var header = document.getElementsByTagName('header');
 
     var mainImage = document.getElementById('logo');
     var maintitle = document.getElementById('titleEAT');
@@ -133,6 +134,7 @@ var animate = function() {
            }
            else if(counter ==42){
              maintitle.style.opacity = 1;
+             header.style.visibility=visible;
            }
            counter++;
     }
