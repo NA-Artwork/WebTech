@@ -1,12 +1,12 @@
 /* The Image Box */
 img{
   width:300px;
-  clip: rect(0px,60px,200px,0px);
 }
 div.img {
     border: 1px solid #ccc;
-    width:50%;
-margin-left: 25%;
+    width:60%;
+    margin:auto;
+margin-left: 20%;
 }
 
 div.img:hover {
