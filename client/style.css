@@ -5,6 +5,9 @@ a {
 a:hover {
 color:green;
 }
+a:hover #a1{
+  color:red;
+}
 header{
   position: fixed;
   top:0;
