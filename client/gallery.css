@@ -3,15 +3,11 @@ img{
   width:300px;
 }
 div.img {
-    border: 1px solid #ccc;
     width:60%;
     margin:auto;
 margin-left: 20%;
 }
 
-div.img:hover {
-    border: 1px solid #777;
-}
 
 /* The Image */
 div.img img {
@@ -21,10 +17,10 @@ div.img img {
 }
 
 /* Description of Image */
-div.desc {
+/*div.desc {
     padding: 15px;
     text-align: center;
-}
+}*/
 
 * {
     box-sizing: border-box;
@@ -54,8 +50,6 @@ div.desc {
 /* Modal Content (image) */
 .modal-content {
     margin: auto;
-    /*display: block;*/
-
     height: 90%;
     width: auto;
     max-width: 750px;
