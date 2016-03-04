@@ -5,7 +5,7 @@ a {
 a:hover {
 color:green;
 }
-a:hover #a1{
+#a1:hover{
   color:red;
 }
 header{
