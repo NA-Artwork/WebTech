@@ -6,7 +6,7 @@
   <meta charset="UTF-8"/>
   <link href='https://fonts.googleapis.com/css?family=Fredericka+the+Great' rel='stylesheet' type='text/css'/>
   <link rel="stylesheet" type="text/css" href="style.css"/>
-  <link rel="stylesheet" type="text/css" href="wpaint.css"/>
+  <link rel="stylesheet" type="text/css" href="gallery.css"/>
   <title> Elva Arce Artist </title>
 </head>
 
@@ -44,23 +44,35 @@
 
   <div class="content-wpaint">
     <div class="grid">
-      <a href= "info.html">
-      <img  src="images/gallery_pictures/fila2.jpg" alt="Artwork1"/></a>
+        <div class="img">
+          <img  src="images/gallery_pictures/fila2.jpg" alt="Artwork1"/>
+        </div>
     </div>
     <div class="grid">
-      <img src="images/gallery_pictures/I_nea.jpg" alt="Artwork2" />
+      <div class="img">
+        <img src="images/gallery_pictures/I_nea.jpg" alt="Artwork2" />
+      </div>
     </div>
     <div class="grid">
-      <img src="images/gallery_pictures/mujerpeluda.jpg" alt="Artwork3" />
+      <div class="img">
+
+        <img src="images/gallery_pictures/mujerpeluda.jpg" alt="Artwork3" />
+      </div>
     </div>
     <div class="grid">
-      <img src="images/gallery_pictures/bigimage2.jpg" alt="Artwork4" />
+      <div class="img">
+        <img src="images/gallery_pictures/bigimage2.jpg" alt="Artwork4" />
+      </div>
     </div>
     <div class="grid">
-      <img src="images/gallery_pictures/bigimage1.jpg" alt="Artwork5" />
+      <div class="img">
+        <img src="images/gallery_pictures/bigimage1.jpg" alt="Artwork5" />
+      </div>
     </div>
     <div class="grid">
-      <img src="images/gallery_pictures/bigimage3.jpg" alt="Artwork2" />
+      <div class="img">
+        <img src="images/gallery_pictures/bigimage3.jpg" alt="Artwork2" />
+      </div>
     </div>
   </div>
 
@@ -68,6 +80,13 @@
   <a href="home.html">HOME</a>
 </footer>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span id="close">×</span>
+  <img class="modal-content" id="img01"/>
+  <div id="caption"></div>
+</div>
+  <script src="gallery.js" type="text/javascript" />
 </body>
 
 </html>
