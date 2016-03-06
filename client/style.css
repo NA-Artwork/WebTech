@@ -158,7 +158,10 @@ audio{
   margin:0;
   box-shadow: 0px 0px 4px 1px grey;
 }
-
+.content-contact{
+  width:100%;
+  margin: 3em 3em 3em 3em;
+}
 figurecaption{
   color:#B44;
 }
@@ -230,7 +233,7 @@ input:focus , textarea:focus{
   background-color: #FFF;
 }
 input {
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
   height: 1.5em;
 }
 textarea{
