@@ -227,12 +227,15 @@ input, textarea{
   border: 3px solid #163176;
   position:relative;
   width: 70%;
-  padding: 10px 8px;
+  padding: .2em .8em;
+  background-color: #FFF0FA;
+}
+input:focus{
+  background-color: #FFF;
 }
 input {
   margin-bottom: 0.5em;
-  height: 2em;
-  background-color: #FFF0FF;
+  height: 1.5em;
 }
 textarea{
   font-family:sans-serif;
