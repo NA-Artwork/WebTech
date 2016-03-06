@@ -164,8 +164,17 @@ audio{
   width:60%;
 }
 .content-artwork {
-  margin: auto;
+  list-style: none;
+  float:left;
+  /*margin: auto;*/
   width:100%;
+}
+.content-artwork li{
+  vertical-align: middle;
+  float:left;
+  display: block;
+  margin:auto;
+padding:0;
 }
 .content-artwork .grid{
   /*float: left;*/
@@ -174,6 +183,7 @@ audio{
   display: inline-block;
   padding: auto;
   margin: 5% auto;
+  vertical-align: baseline;
 }
 .content-artwork .grid img{
   border-radius: 3px;
@@ -192,6 +202,14 @@ audio{
   height: 100%;
   width: 100%;
   margin: 3em auto;
+}
+.img img{
+  border-radius: 3px;
+  border-width: 2px;
+  box-shadow: 0px 0px 4px 1px grey;
+}
+.img img:hover{
+  box-shadow: 0px 0px 4px 1px black;
 }
 figurecaption{
   color:#B44;
