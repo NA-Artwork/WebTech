@@ -84,7 +84,7 @@ nav li{
 }
 body{
   margin: 0 0 0 0;
-  font-family: 'Fredericka the Great', cursive;
+  font-family: sans-serif;
   position: relative;
   padding-top: 100px;
   height: auto;
@@ -218,6 +218,7 @@ figurecaption{
   text-align: right;
 }
 input, textarea{
+  margin-left: 1em;
   border: 3px solid #385387;
   position:relative;
   width: 70%;
