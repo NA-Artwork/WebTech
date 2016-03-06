@@ -224,7 +224,7 @@ input, textarea{
   margin-left: 1em;
   border: 3px solid #385387;
   position:relative;
-  width: 70%;
+  width: 60%;
   padding: .8em .8em;
   background-color: #EAE6E0;
 }
@@ -240,7 +240,7 @@ textarea{
   font-family:sans-serif;
   position: relative;
   height: 10em;
-  width: 85%;
+  width: 75%;
 }
 .button{
   height: 2em;
