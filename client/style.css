@@ -226,7 +226,7 @@ input, textarea{
   position:relative;
   width: 70%;
   padding: .8em .8em;
-  background-color: #F1DFF5;
+  background-color: #EAE6E0;
 }
 input:focus , textarea:focus{
   border-color: #163176;
@@ -245,7 +245,7 @@ textarea{
 .button{
   height: 2em;
   position: relative;
-  background-color: #F1DFF5;
+  background-color: #EAE6E0;
   font-size: 1.5em;
   width: 40%;
   color:#385387;
