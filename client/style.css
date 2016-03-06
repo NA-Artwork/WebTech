@@ -209,15 +209,20 @@ figurecaption{
   text-align: right;
 }
 .button{
+  background-color: #FFF;
+  width: 70%;
+  /*box-shadow: 0px 0px 10px 1px lightgrey;*/
+  border: thin solid #000;
 }
 input[submit]{
-  width: 800px;
 
 }
 input {
+  background-color: #FFF0FF;
   position:relative;
 }
 textarea{
-
+  border: thin solid #000;
   position: relative;
+  width: 70%;
 }
