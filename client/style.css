@@ -104,17 +104,22 @@ p{
   margin-left: 10%
 }
 
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+@-moz-keyframes spin { 100% {
+    -moz-transform: scale(-0.3) rotate(720deg);
+    } }
+@-webkit-keyframes spin { 100% {
+  -webkit-transform: rotate(720deg) scale(-0.3);
+  } }
+@keyframes spin { 100% {
+  -webkit-transform: rotate(720deg) scale(0.3); transform: scale(0.3) rotate(720deg); } }
 
 #islamicanimation{
-  animation-direction: alternate;
+  top:-6em;
   -webkit-transform:scale(-0.5);
   -moz-transform:scale(-0.5);
   transform:scale(-0.5);
-  -webkit-animation:spin 10s linear loop;
-  -moz-animation:spin 10s linear infinite;
+  -webkit-animation:spin 10s linear alternate loop;
+  -moz-animation:spin 10s linear alternate infinite;
   animation:spin 10s linear alternate infinite;
 }
 /*--------------------------------------------------------------------
