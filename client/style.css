@@ -5,8 +5,16 @@ a {
 a:hover {
 color:green;
 }
-::-moz-selection{ background: yellow; color:#333; }
-::selection { background: yellow; color:#333; }
+::-moz-selection{
+  background: yellow;
+  color:#333;
+  border-color:#274287;
+}
+::selection {
+  background: yellow;
+  color:#333;
+  border-color:#274287;
+}
 
 #m1:hover{
   color:#D33;
@@ -213,23 +221,21 @@ figurecaption{
   position: relative;
   background-color: #FFF;
   font-size: 1.5em;
-  width: 70%;
-  /*box-shadow: 0px 0px 10px 1px lightgrey;*/
+  width: 45%;
 }
-
+input, textarea{
+  border: 3px solid #163176;
+  position:relative;
+  width: 70%;
+  padding: 10px 8px;
+}
 input {
   margin-bottom: 0.5em;
   height: 2em;
   background-color: #FFF0FF;
-  position:relative;
-  border: 3px solid #000;
-
 }
 textarea{
-  border: 3px solid #000;
-  border-width: 3px;
   font-family:sans-serif;
   position: relative;
   height: 10em;
-  width: 70%;
 }
