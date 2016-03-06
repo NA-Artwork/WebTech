@@ -169,9 +169,10 @@ audio{
 }
 .content-artwork .grid{
   /*float: left;*/
-  height: 15%;
-  width: 28%;
+  width: 30%;
+  height: 250px;
   display: inline-block;
+  padding: auto;
   margin: 5% auto;
 }
 .content-artwork .grid img{
@@ -180,8 +181,12 @@ audio{
   width:80%;
 }
 .grid img{
-  margin:0;
+  display:block;
+  margin: auto;
   box-shadow: 0px 0px 4px 1px grey;
+}
+.grid img:hover{
+  box-shadow: 0px 0px 4px 1px black;
 }
 .content-contact{
   height: 100%;
