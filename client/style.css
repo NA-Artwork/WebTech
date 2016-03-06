@@ -218,13 +218,14 @@ figurecaption{
   text-align: right;
 }
 input, textarea{
-  border: 3px solid #163176;
+  border: 3px solid #385387;
   position:relative;
   width: 70%;
   padding: .8em .8em;
   background-color: #F1DFF5;
 }
 input:focus , textarea:focus{
+  border-color: #163176;
   background-color: #FFF;
 }
 input {
@@ -235,17 +236,20 @@ textarea{
   font-family:sans-serif;
   position: relative;
   height: 10em;
+  width: 85%;
 }
 .button{
+  height: 2em;
   position: relative;
-  background-color: #FFF;
+  background-color: #F1DFF5;
   font-size: 1.5em;
   width: 40%;
-  color: #228;
+  color:#385387;
   margin:0 0 0 0;
   padding: 0 0 0 0 ;
 }
 .button:hover{
+  background-color: #FFF;
   border-color: #005;
   color: #006;
 }
