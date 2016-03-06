@@ -48,8 +48,8 @@ var animate = function() {
     image7.style.left = (posX+10) +"%";
     image8.style.top = (posY+18) +"%";
     image8.style.left = (posX+16) +"%";
-    image9.style.top = (posY+25) +"%";
-    image9.style.left = (posX+5) +"%";
+    image9.style.top = (posY+40) +"%";
+    image9.style.left = (posX-3) +"%";
     image10.style.top = (posY+20) +"%";
     image10.style.left = (posX+17) +"%";
     image11.style.top = (posY+17) +"%";
@@ -129,10 +129,10 @@ var animate = function() {
            else if (counter == 38){
              image20.style.opacity = 0.81;
            }
-           else if(counter ==41){
+           else if(counter ==39){
              mainImage.style.opacity = 0.6;
            }
-           else if(counter ==42){
+           else if(counter ==45){
              maintitle.style.opacity = 1;
              header.style.visibility=visible;
            }

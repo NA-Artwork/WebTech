@@ -106,24 +106,28 @@ p{
 h2{
   margin: 2em auto;
 }
-@-moz-keyframes spin { 100% {
-    -moz-transform: scale(-0.3) rotate(720deg);
-    } }
-@-webkit-keyframes spin { 100% {
-  -webkit-transform: rotate(720deg) scale(-0.3);
-  } }
-@keyframes spin { 100% {
-  -webkit-transform: rotate(720deg) scale(0.3); transform: scale(0.3) rotate(720deg); } }
+@-moz-keyframes spin { 100% {-moz-transform: rotate(720deg);} }
+@-webkit-keyframes spin { 100% {-webkit-transform: rotate(720deg);} }
+@keyframes spin { 100% { -webkit-transform: rotate(720deg); transform: rotate(720deg); } }
+
+  @-moz-keyframes stop { 100% {-moz-transform: rotate(720deg);} }
+  @-webkit-keyframes stop { 100% {-webkit-transform: rotate(720deg);} }
+  @keyframes stop {
+     0% {animation-play-state:running;}
+    100% {animation-play-state: paused;}
+  }
 
 #islamicanimation{
+  height: auto;
   display: block;
   margin: 0 auto;
-  -webkit-transform:scale(-0.5);
-  -moz-transform:scale(-0.5);
-  transform:scale(-0.5);
   -webkit-animation:spin 10s linear alternate loop;
   -moz-animation:spin 10s linear alternate infinite;
-  animation:spin 10s linear alternate infinite;
+  animation:spin 2s linear infinite;
+}
+
+#islamicanimation:hover{
+  animation:stop 1s ease-in 1;
 }
 #NA-logo{
   position:absolute;
