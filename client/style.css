@@ -170,11 +170,7 @@ audio{
   width:100%;
 }
 .content-artwork li{
-  vertical-align: middle;
   float:left;
-  display: block;
-  margin:auto;
-padding:0;
 }
 .content-artwork .grid{
   /*float: left;*/
