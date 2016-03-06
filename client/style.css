@@ -5,24 +5,26 @@ a {
 a:hover {
 color:green;
 }
+::-moz-selection{ background: yellow; color:#333; }
+::selection { background: yellow; color:#333; }
 
 #m1:hover{
-  color:red;
+  color:#D33;
 }
 #m2:hover{
-  color:blue;
+  color:#636;
 }
 #m3:hover{
-  color:green;
+  color:#813C1B;
 }
 #m4:hover{
-  color:blue;
+  color:#BB1713;
 }
 #a1:hover{
   color:red;
 }
 #a2:hover{
-  color:blue;
+  color:#6D163D;
 }
 #a3:hover{
   color:green;
@@ -155,7 +157,7 @@ figurecaption{
 .titleEAT{
  text-align: center;
   position:relative;
-  margin: 3% 0 0 0;
+  margin: 1% 0 0 0;
   color: #274287;
   font-family: 'Fredericka the Great', cursive;
   font-size: 42pt;
@@ -206,9 +208,16 @@ figurecaption{
   width:40%;
   text-align: right;
 }
+.button{
+}
+input[submit]{
+  width: 800px;
+
+}
 input {
   position:relative;
 }
 textarea{
+
   position: relative;
 }
