@@ -222,6 +222,7 @@ input {
   position:relative;
 }
 textarea{
+  font-family: fantasy;
   border: thin solid #000;
   position: relative;
   width: 70%;
