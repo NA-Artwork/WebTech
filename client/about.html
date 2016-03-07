@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+
 <head>
   <script src="transition.js" type="text/javascript" />
   <meta charset="UTF-8"/>
   <link href='https://fonts.googleapis.com/css?family=Fredericka+the+Great' rel='stylesheet' type='text/css'/>
   <link rel="stylesheet" type="text/css" href="style.css"/>
+  <link rel="stylesheet" type="text/css" href="about.css"/>
   <link rel="stylesheet" type="text/css" href="gallery.css"/>
-  <title> Elva Arce Artist </title>
+
+  <title> Elva Arce </title>
 </head>
 <body>
-  <header>
+  <header id="iheader">
     <div class="titleEAT"><a href ="//localhost:8081">ELVA ARCE</a></div>
       <nav>
         <ul>
-          <!-- <hr/>  hr creates a line above the text -->
-          <li><a href="intro.html">HOME</a></li>
-          <li><a href="about.html">ABOUT</a></li>
+          <li><a id="m1" href="home.html">HOME</a></li>
+          <li><a id="m2" href="about.html">ABOUT</a></li>
           <!-- drop down menu start -->
           <li>
           <div class="dropdown">
-              <a href="">ARTWORK</a>
+            <a id="m3" href="">ARTWORK</a>
             <div class="dropdown-content">
-              <a href="painting.html">PAINTINGS</a>
-              <a href="wall_painting.html">MIXED TECHNIQUES</a>
-              <a href="islamic_art.html">ISLAMIC ART</a>
+              <a id="a1" href="painting.html">PAINTINGS</a>
+              <a id="a2" href="mix_tech.html">MIXED TECHNIQUES</a>
+              <a id="a3" href="islamic_art.html">ISLAMIC ART</a>
             </div>
+          </div>
+          </li>
+          <li>
             <div class="dropdown">
-              <a href="contact.html">CONTACT</a>
+              <a id="m4" href="contact.html">CONTACT</a>
             </div>
           </li>
           <!-- drop down menu finish  -->
@@ -36,10 +41,14 @@
   <br/>
     <div class="content-info">
   <div class="responsive">
+
   <div class="img">
     <img src="images/elva.jpg" alt="Elva" width="300" height="200"/>
+    <div class="desc"></div>
   </div>
 </div>
+
+
   </div>
   <!-- The Modal -->
   <div id="myModal" class="modal">
@@ -48,12 +57,13 @@
     <div id="caption"></div>
   </div>
     <script src="gallery.js" type="text/javascript" />
+
   <p>
     <br/>
-    <br/>
-    <br/>
+
     Hello my name is elva I studied in ....    bit of bui
     <br/>
+
     a bit on each section of artwork
     <br/>
 
@@ -61,11 +71,19 @@
     <br/>
 
     any questions then plase ask
+    <!-- <ul>
+    <li>Hello my name is elva I studied in .... </li>
+    <li>bit of bio </li>
+    <li>a bit on each section of artwork - where to buy commissions    </li>
   </ul> -->
   </p>
-  <div class="content-info">
-    <div class="about-text">
-    </div>
-  </div>
+<!-- picture of elva - description of work - possible viddeo -->
+<div class="content-info">
+<div class="about-text">
+</div>
+
+
+</div>
 </body>
+
 </html>
