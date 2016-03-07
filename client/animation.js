@@ -33,7 +33,7 @@ var animate = function() {
     var image29 = document.getElementById('drop29');
     var image30 = document.getElementById('drop30');
     var image31 = document.getElementById('drop31');
-    var header = document.getElementsByTagName('header');
+    var header =  document.getElementById('iheader');
 
     var mainImage0 = document.getElementById('logo-wet');
     var mainImage = document.getElementById('logo');
@@ -198,7 +198,7 @@ var animate = function() {
              mainImage0.style.opacity=0;
              mainImage.style.opacity=0.6;
              maintitle.style.opacity = 1;
-             header.style.visibility="visible";
+             header.style.dislpay="block";
            }
            counter++;
     }
@@ -216,4 +216,4 @@ var transit = function() {
   }
 }
 window.onload = animate().pipe(transit());
-setTimeout( "window.location.href = 'home.html'",18000);
+setTimeout( "window.location.href = 'home.html'",8000);

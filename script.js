@@ -1,1 +1,1 @@
-window.location.href = 'client/intro.html';
+window.location.href = 'client/home.html';
