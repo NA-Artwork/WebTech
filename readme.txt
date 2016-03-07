@@ -12,8 +12,8 @@ Website features
     a. Custom made music in intro.html
     b. Long animation in javascript creating a paint like feature
     c. animations gradually darkens so that it appears like the paint is drying
-  2. info.html
-    a. image enlarging
+  2. info.html (where user can see the entire picture instead of a rectangular thumbnail)
+    a. image enlarging 
       i. darkens the background
       ii. has an exit button
       iii. appears gradually so that it does not come abruptly
@@ -35,3 +35,4 @@ Website features
     b. menu changes colour on different items using tags for a fun feel
     c. use of “Fredericka the Great” throughout
     d. extensive styling using style.css
+    e. back to top link where scrollable
