@@ -1,4 +1,4 @@
-Nikos(np15685) and I (ab15236) have been asked by a local artist to create a website to
+Alex (ab15236) and I (np15685) have been asked by a local artist to create a website to
 showcase her artwork. We have been given drawings and briefs on the design that she
 would like and we hope at the end of the project to host the website for here. At times we
 have implemented features to only go back to the drawing board after showing these
@@ -13,7 +13,7 @@ Website features
     b. Long animation in javascript creating a paint like feature
     c. animations gradually darkens so that it appears like the paint is drying
   2. info.html (where user can see the entire picture instead of a rectangular thumbnail)
-    a. image enlarging 
+    a. image enlarging
       i. darkens the background
       ii. has an exit button
       iii. appears gradually so that it does not come abruptly
