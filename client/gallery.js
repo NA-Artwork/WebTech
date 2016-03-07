@@ -1,11 +1,8 @@
 var modal = document.getElementById('myModal');
-
 var span = document.getElementById('close');
 span.onclick = function() {
     modal.style.display = "none";
 }
-
-
 var images = document.getElementsByTagName('img');
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");

@@ -1,14 +1,3 @@
-/*LOGO NEADS HEIGHT WIDTH AUTO GETS RESIZED*/
-/*#iheader{
-  opacity: 0;
-}*/
-#titleEAT{
-  font-size: 4em;
-  display: block;
-  opacity: 0;
-  position:fixed;
-  z-index: 2;
-}
 #drop1 , #drop2 , #drop3 , #drop4 , #drop5 , #drop6 , #drop7 , #drop8 , #drop9 , #drop10,
 #drop11, #drop12, #drop13, #drop14, #drop15, #drop16, #drop17, #drop18, #drop19, #drop20,
 #drop21 , #drop22 , #drop23 , #drop24, #drop25, #drop26, #drop27, #drop28, #drop29, #drop30,

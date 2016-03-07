@@ -144,7 +144,6 @@ var animate = function() {
     // image48.style.top = (posY+getRandomArbitrary(-5,80)) +"%";
     // image48.style.left = (posX+getRandomArbitrary(-30,55)) +"%";
 
-
     var id = setInterval(frame, 110);
       function frame() {
             if (maintitle.style.opacity == 1) {

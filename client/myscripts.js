@@ -1,5 +1,4 @@
-
-    var images = {folder:"images/content/", num:1, ext:".jpg"};
+var images = {folder:"images/content/", num:1, ext:".jpg"};
 function changeImage() {
     var image = document.getElementById('myImage');
     images.num++;
@@ -9,7 +8,6 @@ function changeImage() {
     image.src = images.folder+images.num+images.ext;
 
 }
-
 var uniqueID = (function() {
    var id = 0; // This is the private persistent value
    // The outer function returns a nested function that has access

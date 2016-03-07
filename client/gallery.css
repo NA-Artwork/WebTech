@@ -9,7 +9,6 @@ div.img img {
     float: left;
     width: 49.99999%;
 }
-
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -30,7 +29,6 @@ div.img img {
     height: 90%;
     width: auto;
 }
-
 /* Caption of Modal Image */
 #caption {
     margin: auto;
@@ -42,7 +40,6 @@ div.img img {
     padding: 10px 0;
     height: 150px;
 }
-
 /* Add Animation */
 .modal-content, #caption {
     -webkit-animation-name: zoom;
@@ -50,17 +47,14 @@ div.img img {
     animation-name: zoom;
     animation-duration: 0.2s;
 }
-
 @-webkit-keyframes zoom {
     from {transform:scale(0.1)}
     to {transform:scale(1)}
 }
-
 @keyframes zoom {
     from {transform:scale(0.1)}
     to {transform:scale(1)}
 }
-
 /* The Close Button */
 #close {
     position: absolute;
@@ -71,14 +65,12 @@ div.img img {
     font-weight: bold;
     transition: 0.3s;
 }
-
 #close:hover,
 #close:focus {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
 }
-
 /* Responsive Columns */
 @media only screen and (max-width: 750px){
     .responsive {
@@ -89,7 +81,6 @@ div.img img {
         width: 100%;
     }
 }
-
 @media only screen and (max-width: 500px){
     .responsive {
         width: 100%;

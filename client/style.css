@@ -118,7 +118,6 @@ h2{
      0% {animation-play-state:running;}
     100% {animation-play-state: paused;}
   }
-
 #islamicanimation{
   height: auto;
   display: block;
@@ -127,7 +126,6 @@ h2{
   -moz-animation:spin 10s linear alternate infinite;
   animation:spin 2s linear infinite;
 }
-
 #islamicanimation:hover{
   animation:stop 1s ease-in 1;
 }
@@ -226,7 +224,6 @@ figurecaption{
     display: block;
     text-align: center;
 }
-
 .dropdown-content {
     text-align: center;
     font-size: .7em;
@@ -242,7 +239,6 @@ figurecaption{
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
 /* end of drop down menu */
 /*-------------------Gallery stuff----------------------------------*/
 #thumbs img{
