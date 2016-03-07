@@ -302,3 +302,6 @@ textarea{
   color: #FFA;
   background-color:#AAA6B0
 }
+audio{
+  width: 100%;
+}
