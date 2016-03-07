@@ -287,11 +287,11 @@ textarea{
   width: 75%;
 }
 .button{
-  height: 2em;
+  font-size: 1em;
   position: relative;
   background-color: #EAE6E0;
-  font-size: 1.5em;
-  width: 40%;
+  height: 1.8em;
+  width: 30%;
   color:#385387;
   margin:0 0 0 0;
   padding: 0 0 0 0 ;
@@ -302,5 +302,6 @@ textarea{
   color: #006;
 }
 .button:active{
+  color: #FFA;
   background-color:#AAA6A0
 }
