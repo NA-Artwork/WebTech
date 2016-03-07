@@ -253,6 +253,7 @@ figurecaption{
 .form{
   display: block;
   width: 70%;
+  margin-bottom: 10%;
 }
 .form ul{
   list-style-type: none;
@@ -303,5 +304,5 @@ textarea{
 }
 .button:active{
   color: #FFA;
-  background-color:#AAA6A0
+  background-color:#AAA6B0
 }

@@ -1,3 +1,6 @@
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
 var animate = function() {
     var image1 = document.getElementById('drop1');
     var image2 = document.getElementById('drop2');
@@ -69,37 +72,38 @@ var animate = function() {
     image12.style.top = (posY) +"%";
     image12.style.left = (posX-10) +"%";
     image13.style.top = (posY+12) +"%";
-    image13.style.left = (posX+25) +"%";
-    image14.style.top = (posY+16) +"%";
-    image14.style.left = (posX+5) +"%";
-    image15.style.top = (posY+21) +"%";
-    image15.style.left = (posX+11) +"%";
-    image16.style.top = (posY+10) +"%";
-    image16.style.left = (posX+6) +"%";
-    image17.style.top = (posY) +"%";
-    image17.style.left = (posX+7) +"%";
-    image18.style.top = (posY+12) +"%";
-    image18.style.left = (posX+9) +"%";
+    image13.style.left = (posX+getRandomArbitrary(-10,35)) +"%";
+    image14.style.top = (posY+getRandomArbitrary(-5,85)) +"%";
+    image14.style.left = (posX+getRandomArbitrary(-10,35)) +"%";
+    image15.style.top = (posY+getRandomArbitrary(-5,85)) +"%";
+    image15.style.left = (posX+getRandomArbitrary(-15,40)) +"%";
+    image16.style.top = (posY+getRandomArbitrary(-5,85)) +"%";
+    image16.style.left = (posX+getRandomArbitrary(-15,40)) +"%";
+    image17.style.top = (posY+getRandomArbitrary(-5,85)) +"%";
+    image17.style.left = (posX+getRandomArbitrary(-15,40)) +"%";
+    image18.style.top = (posY+getRandomArbitrary(-5,85)) +"%";
+    image18.style.left = (posX+getRandomArbitrary(-15,40)) +"%";
     image19.style.top = (posY+25) +"%";
-    image19.style.left = (posX+5) +"%";
+    image19.style.left = (posX+getRandomArbitrary(-20,45)) +"%";
     image20.style.top = (posY+20) +"%";
-    image20.style.left = (posX+17) +"%";
-    image21.style.top = (posY+11) +"%";
-    image21.style.left = (posX+11) +"%";
+    image20.style.left = (posX+getRandomArbitrary(-20,45)) +"%";
+    image21.style.top = (posY-4) +"%";
+    image21.style.left = (posX+getRandomArbitrary(-20,45)) +"%";
     image22.style.top = (posY+10) +"%";
-    image22.style.left = (posX+6) +"%";
+    image22.style.left = (posX+getRandomArbitrary(-20,45)) +"%";
     image23.style.top = (posY+9) +"%";
-    image23.style.left = (posX+10) +"%";
+    image23.style.left = (posX+getRandomArbitrary(-20,45)) +"%";
     image24.style.top = (posY+18) +"%";
-    image24.style.left = (posX+16) +"%";
+    image24.style.left = (posX+getRandomArbitrary(-20,50)) +"%";
+    console.log(image24.style.left);
     image25.style.top = (posY+40) +"%";
-    image25.style.left = (posX-3) +"%";
+    image25.style.left = (posX+getRandomArbitrary(-20,45)) +"%";
     image26.style.top = (posY+20) +"%";
-    image26.style.left = (posX+17) +"%";
+    image26.style.left = (posX+getRandomArbitrary(-20,45)) +"%";
     image27.style.top = (posY+17) +"%";
-    image27.style.left = (posX+36) +"%";
+    image27.style.left = (posX+getRandomArbitrary(-20,45)) +"%";
     image28.style.top = (posY) +"%";
-    image28.style.left = (posX-10) +"%";
+    image28.style.left = (posX+getRandomArbitrary(-20,45)) +"%";
     image29.style.top = (posY+12) +"%";
     image29.style.left = (posX+25) +"%";
     image30.style.top = (posY+16) +"%";
@@ -107,7 +111,7 @@ var animate = function() {
     image31.style.top = (posY+21) +"%";
     image31.style.left = (posX+11) +"%";
 
-    var id = setInterval(frame, 120);
+    var id = setInterval(frame, 90);
       function frame() {
             if (maintitle.style.opacity == 1) {
                clearInterval(id);
@@ -115,78 +119,82 @@ var animate = function() {
              image1.style.opacity = 0.8;
            } else if (counter == 2){
              image2.style.opacity = 0.8;
-           }
-           else if (counter == 3){
+           } else if (counter == 3){
              image3.style.opacity = 0.8;
-           }
-           else if (counter == 6){
+           } else if (counter == 6){
              image4.style.opacity = 0.81;
-           }
-           else if (counter == 8){
+           } else if (counter == 8){
              image5.style.opacity = 0.81;
            } else if (counter== 10){
              image6.style.opacity = 0.6;
            } else if (counter == 11){
              image7.style.opacity = 0.6;
-           }
-           else if (counter == 13){
+           } else if (counter == 13){
              image8.style.opacity = 0.6;
-           }
-           else if (counter == 16){
+           } else if (counter == 16){
              image9.style.opacity = 0.61;
-           }
-           else if (counter == 18){
+           } else if (counter == 18){
              image10.style.opacity = 0.61;
            } else if (counter== 20){
              image11.style.opacity = 0.6;
            } else if (counter == 22){
              image12.style.opacity = 0.6;
-           }
-           else if (counter == 23){
+           } else if (counter == 23){
              image13.style.opacity = 0.6;
-           }
-           else if (counter == 26){
+           } else if (counter == 26){
              image14.style.opacity = 0.61;
-           }
-           else if (counter == 28){
+           } else if (counter == 28){
              image15.style.opacity = 0.61;
            } else if (counter== 30){
              image16.style.opacity = 0.6;
            } else if (counter == 31){
              image17.style.opacity = 0.8;
-           }
-           else if (counter == 33){
+           } else if (counter == 33){
              image18.style.opacity = 0.8;
-           }
-           else if (counter == 36){
+           } else if (counter == 36){
              image19.style.opacity = 0.81;
-           }
-           else if (counter == 38){
+           } else if (counter == 38){
              image20.style.opacity = 0.81;
+           } else if (counter== 40){
+             image21.style.opacity = 0.6;
+           } else if (counter == 42){
+             image22.style.opacity = 0.6;
+           } else if (counter == 43){
+             image23.style.opacity = 0.6;
+           } else if (counter == 46){
+             image24.style.opacity = 0.61;
+           } else if (counter == 48){
+             image25.style.opacity = 0.61;
+           } else if (counter== 50){
+             image26.style.opacity = 0.6;
+           } else if (counter == 51){
+             image27.style.opacity = 0.8;
+           } else if (counter == 52){
+             image28.style.opacity = 0.8;
+           } else if (counter == 55){
+             image29.style.opacity = 0.81;
+           } else if (counter == 57){
+             image30.style.opacity = 0.81;
+           } else if (counter == 58){
+             image31.style.opacity = 0.81;
            }
-           else if(counter ==39){
+           else if(counter ==59){
              mainImage0.style.opacity = 0.6;
-           }
-           else if(counter ==40){
+           } else if(counter ==60){
              mainImage.style.opacity = 0.05;
-           }
-           else if(counter ==41){
+           } else if(counter ==61){
              mainImage.style.opacity = 0.1;
              mainImage0.style.opacity= 0.55;
-           }
-           else if(counter ==42){
+           } else if(counter ==62){
              mainImage.style.opacity = 0.2;
              mainImage0.style.opacity= 0.5;
-           }
-           else if(counter ==43){
+           } else if(counter ==63){
              mainImage.style.opacity = 0.35;
              mainImage0.style.opacity= 0.35;
-           }
-           else if(counter ==44){
+           } else if(counter ==64){
              mainImage.style.opacity = 0.5;
              mainImage0.style.opacity= 0.2;
-           }
-           else if(counter ==45){
+           } else if(counter ==65){
              mainImage0.style.opacity=0;
              mainImage.style.opacity=0.6;
              maintitle.style.opacity = 1;
@@ -194,16 +202,18 @@ var animate = function() {
            }
            counter++;
     }
-     var id2 = setInterval(frame2, 100);
-        function frame2() {
-          if(counter2 <= 0){
-            clearInterval(id2);
-          }
-          else if (counter2 >0){
-            counter2=counter2-1;
-            mainImage.style.opacity =0;
-          }
-        }
 }
-window.onload = animate;
-// setTimeout( "window.location.href = 'home.html'",12000);
+var transit = function() {
+  var counter2=10;
+  var id2 = setInterval(frame2, 100);
+  function frame2() {
+    if(counter2 <= 0){
+      clearInterval(id2);
+    } else if (counter2 >0){
+      counter2--;
+      mainImage.style.left="10px";
+    }
+  }
+}
+window.onload = animate().pipe(transit());
+setTimeout( "window.location.href = 'home.html'",18000);
