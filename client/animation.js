@@ -34,7 +34,6 @@ var animate = function() {
     var image30 = document.getElementById('drop30');
     var image31 = document.getElementById('drop31');
     var header =  document.getElementById('iheader');
-
     var mainImage0 = document.getElementById('logo-wet');
     var mainImage = document.getElementById('logo');
     var maintitle = document.getElementById('titleEAT');
