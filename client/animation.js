@@ -176,11 +176,11 @@ var animate = function() {
            }
            else if(counter ==42){
              mainImage.style.opacity = 0.2;
-             mainImage0.style.opacity= 0.45;
+             mainImage0.style.opacity= 0.5;
            }
            else if(counter ==43){
              mainImage.style.opacity = 0.35;
-             mainImage0.style.opacity= 0.25;
+             mainImage0.style.opacity= 0.35;
            }
            else if(counter ==44){
              mainImage.style.opacity = 0.5;
