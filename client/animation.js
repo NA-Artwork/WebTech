@@ -172,18 +172,22 @@ var animate = function() {
            }
            else if(counter ==41){
              mainImage.style.opacity = 0.1;
+             mainImage0.style.opacity= 0.55;
            }
            else if(counter ==42){
              mainImage.style.opacity = 0.2;
+             mainImage0.style.opacity= 0.45;
            }
            else if(counter ==43){
              mainImage.style.opacity = 0.35;
+             mainImage0.style.opacity= 0.25;
            }
            else if(counter ==44){
              mainImage.style.opacity = 0.5;
+             mainImage0.style.opacity= 0.1;
            }
            else if(counter ==45){
-            //  mainImage0.style.opacity=0;
+             mainImage0.style.opacity=0;
              mainImage.style.opacity=0.6;
              maintitle.style.opacity = 1;
              header.style.visibility="visible";
