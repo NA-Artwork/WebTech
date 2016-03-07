@@ -1,3 +1,6 @@
+div.img{
+  height: 80%;
+}
 div.img img {
     width: 100%;
     height: auto;
@@ -26,7 +29,7 @@ div.img img {
 /* Modal Content (image) */
 .modal-content {
     margin: auto;
-    height: 90%;
+    height: 85%;
     width: auto;
 }
 /* Caption of Modal Image */

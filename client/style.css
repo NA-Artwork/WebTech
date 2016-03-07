@@ -83,7 +83,6 @@ div{
   padding:0 0 0 0;
 }
 p{
-  text-align: left;
   margin-top: 6em;
   margin-right: 10%;
 }
@@ -228,9 +227,14 @@ figurecaption{
 img#info{
   float:right;
   margin-right: 5em;
-  width:40%;
+  max-width:40%;
+  height: auto;
+  max-height: 450px;
+  width: auto;
 }
-
+.disc{
+  margin: 3em auto;
+}
 /*----------contact.html page-------------------------------------*/
 .form{
   display: block;
@@ -245,7 +249,8 @@ img#info{
 .about-text{
   float: right;
   width:40%;
-  text-align: right;
+  text-align: justify;
+
 }
 input, textarea{
   margin-left: 1em;
