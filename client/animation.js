@@ -214,28 +214,28 @@ var animate = function() {
            else if(counter ==59){
              mainImage0.style.opacity = 0.6;
            } else if(counter ==60){
-             header.style.opacity=0.1;
+            //  header.style.opacity=0.1;
              mainImage.style.opacity = 0.05;
            } else if(counter ==61){
              mainImage.style.opacity = 0.1;
              mainImage0.style.opacity= 0.55;
-             header.style.opacity=0.2;
+            //  header.style.opacity=0.2;
            } else if(counter ==62){
              mainImage.style.opacity = 0.2;
              mainImage0.style.opacity= 0.5;
-             header.style.opacity=0.3;
+            //  header.style.opacity=0.3;
            } else if(counter ==63){
              mainImage.style.opacity = 0.35;
              mainImage0.style.opacity= 0.35;
-             header.style.opacity=0.5;
+            //  header.style.opacity=0.5;
            } else if(counter ==64){
              mainImage.style.opacity = 0.5;
              mainImage0.style.opacity= 0.2;
-             header.style.opacity=0.8;
+            //  header.style.opacity=0.8;
            } else if(counter ==65){
              mainImage0.style.opacity=0;
              mainImage.style.opacity=0.6;
-             header.style.opacity=1;
+            //  header.style.opacity=1;
            }
            counter++;
     }
