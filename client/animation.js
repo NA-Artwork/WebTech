@@ -107,7 +107,7 @@ var animate = function() {
     image31.style.top = (posY+21) +"%";
     image31.style.left = (posX+11) +"%";
 
-    var id = setInterval(frame, 150);
+    var id = setInterval(frame, 120);
       function frame() {
             if (maintitle.style.opacity == 1) {
                clearInterval(id);
@@ -184,7 +184,7 @@ var animate = function() {
            }
            else if(counter ==44){
              mainImage.style.opacity = 0.5;
-             mainImage0.style.opacity= 0.1;
+             mainImage0.style.opacity= 0.2;
            }
            else if(counter ==45){
              mainImage0.style.opacity=0;

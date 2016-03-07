@@ -268,7 +268,7 @@ input, textarea{
   margin-left: 1em;
   border: 3px solid #385387;
   position:relative;
-  width: 60%;
+  width: 40%;
   padding: .8em .8em;
   background-color: #EAE6E0;
 }
@@ -278,7 +278,7 @@ input:focus , textarea:focus{
 }
 input {
   margin-bottom: 1em;
-  height: 1.5em;
+  height: .8em;
 }
 textarea{
   font-family:sans-serif;
@@ -300,4 +300,7 @@ textarea{
   background-color: #FFF;
   border-color: #005;
   color: #006;
+}
+.button:active{
+  background-color:#AAA6A0
 }
