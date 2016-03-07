@@ -167,8 +167,23 @@ var animate = function() {
            else if(counter ==39){
              mainImage0.style.opacity = 0.6;
            }
+           else if(counter ==40){
+             mainImage.style.opacity = 0.05;
+           }
+           else if(counter ==41){
+             mainImage.style.opacity = 0.1;
+           }
+           else if(counter ==42){
+             mainImage.style.opacity = 0.2;
+           }
+           else if(counter ==43){
+             mainImage.style.opacity = 0.35;
+           }
+           else if(counter ==44){
+             mainImage.style.opacity = 0.5;
+           }
            else if(counter ==45){
-             mainImage0.style.opacity=0;
+            //  mainImage0.style.opacity=0;
              mainImage.style.opacity=0.6;
              maintitle.style.opacity = 1;
              header.style.visibility="visible";
