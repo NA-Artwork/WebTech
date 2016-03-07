@@ -1,3 +1,6 @@
+* {
+    box-sizing:content-box;
+}
 a {
   color: #274287;
   text-decoration: none;
@@ -15,7 +18,6 @@ color:green;
   color:#333;
   border-color:#274287;
 }
-
 #m1:hover{
   color:#D33;
 }
@@ -165,7 +167,6 @@ audio{
 }
 .content-artwork {
   list-style: none;
-  float:left;
   /*margin: auto;*/
   width:100%;
 }
@@ -173,9 +174,7 @@ audio{
   float:left;
 }
 .content-artwork .grid{
-  /*float: left;*/
   width: 30%;
-  height: 250px;
   display: inline-block;
   padding: auto;
   margin: 5% auto;

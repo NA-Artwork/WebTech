@@ -19,8 +19,20 @@ var animate = function() {
     var image18 = document.getElementById('drop18');
     var image19 = document.getElementById('drop19');
     var image20 = document.getElementById('drop20');
+    var image21 = document.getElementById('drop21');
+    var image22 = document.getElementById('drop22');
+    var image23 = document.getElementById('drop23');
+    var image24 = document.getElementById('drop24');
+    var image25 = document.getElementById('drop25');
+    var image26 = document.getElementById('drop26');
+    var image27 = document.getElementById('drop27');
+    var image28 = document.getElementById('drop28');
+    var image29 = document.getElementById('drop29');
+    var image30 = document.getElementById('drop30');
+    var image31 = document.getElementById('drop31');
     var header = document.getElementsByTagName('header');
 
+    var mainImage0 = document.getElementById('logo-wet');
     var mainImage = document.getElementById('logo');
     var maintitle = document.getElementById('titleEAT');
     var animDiv = document.getElementsByClassName('animation');
@@ -28,16 +40,16 @@ var animate = function() {
     var counter2 = 10;
     var posY = 10;
     var posX = 35;
-    maintitle.style.top = (posY+20) +"%";
+    maintitle.style.top = (posY+10) +"%";
     maintitle.style.left = (posX+8) +"%";
-    mainImage.style.top = (posY-6) +"%";
-    mainImage.style.left = (posX-15) +"%";
-    image16.style.top = (posY+10) +"%";
-    image16.style.left = (posX+6) +"%";
-    image17.style.top = (posY) +"%";
-    image17.style.left = (posX+7) +"%";
-    image18.style.top = (posY+12) +"%";
-    image18.style.left = (posX+9) +"%";
+    mainImage0.style.top=mainImage.style.top = (posY-6) +"%";
+    mainImage0.style.left=mainImage.style.left = (posX-15) +"%";
+    image1.style.top = (posY+10) +"%";
+    image1.style.left = (posX+16) +"%";
+    image2.style.top = (posY+19) +"%";
+    image2.style.left = (posX+10) +"%";
+    image3.style.top = (posY+2) +"%";
+    image3.style.left = (posX+16) +"%";
     image4.style.top = (posY+16) +"%";
     image4.style.left = (posX+5) +"%";
     image5.style.top = (posY+11) +"%";
@@ -62,16 +74,39 @@ var animate = function() {
     image14.style.left = (posX+5) +"%";
     image15.style.top = (posY+21) +"%";
     image15.style.left = (posX+11) +"%";
-    image1.style.top = (posY+10) +"%";
-    image1.style.left = (posX+16) +"%";
-    image2.style.top = (posY+19) +"%";
-    image2.style.left = (posX+10) +"%";
-    image3.style.top = (posY+2) +"%";
-    image3.style.left = (posX+16) +"%";
+    image16.style.top = (posY+10) +"%";
+    image16.style.left = (posX+6) +"%";
+    image17.style.top = (posY) +"%";
+    image17.style.left = (posX+7) +"%";
+    image18.style.top = (posY+12) +"%";
+    image18.style.left = (posX+9) +"%";
     image19.style.top = (posY+25) +"%";
     image19.style.left = (posX+5) +"%";
     image20.style.top = (posY+20) +"%";
     image20.style.left = (posX+17) +"%";
+    image21.style.top = (posY+11) +"%";
+    image21.style.left = (posX+11) +"%";
+    image22.style.top = (posY+10) +"%";
+    image22.style.left = (posX+6) +"%";
+    image23.style.top = (posY+9) +"%";
+    image23.style.left = (posX+10) +"%";
+    image24.style.top = (posY+18) +"%";
+    image24.style.left = (posX+16) +"%";
+    image25.style.top = (posY+40) +"%";
+    image25.style.left = (posX-3) +"%";
+    image26.style.top = (posY+20) +"%";
+    image26.style.left = (posX+17) +"%";
+    image27.style.top = (posY+17) +"%";
+    image27.style.left = (posX+36) +"%";
+    image28.style.top = (posY) +"%";
+    image28.style.left = (posX-10) +"%";
+    image29.style.top = (posY+12) +"%";
+    image29.style.left = (posX+25) +"%";
+    image30.style.top = (posY+16) +"%";
+    image30.style.left = (posX+5) +"%";
+    image31.style.top = (posY+21) +"%";
+    image31.style.left = (posX+11) +"%";
+
     var id = setInterval(frame, 150);
       function frame() {
             if (maintitle.style.opacity == 1) {
@@ -130,11 +165,13 @@ var animate = function() {
              image20.style.opacity = 0.81;
            }
            else if(counter ==39){
-             mainImage.style.opacity = 0.6;
+             mainImage0.style.opacity = 0.6;
            }
            else if(counter ==45){
+             mainImage0.style.opacity=0;
+             mainImage.style.opacity=0.6;
              maintitle.style.opacity = 1;
-             header.style.visibility=visible;
+             header.style.visibility="visible";
            }
            counter++;
     }
