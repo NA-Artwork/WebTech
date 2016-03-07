@@ -8,7 +8,7 @@ Please can you mark for feedback. We expect to add further client side features 
 final client side submission on May the 22nd after feedback would be appreciated.
 
 Website features
-  1. Intro.html
+  1. home.html
     a. Custom made music in intro.html
     b. Long animation in javascript creating a paint like feature
     c. animations gradually darkens so that it appears like the paint is drying
