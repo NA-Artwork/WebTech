@@ -135,7 +135,7 @@ audio{
   position:fixed;
   left:0px;
 }
-.animation{
+#animation{
   height: 100%;
   width: 100%;
   position: fixed;
