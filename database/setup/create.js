@@ -5,9 +5,13 @@ var db = new sql.Database("test.db");
 db.serialize(startup);
 
 function startup() {
-  db.run("create table pets (name text, kind text)", err);
-  db.run("insert into pets values ('Odie','dog')", err);
-  db.run("insert into pets values ('Wanda','fish')", err);
+  db.run("CREATE TABLE User(userId INTEGER,"+
+                           "name VARCHAR(100) NOT NULL,"+
+                           "email VARCHAR(100) NOT NULL,"+
+                    "CONSTRAINT pkUid PRIMARY KEY(userId))",
+         err);
+  // db.run("insert into pets values ('Odie','dog')", err);
+  // db.run("insert into pets values ('Wanda','fish')", err);
   db.close();
 }
 
