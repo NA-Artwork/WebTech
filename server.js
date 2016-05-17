@@ -116,6 +116,7 @@ function valid(url) {
     return true;
 }
 
+
 // Restrict the url to visible ascii characters, excluding control characters,
 // spaces, and unicode characters beyond ascii.  Such characters aren't
 // technically illegal, but (a) need to be escaped which causes confusion for
