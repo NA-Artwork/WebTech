@@ -31,8 +31,13 @@ function start(port) {
 
 // Serve a request.  Process and validate the url, then deliver the file.
 function handle(request, response) {
+    // console.log("request.url " + request.url + " request.headers " + request.headers);
     var url = request.url;
+    var query = retrieveQuery(url);
     url = removeQuery(url);
+    // console.log("before" + url);
+    url = executeQuery(query,url);
+    // console.log("after" + url);
     url = lower(url);
     url = addIndex(url);
     if (! valid(url)) return fail(response, NotFound, "Invalid URL");
@@ -49,6 +54,43 @@ function removeQuery(url) {
     var n = url.indexOf('?');
     if (n >= 0) url = url.substring(0, n);
     return url;
+}
+
+// Retrieve the query part of a url.
+function retrieveQuery(url) {
+    var n = url.indexOf('?');
+    if (n >= 0){
+      var query = url.substring(n+1, url.length);
+      // console.log(query);
+      return query;
+    }
+    return null;
+}
+
+// Retrieve the query part of a url.
+function executeQuery(query, url) {
+   if(url === "/client/info.html"){
+     buildInfoPage(query);
+     url = "/client/infotemp.html";
+   }
+   return url;
+}
+
+function buildInfoPage(query){
+   var file = "./client/info.html";
+   var fileOut ="./client/infotemp.html"
+   var index;
+  //  fs.readFile(file)
+  fs.readFile(file, 'utf8',function (err, data) {
+ if (err) throw err;
+ if(data.indexOf('k1') < 0){
+  // console.log(data)
+}else {
+  index = data.replace(/k1/g,query);
+  fs.writeFile(fileOut,index);
+  console.log("file written");
+}
+});
 }
 
 // Make the url lower case, so the server is case insensitive, even on Linux.
@@ -121,6 +163,7 @@ function negotiate(accept) {
 // Read and deliver the url as a file within the site.
 function reply(response, url, type) {
     var file = "." + url;
+    console.log(file);
     fs.readFile(file, deliver.bind(null, response, type));
 }
 
