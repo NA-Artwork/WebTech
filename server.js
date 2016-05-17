@@ -13,6 +13,10 @@
 // avoid privilege or port number clash problems or to add firewall protection.
 var http = require('http');
 var fs = require('fs');
+var sql = require("sqlite3");
+sql.verbose();
+var db = new sql.Database("database/database.sqlite3");
+
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
 var banned = defineBanned();
 var types = defineTypes();
@@ -61,7 +65,7 @@ function retrieveQuery(url) {
     var n = url.indexOf('?');
     if (n >= 0){
       var query = url.substring(n+1, url.length);
-      // console.log(query);
+      console.log(query);
       return query;
     }
     return null;
@@ -72,8 +76,30 @@ function executeQuery(query, url) {
    if(url === "/client/info.html"){
      buildInfoPage(query);
      url = "/client/infotemp.html";
+   }else if( url === "/client/contact.html"){
+     insertUser(query);
+     insertMessage(query);
    }
    return url;
+}
+function insertUser(query){
+  var querySplit = query.split('&');
+  console.log(querySplit);
+  var index = querySplit[0].indexOf('=');
+  var uName = querySplit[0].substring(index+1,querySplit[0].length);
+  console.log(uName);
+  index = querySplit[1].indexOf('=');
+  uName = uName + " " + querySplit[1].substring(index+1,querySplit[1].length);
+  console.log(uName);
+  index = querySplit[2].indexOf('=');
+  var email = querySplit[2].substring(index+1,querySplit[2].length);
+  console.log(email);
+  var strtemp = "INSERT INTO User(name,email) Values ('"+ uName +"','"+email+"')";
+  console.log(strtemp);
+   db.run(strtemp);
+}
+function insertMessage(query){
+
 }
 
 function buildInfoPage(query){
