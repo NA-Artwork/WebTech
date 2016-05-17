@@ -83,20 +83,23 @@ function executeQuery(query, url) {
    return url;
 }
 function insertUser(query){
-  var querySplit = query.split('&');
-  console.log(querySplit);
-  var index = querySplit[0].indexOf('=');
-  var uName = querySplit[0].substring(index+1,querySplit[0].length);
-  console.log(uName);
-  index = querySplit[1].indexOf('=');
-  uName = uName + " " + querySplit[1].substring(index+1,querySplit[1].length);
-  console.log(uName);
-  index = querySplit[2].indexOf('=');
-  var email = querySplit[2].substring(index+1,querySplit[2].length);
-  console.log(email);
-  var strtemp = "INSERT INTO User(name,email) Values ('"+ uName +"','"+email+"')";
-  console.log(strtemp);
-   db.run(strtemp);
+  if(query!=null){
+
+    var querySplit = query.split('&');
+    console.log(querySplit);
+    var index = querySplit[0].indexOf('=');
+    var uName = querySplit[0].substring(index+1,querySplit[0].length);
+    console.log(uName);
+    index = querySplit[1].indexOf('=');
+    uName = uName + " " + querySplit[1].substring(index+1,querySplit[1].length);
+    console.log(uName);
+    index = querySplit[2].indexOf('=');
+    var email = querySplit[2].substring(index+1,querySplit[2].length);
+    console.log(email);
+    var strtemp = "INSERT INTO User(name,email) Values ('"+ uName +"','"+email+"')";
+    console.log(strtemp);
+    db.run(strtemp);
+  }
 }
 function insertMessage(query){
 
