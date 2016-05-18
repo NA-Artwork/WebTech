@@ -13,6 +13,10 @@
 // avoid privilege or port number clash problems or to add firewall protection.
 var http = require('http');
 var fs = require('fs');
+var sql = require("sqlite3");
+sql.verbose();
+var db = new sql.Database("database/database.sqlite3");
+
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
 var banned = defineBanned();
 var types = defineTypes();
@@ -31,8 +35,13 @@ function start(port) {
 
 // Serve a request.  Process and validate the url, then deliver the file.
 function handle(request, response) {
+    // console.log("request.url " + request.url + " request.headers " + request.headers);
     var url = request.url;
+    var query = retrieveQuery(url);
     url = removeQuery(url);
+    // console.log("before" + url);
+    url = executeQuery(query,url);
+    // console.log("after" + url);
     url = lower(url);
     url = addIndex(url);
     if (! valid(url)) return fail(response, NotFound, "Invalid URL");
@@ -49,6 +58,68 @@ function removeQuery(url) {
     var n = url.indexOf('?');
     if (n >= 0) url = url.substring(0, n);
     return url;
+}
+
+// Retrieve the query part of a url.
+function retrieveQuery(url) {
+    var n = url.indexOf('?');
+    if (n >= 0){
+      var query = url.substring(n+1, url.length);
+      console.log(query);
+      return query;
+    }
+    return null;
+}
+
+// Retrieve the query part of a url.
+function executeQuery(query, url) {
+   if(url === "/client/info.html"){
+     buildInfoPage(query);
+     url = "/client/infotemp.html";
+   }else if( url === "/client/contact.html"){
+     insertUser(query);
+     insertMessage(query);
+   }
+   return url;
+}
+function insertUser(query){
+  if(query!=null){
+
+    var querySplit = query.split('&');
+    console.log(querySplit);
+    var index = querySplit[0].indexOf('=');
+    var uName = querySplit[0].substring(index+1,querySplit[0].length);
+    console.log(uName);
+    index = querySplit[1].indexOf('=');
+    uName = uName + " " + querySplit[1].substring(index+1,querySplit[1].length);
+    console.log(uName);
+    index = querySplit[2].indexOf('=');
+    var email = querySplit[2].substring(index+1,querySplit[2].length);
+    console.log(email);
+    var strtemp = "INSERT INTO User(name,email) Values ('"+ uName +"','"+email+"')";
+    console.log(strtemp);
+    db.run(strtemp);
+  }
+}
+function insertMessage(query){
+
+}
+
+function buildInfoPage(query){
+   var file = "./client/info.html";
+   var fileOut ="./client/infotemp.html"
+   var index;
+  //  fs.readFile(file)
+  fs.readFile(file, 'utf8',function (err, data) {
+ if (err) throw err;
+ if(data.indexOf('k1') < 0){
+  // console.log(data)
+}else {
+  index = data.replace(/k1/g,query);
+  fs.writeFile(fileOut,index);
+  console.log("file written");
+}
+});
 }
 
 // Make the url lower case, so the server is case insensitive, even on Linux.
@@ -73,6 +144,7 @@ function valid(url) {
     if (url.lastIndexOf(".") < url.lastIndexOf("/")) return false;
     return true;
 }
+
 
 // Restrict the url to visible ascii characters, excluding control characters,
 // spaces, and unicode characters beyond ascii.  Such characters aren't
@@ -121,6 +193,7 @@ function negotiate(accept) {
 // Read and deliver the url as a file within the site.
 function reply(response, url, type) {
     var file = "." + url;
+    console.log(file);
     fs.readFile(file, deliver.bind(null, response, type));
 }
 
