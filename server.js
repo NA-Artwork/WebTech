@@ -74,16 +74,13 @@ function retrieveQuery(url) {
 // Retrieve the query part of a url.
 function executeQuery(query, url) {
    if(url === "/client/info.html"){
-     buildInfoPage(query);
-     url = "/client/infotemp.html";
+    //  url = "/client/infotemp.html";
+     url = buildInfoPage(query);
    }else if( url === "/client/contact.html"){
      insertUser(query);
      insertMessage(query);
    }
-   return execQueryDone(url);
-}
-function execQueryDone(url){
-  return url;
+   return url;
 }
 
 function insertUser(query){
@@ -111,21 +108,21 @@ function insertMessage(query){
 
 function buildInfoPage(query){
    var file = "./client/info.html";
-   var index;
-   fs.readFile(file, 'utf8',InfoReadFileError.bind(null,query));
+   var fileOut ="./client/infotemp.html"
+   var index = fs.readFileSync(file, 'utf8');
+   if(!index) throw err;
+   index = index.replace(/k1/g,query);
+   fs.writeFile(fileOut,index);
+   return "/client/infotemp.html";
 }
-
-function InfoReadFileError(query, err, data) {
-  var fileOut ="./client/infotemp.html"
-  if (err) throw err;
-  if(data.indexOf('k1') < 0){
-    throw err;
-  }else {
-    index = data.replace(/k1/g,query);
-    fs.writeFile(fileOut,index);
-    console.log("file written");
-  }
-}
+//
+// console.log("file written");
+// function InfoReadFileError(query, err, data) {
+//   if (err) throw err;
+//   if(data.indexOf('k1') < 0){
+//     throw err;
+//   }
+// }
 
 
 // Make the url lower case, so the server is case insensitive, even on Linux.
