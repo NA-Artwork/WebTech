@@ -96,7 +96,7 @@ function executeQuery(query, url) {
      commentFormSql.insertUser(query,db);
      commentFormSql.insertMessage(query,db);
    }else if(url === "/admin/messages.html"){
-     url = buildMessgP.buildMessagesPage(fs);
+     url = buildMessgP.buildMessagesPage(db,fs);
    }
    return url;
 }
