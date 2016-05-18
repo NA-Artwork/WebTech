@@ -11,6 +11,8 @@ function buildMessageError(fs, err, rows){
   var index = fs.readFileSync(file,'utf8');
   var list = "";
   if(index === null) throw err;
+  if(rows){
+
   rows.forEach(function (row) {
       console.log(row.body, row.name, row.email, row.tstamp);
       list = addListItem("" + row.name +" "+ row.email, list, "details");
@@ -21,6 +23,7 @@ function buildMessageError(fs, err, rows){
   index = index.replace(/replaceThis/g, list);
   console.log(index);
   fs.writeFileSync(fileOut,index);
+  }
 }
 function addListItem(item, list, classId){
   list = list + "<li class='"+classId+"'>"+item+"</li>\n";

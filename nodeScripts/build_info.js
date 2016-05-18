@@ -1,4 +1,4 @@
-
+"use strict";
 module.exports.buildInfoPage = function buildInfoPage(query, fs){
    var file = "./client/info.html";
    var fileOut ="./client/infotemp.html"

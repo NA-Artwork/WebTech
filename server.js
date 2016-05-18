@@ -14,6 +14,8 @@
 var http = require('http');
 var fs = require('fs');
 var cry = require("crypto");
+var auth = require("basic-auth");
+var authenticate = require('./nodeScripts/authenticate.js')
 var sql = require("sqlite3");
 sql.verbose();
 var db = new sql.Database("database/database.sqlite3");
@@ -44,11 +46,9 @@ function handle(request, response) {
     var post = request.method;
     var query = retrieveQuery(url);
     url = removeQuery(url);
-    // console.log("before" + url);
-    // console.log("after" + url);
     url = lower(url);
     url = addIndex(url);
-    if (! free(url)) console.alert("not free");// return fail(response, NotFound, "Administrator access only");
+    if (! free(url))  url = "/client/login.html"// return fail(response, NotFound, "Administrator access only");
     if (! valid(url)) return fail(response, NotFound, "Invalid URL");
     if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
     if (! open(url))  return fail(response, NotFound, "URL has been banned");
@@ -66,6 +66,15 @@ function handle(request, response) {
                 commentFormSql.insertUser(body, db);
                 console.log(body);
             });
+    } else if (post === 'login'){
+      var body='';
+      request.on('data', function (data) {
+          body +=data;
+      });
+      request.on('end',function(){
+          url = authenticate.veryfy(query);
+          console.log(body);
+      });
     }
 
     reply(response, url, type);
@@ -96,6 +105,8 @@ function executeQuery(query, url) {
      url = buildInfo.buildInfoPage(query,fs);
    }else if(url === "/admin/messages.html"){
      url = buildMessgP.buildMessagesPage(db,fs);
+   } else if (url === '/client/login'){
+     url = authenticate.veryfy(query);
    }
    return url;
 }
