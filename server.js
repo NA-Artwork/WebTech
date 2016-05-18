@@ -93,7 +93,7 @@ function executeQuery(query, url) {
     //  url = "/client/infotemp.html";
      url = buildInfo.buildInfoPage(query,fs);
    }else if(url === "/admin/messages.html"){
-     url = buildMessgP.buildMessagesPage(fs);
+     url = buildMessgP.buildMessagesPage(db,fs);
    }
    return url;
 }

@@ -156,6 +156,19 @@ audio{
 .content-info .grid img{
   width:60%;
 }
+.content-mssges{
+  position: relative;
+  top:3em;
+  margin-bottom: 3em;
+  width:100%;
+}
+.details{
+  font-size: 1.5em;
+}
+.message{
+
+}
+
 .content-artwork {
   list-style: none;
   /*margin: auto;*/
