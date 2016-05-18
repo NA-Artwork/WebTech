@@ -92,9 +92,6 @@ function executeQuery(query, url) {
    if(url === "/client/info.html"){
     //  url = "/client/infotemp.html";
      url = buildInfo.buildInfoPage(query,fs);
-   }else if( url === "/client/contact.html"){
-     commentFormSql.insertUser(query,db);
-     commentFormSql.insertMessage(query,db);
    }else if(url === "/admin/messages.html"){
      url = buildMessgP.buildMessagesPage(fs);
    }
