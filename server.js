@@ -80,8 +80,12 @@ function executeQuery(query, url) {
      insertUser(query);
      insertMessage(query);
    }
-   return url;
+   return execQueryDone(url);
 }
+function execQueryDone(url){
+  return url;
+}
+
 function insertUser(query){
   if(query!=null){
 
@@ -107,20 +111,22 @@ function insertMessage(query){
 
 function buildInfoPage(query){
    var file = "./client/info.html";
-   var fileOut ="./client/infotemp.html"
    var index;
-  //  fs.readFile(file)
-  fs.readFile(file, 'utf8',function (err, data) {
- if (err) throw err;
- if(data.indexOf('k1') < 0){
-  // console.log(data)
-}else {
-  index = data.replace(/k1/g,query);
-  fs.writeFile(fileOut,index);
-  console.log("file written");
+   fs.readFile(file, 'utf8',InfoReadFileError.bind(null,query));
 }
-});
+
+function InfoReadFileError(query, err, data) {
+  var fileOut ="./client/infotemp.html"
+  if (err) throw err;
+  if(data.indexOf('k1') < 0){
+    throw err;
+  }else {
+    index = data.replace(/k1/g,query);
+    fs.writeFile(fileOut,index);
+    console.log("file written");
+  }
 }
+
 
 // Make the url lower case, so the server is case insensitive, even on Linux.
 function lower(url) {
