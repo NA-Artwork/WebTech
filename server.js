@@ -13,6 +13,7 @@
 // avoid privilege or port number clash problems or to add firewall protection.
 var http = require('http');
 var fs = require('fs');
+var cry = require("crypto");
 var sql = require("sqlite3");
 sql.verbose();
 var db = new sql.Database("database/database.sqlite3");
@@ -44,13 +45,14 @@ function handle(request, response) {
     var query = retrieveQuery(url);
     url = removeQuery(url);
     // console.log("before" + url);
-    url = executeQuery(query,url);
     // console.log("after" + url);
     url = lower(url);
     url = addIndex(url);
+    if (! free(url)) console.alert("not free");// return fail(response, NotFound, "Administrator access only");
     if (! valid(url)) return fail(response, NotFound, "Invalid URL");
-    if (! safe(url)) return fail(response, NotFound, "Unsafe URL");
-    if (! open(url)) return fail(response, NotFound, "URL has been banned");
+    if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
+    if (! open(url))  return fail(response, NotFound, "URL has been banned");
+    url = executeQuery(query,url);
     var type = findType(url);
     if (type == null) return fail(response, BadType, "File type unsupported");
     if (type == "text/html") type = negotiate(request.headers.accept);
@@ -121,7 +123,10 @@ function valid(url) {
     return true;
 }
 
-
+function free(url){
+    if(url.indexOf("admin") > 0) return false;
+    return true;
+}
 // Restrict the url to visible ascii characters, excluding control characters,
 // spaces, and unicode characters beyond ascii.  Such characters aren't
 // technically illegal, but (a) need to be escaped which causes confusion for
