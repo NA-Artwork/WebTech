@@ -17,6 +17,8 @@ var sql = require("sqlite3");
 sql.verbose();
 var db = new sql.Database("database/database.sqlite3");
 
+var commentFormSql=require("./nodeScripts/comments_form.js");
+
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
 var banned = defineBanned();
 var types = defineTypes();
@@ -74,53 +76,41 @@ function retrieveQuery(url) {
 // Retrieve the query part of a url.
 function executeQuery(query, url) {
    if(url === "/client/info.html"){
-     buildInfoPage(query);
-     url = "/client/infotemp.html";
+    //  url = "/client/infotemp.html";
+     url = buildInfoPage(query);
    }else if( url === "/client/contact.html"){
-     insertUser(query);
-     insertMessage(query);
+     commentFormSql.insertUser(query,db);
+     commentFormSql.insertMessage(query,db);
+   }else if(url === "/admin/messages.html"){
+     url = buildMessagesPage();
    }
    return url;
-}
-function insertUser(query){
-  if(query!=null){
-
-    var querySplit = query.split('&');
-    console.log(querySplit);
-    var index = querySplit[0].indexOf('=');
-    var uName = querySplit[0].substring(index+1,querySplit[0].length);
-    console.log(uName);
-    index = querySplit[1].indexOf('=');
-    uName = uName + " " + querySplit[1].substring(index+1,querySplit[1].length);
-    console.log(uName);
-    index = querySplit[2].indexOf('=');
-    var email = querySplit[2].substring(index+1,querySplit[2].length);
-    console.log(email);
-    var strtemp = "INSERT INTO User(name,email) Values ('"+ uName +"','"+email+"')";
-    console.log(strtemp);
-    db.run(strtemp);
-  }
-}
-function insertMessage(query){
-
 }
 
 function buildInfoPage(query){
    var file = "./client/info.html";
    var fileOut ="./client/infotemp.html"
-   var index;
-  //  fs.readFile(file)
-  fs.readFile(file, 'utf8',function (err, data) {
- if (err) throw err;
- if(data.indexOf('k1') < 0){
-  // console.log(data)
-}else {
-  index = data.replace(/k1/g,query);
-  fs.writeFile(fileOut,index);
-  console.log("file written");
+   var index = fs.readFileSync(file, 'utf8');
+   if(!index) throw err;
+   index = index.replace(/k1/g,query);
+   fs.writeFile(fileOut,index);
+   return "/client/infotemp.html";
 }
-});
+function buildMessagesPage(){
+  var file = "./admin/messages.html";
+  var file = "./admin/messagestemp.html";
+  db.all("SELECT * FROM Message m LEFT JOIN User u ON m.userId = u.userId",function(err, rows) {
+        rows.forEach(function (row) {
+            console.log(row.body, row.name, row.email, row.tstamp);
+        })
+    });
+    var index = fs.readFileSync(file,'utf8');
+    if(!index) throw err;
+    index = index.replace(/replaceThis/g,rows[0].body);
+    fs.writeFile(fileOut,index);
+    return "/admin/messagestemp.html";
 }
+
 
 // Make the url lower case, so the server is case insensitive, even on Linux.
 function lower(url) {
