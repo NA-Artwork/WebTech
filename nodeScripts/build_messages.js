@@ -1,7 +1,7 @@
 var t = require("./test.js");
 module.exports.buildMessagesPage = function buildMessagesPage(db, fs){
   var rows;
-  db.all("SELECT * FROM Message m LEFT JOIN User u ON m.userId = u.userId",buildMessageError.bind(null,fs));
+  db.all("SELECT * FROM Message",buildMessageError.bind(null,fs));
     return "/admin/messagestemp.html";
 }
 
@@ -11,7 +11,7 @@ function buildMessageError(fs, err, rows){
   var index = fs.readFileSync(file,'utf8');
   var original = fs.readFileSync(file,'utf8');
   var list = "";
-  if(index === null) throw err;
+  if(index === null||original==null) throw err;
   if(rows){
     rows.forEach(function (row) {
       console.log(row.body, row.name, row.email, row.tstamp);
@@ -19,10 +19,8 @@ function buildMessageError(fs, err, rows){
       list = addListItem("Message: " + row.body, list, "message");
       list = addListItem("", list, "");
     })
-
-    if(list)
     index = index.replace(/replaceThis/g, list);
-    console.log(index);
+    // console.log(index);
     fs.writeFileSync(fileOut,index);
   }else fs.writeFileSync(fileOut,original);
 }

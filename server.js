@@ -18,7 +18,7 @@ var auth = require("basic-auth");
 var authenticate = require('./nodeScripts/authenticate.js')
 var sql = require("sqlite3");
 sql.verbose();
-var db = new sql.Database("database/database.sqlite3");
+var db = new sql.Database("./database/database.sqlite3");
 
 var t = require("./nodeScripts/test.js");
 var commentFormSql = require("./nodeScripts/comments_form.js");
