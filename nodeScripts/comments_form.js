@@ -1,3 +1,5 @@
+"use strict";
+var t = require("./test.js");
 module.exports.insertUser=function insertUser(query, db){
   if(query!=null){
     var querySplit = query.split('&');
@@ -28,4 +30,8 @@ function sqlrun(uName, email, message, db){
 function deleteAtSymbol(email){
   var re = /%40/g;
   return email.replace(re, "@");
+}
+
+module.exports.test = function test(){
+  t.check(deleteAtSymbol("nikos%40gmail.com"),"nikos@gmail.com");
 }

@@ -13,10 +13,14 @@
 // avoid privilege or port number clash problems or to add firewall protection.
 var http = require('http');
 var fs = require('fs');
+var cry = require("crypto");
+var auth = require("basic-auth");
+var authenticate = require('./nodeScripts/authenticate.js')
 var sql = require("sqlite3");
 sql.verbose();
-var db = new sql.Database("database/database.sqlite3");
+var db = new sql.Database("./database/database.sqlite3");
 
+var t = require("./nodeScripts/test.js");
 var commentFormSql = require("./nodeScripts/comments_form.js");
 var buildInfo = require("./nodeScripts/build_info.js");
 var buildMessgP = require("./nodeScripts/build_messages.js");
@@ -24,7 +28,12 @@ var buildMessgP = require("./nodeScripts/build_messages.js");
 var OK = 200, NotFound = 404, BadType = 415, Error = 500;
 var banned = defineBanned();
 var types = defineTypes();
+
 test();
+commentFormSql.test();
+buildInfo.test();
+buildMessgP.test();
+
 start(8080);
 
 // Start the http service.  Accept only requests from localhost, for security.
@@ -43,14 +52,13 @@ function handle(request, response) {
     var post = request.method;
     var query = retrieveQuery(url);
     url = removeQuery(url);
-    // console.log("before" + url);
-    url = executeQuery(query,url);
-    // console.log("after" + url);
     url = lower(url);
     url = addIndex(url);
+    // if (! free(url))  url = "/client/login.html"// return fail(response, NotFound, "Administrator access only");
     if (! valid(url)) return fail(response, NotFound, "Invalid URL");
-    if (! safe(url)) return fail(response, NotFound, "Unsafe URL");
-    if (! open(url)) return fail(response, NotFound, "URL has been banned");
+    if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
+    if (! open(url))  return fail(response, NotFound, "URL has been banned");
+    url = executeQuery(query,url);
     var type = findType(url);
     if (type == null) return fail(response, BadType, "File type unsupported");
     if (type == "text/html") type = negotiate(request.headers.accept);
@@ -64,6 +72,15 @@ function handle(request, response) {
                 commentFormSql.insertUser(body, db);
                 console.log(body);
             });
+    } else if (post === 'login'){
+      var body='';
+      request.on('data', function (data) {
+          body +=data;
+      });
+      request.on('end',function(){
+          url = authenticate.verify(query);
+          console.log(body);
+      });
     }
 
     reply(response, url, type);
@@ -94,6 +111,8 @@ function executeQuery(query, url) {
      url = buildInfo.buildInfoPage(query,fs);
    }else if(url === "/admin/messages.html"){
      url = buildMessgP.buildMessagesPage(db,fs);
+   } else if (url === '/client/login'){
+     url = authenticate.veryfy(query);
    }
    return url;
 }
@@ -121,7 +140,10 @@ function valid(url) {
     return true;
 }
 
-
+function free(url){
+    if(url.indexOf("admin") > 0) return false;
+    return true;
+}
 // Restrict the url to visible ascii characters, excluding control characters,
 // spaces, and unicode characters beyond ascii.  Such characters aren't
 // technically illegal, but (a) need to be escaped which causes confusion for
@@ -258,36 +280,28 @@ function defineTypes() {
 
 // Test the server's logic, and make sure there's an index file.
 function test() {
-    check(removeQuery("/index.html?x=1"), "/index.html");
-    check(lower("/index.html"), "/index.html");
-    check(lower("/INDEX.HTML"), "/index.html");
-    check(addIndex("/index.html"), "/index.html");
-    check(addIndex("/admin/"), "/admin/index.html");
-    check(valid("/index.html"), true);
-    check(valid("../x"), false, "urls must start with /");
-    check(valid("/x/../y"), false, "urls must not contain /../");
-    check(valid("/x//y"), false, "urls must not contain //");
-    check(valid("/x/./y"), false, "urls must not contain /./");
-    check(valid("/.txt"), false, "urls must not contain /.");
-    check(valid("/x"), false, "filenames must have extensions");
-    check(safe("/index.html"), true);
-    check(safe("/\n/"), false);
-    check(safe("/x y/"), false);
-    check(open("/index.html"), true);
-    check(open("/server.js"), false);
-    check(findType("/x.txt"), "text/plain");
-    check(findType("/x"), undefined);
-    check(findType("/x.abc"), undefined);
-    check(findType("/x.htm"), undefined);
-    check(negotiate("xxx,text/html"), "text/html");
-    check(negotiate("xxx,application/xhtml+xml"), "application/xhtml+xml");
-    check(fs.existsSync('./index.html'), true, "site contains no index.html");
-}
-
-function check(x, out, message) {
-    if (x == out) return;
-    if (message) console.log("Test failed:", message);
-    else console.log("Test failed: Expected", out, "Actual:", x);
-    console.trace();
-    process.exit(1);
+    t.check(removeQuery("/index.html?x=1"), "/index.html");
+    t.check(lower("/index.html"), "/index.html");
+    t.check(lower("/INDEX.HTML"), "/index.html");
+    t.check(addIndex("/index.html"), "/index.html");
+    t.check(addIndex("/admin/"), "/admin/index.html");
+    t.check(valid("/index.html"), true);
+    t.check(valid("../x"), false, "urls must start with /");
+    t.check(valid("/x/../y"), false, "urls must not contain /../");
+    t.check(valid("/x//y"), false, "urls must not contain //");
+    t.check(valid("/x/./y"), false, "urls must not contain /./");
+    t.check(valid("/.txt"), false, "urls must not contain /.");
+    t.check(valid("/x"), false, "filenames must have extensions");
+    t.check(safe("/index.html"), true);
+    t.check(safe("/\n/"), false);
+    t.check(safe("/x y/"), false);
+    t.check(open("/index.html"), true);
+    t.check(open("/server.js"), false);
+    t.check(findType("/x.txt"), "text/plain");
+    t.check(findType("/x"), undefined);
+    t.check(findType("/x.abc"), undefined);
+    t.check(findType("/x.htm"), undefined);
+    t.check(negotiate("xxx,text/html"), "text/html");
+    t.check(negotiate("xxx,application/xhtml+xml"), "application/xhtml+xml");
+    t.check(fs.existsSync('./index.html'), true, "site contains no index.html");
 }
