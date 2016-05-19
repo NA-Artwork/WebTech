@@ -22,8 +22,8 @@ module.exports.insertUser=function insertUser(query, db){
 function getStatementFromArray(array, index, position){
   index = array[position].indexOf('=');
   var word = array[position].substring(index+1,array[position].length);
-  word = urlencode.decode(word);
   word = replacePlusSymbol(word);
+  word = urlencode.decode(word);
   console.log("\n getStatementFromArray word= " + word);
   return word;
 }
@@ -41,10 +41,14 @@ function deleteAtSymbol(email){
 }
 function replacePlusSymbol(str){
   var re = /[\+]/g;
-  return str.replace(re, " ");
+  str = str.replace(re, "%2B");
+  str = str.replace(/%2B%2B%2B/g," + ");
+  str = str.replace(/%2B/g, " ");
+  return str;
 }
 
 module.exports.test = function test(){
   t.check(deleteAtSymbol("nikos%40gmail.com"),"nikos@gmail.com");
+  t.check(replacePlusSymbol("a+++b+is"), "a + b is");
   t.check(replacePlusSymbol("nikos+40gmail.com"),"nikos 40gmail.com");
 }
