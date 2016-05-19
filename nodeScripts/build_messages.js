@@ -21,6 +21,7 @@ function buildMessageError(fs, err, rows){
       list = addListItem(" email: "+ row.email, list, "details");
       list = addListItem(date, list, "details");
       list = addListItem(row.body, list, "message");
+      list = addlineBreak(list);
     })
     index = index.replace(/replaceThis/g, list);
     // console.log(index);
@@ -32,7 +33,7 @@ function addListItem(item, list, classId){
   return list;
 }
 function addlineBreak(list){
-  return list +"<br>";
+  return list +"<br/>";
 
 }
 
@@ -40,6 +41,6 @@ function addlineBreak(list){
 module.exports.test = function test(){
   t.check(addListItem("nikos","","details"),"<li class='details'>nikos</li>\n");
   t.check(addListItem("nikos","line\n","details"),"line\n<li class='details'>nikos</li>\n");
-  t.check(addlineBreak(""), "<br>");
-  t.check(addlineBreak("line\n"), "line\n<br>");
+  t.check(addlineBreak(""), "<br/>");
+  t.check(addlineBreak("line\n"), "line\n<br/>");
 }
