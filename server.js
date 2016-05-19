@@ -16,8 +16,11 @@ var fs = require('fs');
 var cry = require("crypto");
 var auth = require("basic-auth");
 var authenticate = require('./nodeScripts/authenticate.js')
-var sql = require("sqlite3");
+var sql = require('sqlite3');
 sql.verbose();
+
+// var createDB = require('./database/setup/create.js');
+// create.startup();
 var db = new sql.Database("./database/database.sqlite3");
 
 var t = require("./nodeScripts/test.js");
@@ -50,44 +53,50 @@ function start(port) {
 function handle(request, response) {
     var url = request.url;
     var post = request.method;
-    var done = {value : false};
     var query = retrieveQuery(url);
     url = removeQuery(url);
     url = lower(url);
     url = addIndex(url);
+    executeQuery(query,url);
     // if (! free(url))  url = "/client/login.html"// return fail(response, NotFound, "Administrator access only");
     if (! valid(url)) return fail(response, NotFound, "Invalid URL");
     if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
     if (! open(url))  return fail(response, NotFound, "URL has been banned");
-    url = executeQuery(query,url,done);
     var type = findType(url);
     if (type == null) return fail(response, BadType, "File type unsupported");
     if (type == "text/html") type = negotiate(request.headers.accept);
 
     if(post =='POST') {
-            var body='';
-            request.on('data', function (data) {
+          var body='';
+          request.on('data', function (data) {
                 body +=data;
-            });
-            request.on('end',function(){
-                commentFormSql.insertUser(body, db);
+          });
+          request.on('end',function(){
+                commentFormSql.insertUser(body, db, fs);
                 console.log(body);
-            });
+          });
     } else if (post === 'login'){
-      var body='';
-      request.on('data', function (data) {
-          body +=data;
-      });
-      request.on('end',function(){
-          url = authenticate.verify(query);
-          console.log(body);
-      });
+          var body='';
+          request.on('data', function (data) {
+                body +=data;
+          });
+          request.on('end',function(){
+                url = authenticate.verify(query);
+                console.log(body);
+          });
     }
-    while(!done.value){}
+    url = redirects(url);
     reply(response, url, type);
 }
 function redirects(url){
-
+  if(url === "/client/info.html"){
+    url = "/client/infotemp.html";
+  }else if(url === "/admin/messages.html"){
+    url = "/admin/messagestemp.html";
+  } else if (url === '/client/login'){
+    url = "/admin/messages.html";
+  }
+  return url;
 }
 // Remove the query part of a url.
 function removeQuery(url) {
@@ -107,18 +116,13 @@ function retrieveQuery(url) {
     return null;
 }
 
-// Retrieve the query part of a url.
-function executeQuery(query, url, done) {
+// Build dynamically created pages or request login.
+function executeQuery(query, url) {
    if(url === "/client/info.html"){
-    //  url = "/client/infotemp.html";
-     url = buildInfo.buildInfoPage(query,fs);
-   }else if(url === "/admin/messages.html"){
-     url = buildMessgP.buildMessagesPage(db,fs);
+     buildInfo.buildInfoPage(query,fs);
    } else if (url === '/client/login'){
-     url = authenticate.verify(query);
+     authenticate.verify(query);
    }
-   done.value = true;
-   return url;
 }
 
 // Make the url lower case, so the server is case insensitive, even on Linux.

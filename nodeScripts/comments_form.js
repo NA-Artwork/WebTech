@@ -1,8 +1,9 @@
 "use strict";
 var t = require("./test.js");
 var urlencode = require('urlencode');
+var messageUpdate = require("./build_messages.js");
 
-module.exports.insertUser=function insertUser(query, db){
+module.exports.insertUser=function insertUser(query, db, fs){
   if(query!=null){
     var index;
     var querySplit = query.split('&');
@@ -16,6 +17,7 @@ module.exports.insertUser=function insertUser(query, db){
     var message = getStatementFromArray(querySplit, index, 3);
     console.log("\n message= " + message);
     sqlrun(uName, email, message, db);
+    messageUpdate.buildMessagesPage(db,fs);
   }
 }
 

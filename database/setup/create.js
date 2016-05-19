@@ -5,7 +5,7 @@ var db = new sql.Database("../database.sqlite3");
 db.serialize(startup);
 
 function startup() {
-  db.run("CREATE TABLE Message(messageId INTEGER,"+
+  db.run("CREATE TABLE IF NOT EXISTS Message(messageId INTEGER,"+
                            "name VARCHAR(100) NOT NULL,"+
                            "body TEXT ,"+
                            "tstamp INTEGER  ,"+
