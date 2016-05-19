@@ -1,8 +1,8 @@
 var t = require("./test.js");
 module.exports.buildMessagesPage = function buildMessagesPage(db, fs){
   var rows;
-  db.all("SELECT * FROM Message",buildMessageError.bind(null,fs));
-    return "/admin/messagestemp.html";
+  db.all("SELECT * FROM Message ORDER BY tstamp DESC",buildMessageError.bind(null,fs));
+  return "/admin/messagestemp.html";
 }
 
 function buildMessageError(fs, err, rows){
@@ -13,16 +13,19 @@ function buildMessageError(fs, err, rows){
   var list = "";
   if(index === null||original==null) throw err;
   if(rows){
+    var i = 0;
     rows.forEach(function (row) {
-      console.log(row.body, row.name, row.email, row.tstamp);
-      list = addListItem("user name: " + row.name +" email: "+ row.email, list, "details");
-      list = addListItem("Message: " + row.body, list, "message");
-      list = addListItem("", list, "");
+      var date = new Date(row.tstamp*1000);
+      console.log(row.body, row.name, row.email, row.tstamp, date);
+      list = addListItem("#"+(rows.length-i++) + " user name: " + row.name, list, "details");
+      list = addListItem(" email: "+ row.email, list, "details");
+      list = addListItem(date, list, "details");
+      list = addListItem(row.body, list, "message");
     })
     index = index.replace(/replaceThis/g, list);
     // console.log(index);
     fs.writeFileSync(fileOut,index);
-  }else fs.writeFileSync(fileOut,original);
+  }
 }
 function addListItem(item, list, classId){
   list = list + "<li class='"+classId+"'>"+item+"</li>\n";
