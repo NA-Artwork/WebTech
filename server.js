@@ -112,7 +112,7 @@ function executeQuery(query, url) {
    }else if(url === "/admin/messages.html"){
      url = buildMessgP.buildMessagesPage(db,fs);
    } else if (url === '/client/login'){
-     url = authenticate.veryfy(query);
+     url = authenticate.verify(query);
    }
    return url;
 }

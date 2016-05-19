@@ -7,7 +7,7 @@ module.exports.insertUser=function insertUser(query, db){
     var querySplit = query.split('&');
     console.log(querySplit);
     var index = querySplit[0].indexOf('=');
-    var uName = urlencode.decode(querySplit[0].substring(index+1,querySplit[0].length));
+    var uName = querySplit[0].substring(index+1,querySplit[0].length));
     console.log(uName);
     index = querySplit[1].indexOf('=');
     uName = urlencode.decode(uName + " " + querySplit[1].substring(index+1,querySplit[1].length));
