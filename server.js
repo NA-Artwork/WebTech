@@ -50,6 +50,7 @@ function start(port) {
 function handle(request, response) {
     var url = request.url;
     var post = request.method;
+    var done = {value : false};
     var query = retrieveQuery(url);
     url = removeQuery(url);
     url = lower(url);
@@ -58,7 +59,7 @@ function handle(request, response) {
     if (! valid(url)) return fail(response, NotFound, "Invalid URL");
     if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
     if (! open(url))  return fail(response, NotFound, "URL has been banned");
-    url = executeQuery(query,url);
+    url = executeQuery(query,url,done);
     var type = findType(url);
     if (type == null) return fail(response, BadType, "File type unsupported");
     if (type == "text/html") type = negotiate(request.headers.accept);
@@ -82,10 +83,12 @@ function handle(request, response) {
           console.log(body);
       });
     }
-
+    while(!done.value){}
     reply(response, url, type);
 }
+function redirects(url){
 
+}
 // Remove the query part of a url.
 function removeQuery(url) {
     var n = url.indexOf('?');
@@ -105,15 +108,16 @@ function retrieveQuery(url) {
 }
 
 // Retrieve the query part of a url.
-function executeQuery(query, url) {
+function executeQuery(query, url, done) {
    if(url === "/client/info.html"){
     //  url = "/client/infotemp.html";
      url = buildInfo.buildInfoPage(query,fs);
    }else if(url === "/admin/messages.html"){
      url = buildMessgP.buildMessagesPage(db,fs);
    } else if (url === '/client/login'){
-     url = authenticate.veryfy(query);
+     url = authenticate.verify(query);
    }
+   done.value = true;
    return url;
 }
 

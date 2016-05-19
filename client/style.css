@@ -171,11 +171,15 @@ audio{
   background-color: grey;
   width:50%;
   font-size: 1.1em;
+  padding-top: .5em;
+  padding-bottom: .5em;
 }
 .message{
   background-color: white;
   width:50%;
   font-family: helvetica;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .content-artwork {

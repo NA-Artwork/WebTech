@@ -9,7 +9,7 @@ module.exports.insertUser=function insertUser(query, db){
     console.log(querySplit);
     var uName = getStatementFromArray(querySplit, index, 0);
     console.log(uName);
-    uName = (uName + " " + getStatementFromArray(querySplit, index, 1));
+    uName = uName + " " + getStatementFromArray(querySplit, index, 1);
     console.log("\n uname = " + uName);
     var email = getStatementFromArray(querySplit, index, 2);
     console.log("\n EMAIL= " + email);
