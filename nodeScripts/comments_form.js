@@ -4,25 +4,28 @@ var urlencode = require('urlencode');
 
 module.exports.insertUser=function insertUser(query, db){
   if(query!=null){
+    var index;
     var querySplit = query.split('&');
     console.log(querySplit);
-    var index = querySplit[0].indexOf('=');
-    var uName = urlencode.decode(querySplit[0].substring(index+1,querySplit[0].length));
+    var uName = getStatementFromArray(querySplit, index, 0);
     console.log(uName);
-    index = querySplit[1].indexOf('=');
-    uName = urlencode.decode(uName + " " + querySplit[1].substring(index+1,querySplit[1].length));
+    uName = (uName + " " + getStatementFromArray(querySplit, index, 1));
     console.log("\n uname = " + uName);
-    index = querySplit[2].indexOf('=');
-    var email = urlencode.decode(querySplit[2].substring(index+1,querySplit[2].length));
+    var email = getStatementFromArray(querySplit, index, 2);
     console.log("\n EMAIL= " + email);
-    index = querySplit[3].indexOf('=');
-    var message = urlencode.decode(querySplit[3].substring(index+1,querySplit[3].length));
-    console.log("\n message= " +message);
-    uName = replacePlusSymbol(uName);
-    email = replacePlusSymbol(email);
-    message = replacePlusSymbol(message);
+    var message = getStatementFromArray(querySplit, index, 3);
+    console.log("\n message= " + message);
     sqlrun(uName, email, message, db);
   }
+}
+
+function getStatementFromArray(array, index, position){
+  index = array[position].indexOf('=');
+  var word = array[position].substring(index+1,array[position].length);
+  word = urlencode.decode(word);
+  word = replacePlusSymbol(word);
+  console.log("\n getStatementFromArray word= " + word);
+  return word;
 }
 
 function sqlrun(uName, email, message, db){
@@ -30,8 +33,6 @@ function sqlrun(uName, email, message, db){
   var ps = db.prepare("INSERT INTO Message(name, tstamp, body, email) Values (?, ?, ?, ?)");
   ps.run(uName, unixTime, message, email);
   ps.finalize();
-  // var strtemp = "INSERT INTO Message(name, tstamp, body, email) Values ('"+ uName +"','"+ unixTime +"','"+ message +"','"+email+"')";
-  // console.log(strtemp);
 }
 
 function deleteAtSymbol(email){
@@ -39,8 +40,11 @@ function deleteAtSymbol(email){
   return email.replace(re, "@");
 }
 function replacePlusSymbol(str){
-  return str.replace(/[+]/g," ");
+  var re = /[\+]/g;
+  return str.replace(re, " ");
 }
+
 module.exports.test = function test(){
   t.check(deleteAtSymbol("nikos%40gmail.com"),"nikos@gmail.com");
+  t.check(replacePlusSymbol("nikos+40gmail.com"),"nikos 40gmail.com");
 }
