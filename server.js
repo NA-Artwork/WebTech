@@ -110,7 +110,7 @@ function handle(request, response) {
 }
 
 function redir(request,response){
-  response.end();
+  deliver(response,)
 }
 
 function handlePostRequest(request,url){
