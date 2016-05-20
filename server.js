@@ -12,42 +12,72 @@
 // Then start the server on the given port: use the default 80, or use 8080 to
 // avoid privilege or port number clash problems or to add firewall protection.
 var http = require('http');
+var https = require('https');
 var fs = require('fs');
 var cry = require("crypto");
 var auth = require("basic-auth");
 var authenticate = require('./nodeScripts/authenticate.js')
 var sql = require('sqlite3');
 sql.verbose();
-
+//redirect directly
+//
 // var createDB = require('./database/setup/create.js');
 // create.startup();
 
 var db = new sql.Database("./database/database.sqlite3");
-
 var t = require("./nodeScripts/test.js");
 var commentFormSql = require("./nodeScripts/comments_form.js");
 var buildInfo = require("./nodeScripts/build_info.js");
 var buildMessgP = require("./nodeScripts/build_messages.js");
 
-var OK = 200, NotFound = 404, BadType = 415, Error = 500;
+//Redirect 302:permanent
+var OK = 200, Redirect = 302, NotFound = 404, BadType = 415, Error = 500;
 var banned = defineBanned();
 var types = defineTypes();
-
-test();
-commentFormSql.test();
-buildInfo.test();
-buildMessgP.test();
+//global variable ipaddress
+//
+//or send a session cookie
+//
 userName = null;
 password = null;
-start(8080);
+
+const options = {
+  key: fs.readFileSync('server-key.pem'),
+  cert: fs.readFileSync('server-crt.pem'),
+  ca: fs.readFileSync('ca-crt.pem'),
+};
+
+var ports = [80, 443];
+
+start(ports,options);
+
+
 // Start the http service.  Accept only requests from localhost, for security.
 // Print out the server address to visit.
-function start(port) {
-    var httpService = http.createServer(handle);
-    httpService.listen(port, 'localhost');
-    var address = "http://localhost";
-    if (port != 80) address = address + ":" + port;
-    console.log("Server running at", address);
+function start(ports, options) {
+  test();
+  commentFormSql.test();
+  buildInfo.test();
+  buildMessgP.test();
+  var httpService = http.createServer(handle);
+  httpService.listen(ports[0], 'localhost');
+  console.log(options);
+  var httpsService = https.createServer(options, handle);
+  httpsService.listen(ports[1], 'localhost');
+  printAddresses();
+  // var address = "https://localhost";
+  // if (!(port === 80 || port === 443)) address = address + ":" + port;
+  // console.log("Server running at", address);
+}
+// Print out the server addresses.
+function printAddresses() {
+    var httpAddress = "http://localhost";
+    if (ports[0] != 80) httpAddress += ":" + ports[0];
+    httpAddress += "/";
+    var httpsAddress = "https://localhost";
+    if (ports[1] != 443) httpsAddress += ":" + ports[1];
+    httpsAddress += "/";
+    console.log('Server running at', httpAddress, 'and', httpsAddress);
 }
 
 // Serve a request.  Process and validate the url, then deliver the file.
