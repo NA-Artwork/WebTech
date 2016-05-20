@@ -1,10 +1,10 @@
 "use strict";
-var sql = require('sqlite3');
-var db = new sql.Database("./database/database.sqlite3");
-verify("alex", "password1");
+// var sql = require('sqlite3');
+// var db = new sql.Database("./database/database.sqlite3");
+// verify("alex", "password1");
 
-// module.exports.verify=function verify(un,p){
-function verify(un,p){
+module.exports.verify=function verify(un,p, db){
+// function verify(un,p){
 
   var userNameMatch;
   var passWordMatch;
@@ -25,14 +25,20 @@ function verify(un,p){
             if(p===row.password){
               passWordMatch=true;
               console.log("pass match");
-              return passMatch(passWordMatch, userNameMatch);
+              if(passWordMatch==true && userNameMatch==true){
+                console.log("full match");
+                return true;
+              }
+              else{
+                console.log("fail match");
+                return false;
+              }
             }
           }
         });
       }
     }
   });
-  return false;
   }
 
   function passMatch(passWordMatch, userNameMatch){
