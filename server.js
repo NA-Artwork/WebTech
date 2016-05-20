@@ -43,9 +43,9 @@ var types = defineTypes();
 //or send a session cookie
 //  At the moment these global variables are changed from
 // the login.html form submision.
-userName = null;
-password = null;
-
+var userName = null;
+var password = null;
+var loginRedirCallbackUrl = null;
 // The options for httpsService
 const options = {
   key:  fs.readFileSync('server-key.pem'),
@@ -98,7 +98,10 @@ function handle(request, response) {
   if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
   if (!free(url)){
     if (userName =="Nikos" && password == "2108"){console.log("loggedin");}
-    else redirectInternal(request, response, "/login.html");// return fail(response, NotFound, "Administrator access only");
+    else {
+      loginRedirCallbackUrl = url;
+      redirectInternal(request, response, "/login.html");// return fail(response, NotFound, "Administrator access only");
+    }
   }
   if (! open(url))  return fail(response, NotFound, "URL has been banned");
   var type = findType(url);
@@ -135,13 +138,14 @@ function handlePostRequest(request, response, url){
     }
     if(url == "/client/contact.html"){
       commentFormSql.insertMessage(body, db, fs);
-    }else if(url == "/login.html"){
+    }else if(body.indexOf("password")>0){
       var cred = body.split('&');
       var i1 = cred[0].indexOf('=');
       userName = cred[0].substring(i1+1,cred[0].length);
       i1 = cred[1].indexOf('=');
       password = cred[1].substring(i1+1, cred[1].length);
       console.log(cred +"\n"+userName+"\n"+password );
+      if (userName =="Nikos" && password == "2108"){redirectInternal(request,response,loginRedirCallbackUrl);}
     }
   });
 }
