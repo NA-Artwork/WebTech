@@ -1,6 +1,6 @@
 "use strict";
 var sql = require('sqlite3');
-var db = new sql.Database("../database/database.sqlite3");
+var db = new sql.Database("./database/database.sqlite3");
 verify("alex", "password1");
 
 // module.exports.verify=function verify(un,p){

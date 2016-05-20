@@ -19,7 +19,8 @@ var auth = require("basic-auth");
 var authenticate = require('./nodeScripts/authenticate.js')
 var sql = require('sqlite3');
 sql.verbose();
-var db = new sql.Database("./database/database.sqlite3");
+var db = new sql.Database('./database/database.sqlite3');
+
 //redirect directly
 //
 // var createDB = require('./database/setup/create.js');
