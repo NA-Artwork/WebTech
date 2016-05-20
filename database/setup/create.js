@@ -14,7 +14,7 @@ function startup() {
          err);
   db.run("CREATE TABLE IF NOT EXISTS" +
          "User (usId INTEGER," +
-          "userName VARCHAR(100) NOT NULL UNIQUE, pass NOT NULL)"+
+          "userName VARCHAR(100) NOT NULL UNIQUE, pass VARCHAR(100) NOT NULL)"+
           "CONSTRAINT pkUid PRIMARY KEY(usId))", err);
   db.close();
 }
