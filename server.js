@@ -97,28 +97,30 @@ function handle(request, response) {
   if (! valid(url)) return fail(response, NotFound, "Invalid URL");
   if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
   if (!free(url)){
-    if (userName =="Nikos" && password == "2108"){}
-    else url = "/login.html";// return fail(response, NotFound, "Administrator access only");
+    if (userName =="Nikos" && password == "2108"){console.log("loggedin");}
+    else redirectInternal(request, response, "/login.html");// return fail(response, NotFound, "Administrator access only");
   }
   if (! open(url))  return fail(response, NotFound, "URL has been banned");
   var type = findType(url);
   if (type == null) return fail(response, BadType, "File type unsupported");
   if (type == "text/html") type = negotiate(request.headers.accept);
-  if(method == 'POST') handlePostRequest(request,url);
+  if(method == 'POST') handlePostRequest(request, response, url);
 
   url = redirects(url);
   reply(response, url, type);
 }
 
-function redirectToHTTPS(request,response){
-  console.log(request.url);
+function redirectToHTTPS(request, response){
   var redirectLocation = {Location : ("https://localhost" + request.url)};
   response.writeHead(Redirect, redirectLocation);
-  // response.write("https://localhost");
   response.end();
 }
-
-function handlePostRequest(request,url){
+function redirectInternal(request, response, url){
+  var redirectLocation = {Location : ("https://localhost" + url)};
+  response.writeHead(Redirect, redirectLocation);
+  response.end();
+}
+function handlePostRequest(request, response, url){
   var body="";
   request.on('data', function (data) {
     body += data;
@@ -129,6 +131,7 @@ function handlePostRequest(request,url){
       console.log(body+" logged Out");
       userName = null;
       password = null;
+      redirectInternal(request,response,"");
     }
     if(url == "/client/contact.html"){
       commentFormSql.insertMessage(body, db, fs);
