@@ -16,8 +16,12 @@ var fs = require('fs');
 var cry = require("crypto");
 var auth = require("basic-auth");
 var authenticate = require('./nodeScripts/authenticate.js')
-var sql = require("sqlite3");
+var sql = require('sqlite3');
 sql.verbose();
+
+// var createDB = require('./database/setup/create.js');
+// create.startup();
+
 var db = new sql.Database("./database/database.sqlite3");
 
 var t = require("./nodeScripts/test.js");
@@ -33,9 +37,9 @@ test();
 commentFormSql.test();
 buildInfo.test();
 buildMessgP.test();
-
+userName = null;
+password = null;
 start(8080);
-
 // Start the http service.  Accept only requests from localhost, for security.
 // Print out the server address to visit.
 function start(port) {
@@ -49,45 +53,61 @@ function start(port) {
 // Serve a request.  Process and validate the url, then deliver the file.
 function handle(request, response) {
     var url = request.url;
-    var post = request.method;
-    var done = {value : false};
+    var method = request.method;
     var query = retrieveQuery(url);
     url = removeQuery(url);
     url = lower(url);
     url = addIndex(url);
-    // if (! free(url))  url = "/client/login.html"// return fail(response, NotFound, "Administrator access only");
+    executeQuery(query,url);
     if (! valid(url)) return fail(response, NotFound, "Invalid URL");
     if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
+    if (!free(url)){
+      if (userName =="Nikos" && password == "2108"){}
+      else url = "/login.html";// return fail(response, NotFound, "Administrator access only");
+    }
     if (! open(url))  return fail(response, NotFound, "URL has been banned");
-    url = executeQuery(query,url,done);
     var type = findType(url);
     if (type == null) return fail(response, BadType, "File type unsupported");
     if (type == "text/html") type = negotiate(request.headers.accept);
-
-    if(post =='POST') {
-            var body='';
-            request.on('data', function (data) {
-                body +=data;
-            });
-            request.on('end',function(){
-                commentFormSql.insertUser(body, db);
-                console.log(body);
-            });
-    } else if (post === 'login'){
-      var body='';
-      request.on('data', function (data) {
-          body +=data;
-      });
-      request.on('end',function(){
-          url = authenticate.verify(query);
-          console.log(body);
-      });
-    }
-    while(!done.value){}
+    if(method == 'POST') handlePostRequest(request,url);
+    url = redirects(url);
     reply(response, url, type);
 }
-function redirects(url){
 
+function handlePostRequest(request,url){
+    var body="";
+    request.on('data', function (data) {
+      body += data;
+    });
+    request.on('end',function(){
+      console.log(body + " url " +url);
+      if(body.indexOf("foo=logout")==0){
+        console.log(body+" logged Out");
+        userName = null;
+        password = null;
+      }
+      if(url == "/client/contact.html"){
+        commentFormSql.insertMessage(body, db, fs);
+      }else if(url == "/login.html"){
+        var cred = body.split('&');
+        var i1 = cred[0].indexOf('=');
+        userName = cred[0].substring(i1+1,cred[0].length);
+        i1 = cred[1].indexOf('=');
+        password = cred[1].substring(i1+1, cred[1].length);
+        console.log(cred +"\n"+userName+"\n"+password );
+      }
+    });
+}
+
+function redirects(url){
+  if(url === "/client/info.html"){
+    url = "/client/infotemp.html";
+  }else if(url === "/admin/messages.html"){
+    url = "/admin/messagestemp.html";
+  } else if (url === '/client/login.html'){
+    url = "/admin/messages.html";
+  }
+  return url;
 }
 // Remove the query part of a url.
 function removeQuery(url) {
@@ -107,18 +127,14 @@ function retrieveQuery(url) {
     return null;
 }
 
-// Retrieve the query part of a url.
-function executeQuery(query, url, done) {
+// Build dynamically created pages or request login.
+function executeQuery(query, url) {
    if(url === "/client/info.html"){
-    //  url = "/client/infotemp.html";
-     url = buildInfo.buildInfoPage(query,fs);
-   }else if(url === "/admin/messages.html"){
-     url = buildMessgP.buildMessagesPage(db,fs);
-   } else if (url === '/client/login'){
-     url = authenticate.verify(query);
+     buildInfo.buildInfoPage(query,fs);
    }
-   done.value = true;
-   return url;
+  //  else if (url === '/client/login'){
+  //    authenticate.verify(query);
+  //  }
 }
 
 // Make the url lower case, so the server is case insensitive, even on Linux.
