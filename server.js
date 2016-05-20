@@ -65,7 +65,7 @@ function start(ports, options) {
   commentFormSql.test();
   buildInfo.test();
   buildMessgP.test();
-  var httpService = http.createServer(redir);
+  var httpService = http.createServer(redirectToHTTPS);
   httpService.listen(ports[0], 'localhost');
   var httpsService = https.createServer(options, handle);
   httpsService.listen(ports[1], 'localhost');
@@ -110,7 +110,11 @@ function handle(request, response) {
   reply(response, url, type);
 }
 
-function redir(request,response){
+function redirectToHTTPS(request,response){
+  console.log(request.url);
+  var redirectLocation = {Location : ("https://localhost" + request.url)};
+  response.writeHead(Redirect, redirectLocation);
+  // response.write("https://localhost");
   response.end();
 }
 
