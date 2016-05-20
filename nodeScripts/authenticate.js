@@ -1,68 +1,60 @@
 "use strict";
-// var sql = require('sqlite3');
-// var db = new sql.Database("./database/database.sqlite3");
+var t = require("./test.js");
+var sql = require('sqlite3');
+sql.verbose();
+var testdb = new sql.Database("./database/testdb.sqlite3");
+
+// testdb.serialize();
 // verify("alex", "password1");
 
-module.exports.verify=function verify(un,p, db){
-// function verify(un,p){
+module.exports ={
+ verify:verify,
+ test:test
+};
 
-  var userNameMatch;
-  var passWordMatch;
-  var ps = db.prepare("SELECT userName as username from User where username=?");
-  // db.each("SELECT username as username from User", function(err, row) {
-  //     console.log("\n" + row.username);
-  //     });
-  ps.get(un, function(err, row) {
-    if(row){
-      // console.log("database ussername= " +  row.username );
-      if(un===row.username){
-        userNameMatch=true;
-        console.log("user match");
-        var ps = db.prepare("SELECT pass AS password from User where password=?");
-
-        ps.get(p, function(err, row) {
-          if(row){
-            if(p===row.password){
-              passWordMatch=true;
-              console.log("pass match");
-              if(passWordMatch==true && userNameMatch==true){
-                console.log("full match");
-                return true;
-              }
-              else{
-                console.log("fail match");
-                return false;
-              }
-            }
-          }
-        });
-      }
-    }
+function verify(un,p, db){
+  var match = {value:false};
+  // var query = "SELECT userName,pass FROM User WHERE username='"+un+"' AND pass='"+p+"'";
+  // console.log(query);
+  // var ps = db.run(query);
+  //
+  // var ps = db.prepare("SELECT userName,pass FROM User WHERE username=? AND pass=?");
+  // ps.get(un, p, function(err, row) {
+  //      throw err;
+  //     console.log(row.username + ": " + row.pass);
+  // });
+  db.serialize(function() {
+    var ps = db.prepare("SELECT userName,pass FROM User WHERE username=? AND pass=?");
+    ps.get(un, p, function(err, row) {
+        if(err) match.value = false;
+        if(row.length <= 0) match.value = false;
+        console.log(row.username + ": " + row.pass);
+        if(row.username == un && row.pass == p) match.value = true;
+        match.value = false;
+    });
   });
-  }
-
-  function passMatch(passWordMatch, userNameMatch){
-    // console.log("passWordMatch userNameMatch=" + passWordMatch + " " + userNameMatch)
-    if(passWordMatch==true && userNameMatch==true){
-      console.log("full match");
+  return match.value;
+}
+function compareKey(un,p, err, row) {
+  console.log("happened");
+  if(row){
+    console.log("database ussername= " +  row.username );
+    if(un === row.username && p === row.pass){
+      match.value=true;
+      console.log("user match");
       return true;
-    }
-    else{
-      console.log("fail match");
+    } else {
+      match.value=false;
+      console.log("user not match");
       return false;
     }
-  // if(passWordMatch==true && userNameMatch==true){
-  //   console.log("full match");
-  //   return true;
-  // }
-  // else{
-  //   console.log("fail");
-  //   return false;
-  // }
-  // if(un==="Nikos"&&p==="pa") return true;
-  // else return false;
+  }
+  return false;
 }
-
+function test(){
+  t.check(verify("Nikos", "2108", testdb), true );
+  t.check(verify("Nikos", "papar", testdb), false );
+}
 
 
 

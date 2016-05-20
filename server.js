@@ -14,17 +14,13 @@
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
-var cry = require("crypto");
-var auth = require("basic-auth");
+// So we don't forget to use real time replies
+// when the artist's SMTP configuration is completed.
+var nodemailer = require('nodemailer');
 var authenticate = require('./nodeScripts/authenticate.js')
 var sql = require('sqlite3');
 sql.verbose();
 var db = new sql.Database('./database/database.sqlite3');
-
-//redirect directly
-//
-// var createDB = require('./database/setup/create.js');
-// create.startup();
 
 var t = require("./nodeScripts/test.js");
 var commentFormSql = require("./nodeScripts/comments_form.js");
@@ -45,6 +41,7 @@ var types = defineTypes();
 // the login.html form submision.
 var userName = null;
 var password = null;
+var loggedin = false;
 var loginRedirCallbackUrl = null;
 // The options for httpsService
 const options = {
@@ -65,6 +62,7 @@ function start(ports, options) {
   commentFormSql.test();
   buildInfo.test();
   buildMessgP.test();
+  authenticate.test();
   var httpService = http.createServer(redirectToHTTPS);
   httpService.listen(ports[0], 'localhost');
   var httpsService = https.createServer(options, handle);
@@ -97,7 +95,7 @@ function handle(request, response) {
   if (! valid(url)) return fail(response, NotFound, "Invalid URL");
   if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
   if (!free(url)){
-    if (userName =="Nikos" && password == "2108"){console.log("loggedin");}
+    if (loggedin){console.log("loggedin");}
     else {
       loginRedirCallbackUrl = url;
       redirectInternal(request, response, "/login.html");// return fail(response, NotFound, "Administrator access only");
@@ -114,12 +112,16 @@ function handle(request, response) {
 }
 
 function redirectToHTTPS(request, response){
-  var redirectLocation = {Location : ("https://localhost" + request.url)};
+  var redirectLocation = {
+    Location : ("https://localhost" + request.url)
+  };
   response.writeHead(Redirect, redirectLocation);
   response.end();
 }
 function redirectInternal(request, response, url){
-  var redirectLocation = {Location : ("https://localhost" + url)};
+  var redirectLocation = {
+    Location : ("https://localhost" + url)
+  };
   response.writeHead(Redirect, redirectLocation);
   response.end();
 }
@@ -132,8 +134,7 @@ function handlePostRequest(request, response, url){
     console.log(body + " url " +url);
     if(body.indexOf("foo=logout")==0){
       console.log(body+" logged Out");
-      userName = null;
-      password = null;
+      logout();
       redirectInternal(request,response,"");
     }
     if(url == "/client/contact.html"){
@@ -144,13 +145,20 @@ function handlePostRequest(request, response, url){
       userName = cred[0].substring(i1+1,cred[0].length);
       i1 = cred[1].indexOf('=');
       password = cred[1].substring(i1+1, cred[1].length);
-      console.log(cred +"\n"+userName+"\n"+password );
-      if (userName =="Nikos" && password == "2108"){
-        redirectInternal(request,response,loginRedirCallbackUrl);}
+      console.log(cred +"\n"+userName+"\n"+password +loggedin);
+      loggedin = authenticate.verify(userName, password, db);
+      console.log(loggedin);
+      if (loggedin){
+        redirectInternal(request,response,loginRedirCallbackUrl);
+      }
     }
   });
 }
-
+function logout(){
+  userName = null;
+  password = null;
+  loggedin = false;
+}
 function redirects(url){
   if(url === "/client/info.html"){
     url = "/client/infotemp.html";
