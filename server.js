@@ -87,7 +87,7 @@ function handlePostRequest(request,url){
         password = null;
       }
       if(url == "/client/contact.html"){
-        commentFormSql.insertUser(body, db, fs);
+        commentFormSql.insertMessage(body, db, fs);
       }else if(url == "/login.html"){
         var cred = body.split('&');
         var i1 = cred[0].indexOf('=');

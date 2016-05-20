@@ -3,7 +3,7 @@ var t = require("./test.js");
 var urlencode = require('urlencode');
 var messageUpdate = require("./build_messages.js");
 
-module.exports.insertUser=function insertUser(query, db, fs){
+module.exports.insertMessage = function insertMessage(query, db, fs){
   if(query!=null){
     var index;
     var querySplit = query.split('&');
