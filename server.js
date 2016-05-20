@@ -25,13 +25,13 @@ sql.verbose();
 // create.startup();
 
 var db = new sql.Database("./database/database.sqlite3");
-
 var t = require("./nodeScripts/test.js");
 var commentFormSql = require("./nodeScripts/comments_form.js");
 var buildInfo = require("./nodeScripts/build_info.js");
 var buildMessgP = require("./nodeScripts/build_messages.js");
 
-var OK = 200, Redirect = 307, NotFound = 404, BadType = 415, Error = 500;
+//Redirect 302:permanent
+var OK = 200, Redirect = 302, NotFound = 404, BadType = 415, Error = 500;
 var banned = defineBanned();
 var types = defineTypes();
 //global variable ipaddress
@@ -40,20 +40,44 @@ var types = defineTypes();
 //
 userName = null;
 password = null;
+
+const options = {
+  key: fs.readFileSync('server-key.pem'),
+  cert: fs.readFileSync('server-crt.pem'),
+  ca: fs.readFileSync('ca-crt.pem'),
+};
+
+var ports = [80, 443];
+
+start(ports,options);
+
+
 // Start the http service.  Accept only requests from localhost, for security.
 // Print out the server address to visit.
-function start(port, options) {
+function start(ports, options) {
   test();
   commentFormSql.test();
   buildInfo.test();
   buildMessgP.test();
-  // var options = options;//{ key: key, cert: cert };
+  var httpService = http.createServer(handle);
+  httpService.listen(ports[0], 'localhost');
   console.log(options);
-  var httpService = https.createServer(options, handle);
-  httpService.listen(port, 'localhost');
-  var address = "https://localhost";
-  if (port != 80 || port != 443) address = address + ":" + port;
-  console.log("Server running at", address);
+  var httpsService = https.createServer(options, handle);
+  httpsService.listen(ports[1], 'localhost');
+  printAddresses();
+  // var address = "https://localhost";
+  // if (!(port === 80 || port === 443)) address = address + ":" + port;
+  // console.log("Server running at", address);
+}
+// Print out the server addresses.
+function printAddresses() {
+    var httpAddress = "http://localhost";
+    if (ports[0] != 80) httpAddress += ":" + ports[0];
+    httpAddress += "/";
+    var httpsAddress = "https://localhost";
+    if (ports[1] != 443) httpsAddress += ":" + ports[1];
+    httpsAddress += "/";
+    console.log('Server running at', httpAddress, 'and', httpsAddress);
 }
 
 // Serve a request.  Process and validate the url, then deliver the file.
@@ -331,49 +355,3 @@ function test() {
     t.check(negotiate("xxx,application/xhtml+xml"), "application/xhtml+xml");
     t.check(fs.existsSync('./index.html'), true, "site contains no index.html");
 }
-var key =
-    "-----BEGIN RSA PRIVATE KEY-----\n" +
-    "MIICXAIBAAKBgQDGkGjkLwOG9gkuaBFj12n+dLc+fEFk1ns60vsE1LNTDtqe87vj\n" +
-    "3cTMPpsSjzZpzm1+xQs3+ayAM2+wkhdjhthWwiG2v2Ime2afde3iFzA93r4UPlQv\n" +
-    "aDVET8AiweE6f092R0riPpaG3zdx6gnsnNfIEzRH3MnPUe5eGJ/TAiwxsQIDAQAB\n" +
-    "AoGAGz51JdnNghb/634b5LcJtAAPpGMoFc3X2ppYFrGYaS0Akg6fGQS0m9F7NXCw\n" +
-    "5pOMMniWsXdwU6a7DF7/FojJ5d+Y5nWkqyg7FRnrR5QavIdA6IQCIq8by9GRZ0LX\n" +
-    "EUpgIqE/hFbbPM2v2YxMe6sO7E63CU2wzSI2aYQtWCUYKAECQQDnfABYbySAJHyR\n" +
-    "uxntTeuEahryt5Z/rc0XRluF5yUGkaafiDHoxqjvirN4IJrqT/qBxv6NxvKRu9F0\n" +
-    "UsQOzMpJAkEA25ff5UQRGg5IjozuccopTLxLJfTG4Ui/uQKjILGKCuvnTYHYsdaY\n" +
-    "cZeVjuSJgtrz5g7EKdOi0H69/dej1cFsKQJBAIkc/wti0ekBM7QScloItH9bZhjs\n" +
-    "u71nEjs+FoorDthkP6DxSDbMLVat/n4iOgCeXRCv8SnDdPzzli5js/PcQ9kCQFWX\n" +
-    "0DykGGpokN2Hj1WpMAnqBvyneXHMknaB0aXnrd/t7b2nVBiVhdwY8sG80ODBiXnt\n" +
-    "3YZUKM1N6a5tBD5IY2kCQDIjsE0c39OLiFFnpBwE64xTNhkptgABWzN6vY7xWRJ/\n" +
-    "bbMgeh+dQH20iq+O0dDjXkWUGDfbioqtRClhcyct/qE=\n" +
-    "-----END RSA PRIVATE KEY-----\n";
-
-var cert =
-    "-----BEGIN CERTIFICATE-----\n" +
-    "MIIClTCCAf4CCQDwoLa5kuCqOTANBgkqhkiG9w0BAQUFADCBjjELMAkGA1UEBhMC\n" +
-    "VUsxDTALBgNVBAgMBEF2b24xEDAOBgNVBAcMB0JyaXN0b2wxDDAKBgNVBAoMA1VP\n" +
-    "QjEZMBcGA1UECwwQQ29tcHV0ZXIgU2NpZW5jZTESMBAGA1UEAwwJbG9jYWxob3N0\n" +
-    "MSEwHwYJKoZIhvcNAQkBFhJub25lQGNzLmJyaXMuYWMudWswHhcNMTMwNDA4MDgy\n" +
-    "NjE2WhcNMTUwNDA4MDgyNjE2WjCBjjELMAkGA1UEBhMCVUsxDTALBgNVBAgMBEF2\n" +
-    "b24xEDAOBgNVBAcMB0JyaXN0b2wxDDAKBgNVBAoMA1VPQjEZMBcGA1UECwwQQ29t\n" +
-    "cHV0ZXIgU2NpZW5jZTESMBAGA1UEAwwJbG9jYWxob3N0MSEwHwYJKoZIhvcNAQkB\n" +
-    "FhJub25lQGNzLmJyaXMuYWMudWswgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGB\n" +
-    "AMaQaOQvA4b2CS5oEWPXaf50tz58QWTWezrS+wTUs1MO2p7zu+PdxMw+mxKPNmnO\n" +
-    "bX7FCzf5rIAzb7CSF2OG2FbCIba/YiZ7Zp917eIXMD3evhQ+VC9oNURPwCLB4Tp/\n" +
-    "T3ZHSuI+lobfN3HqCeyc18gTNEfcyc9R7l4Yn9MCLDGxAgMBAAEwDQYJKoZIhvcN\n" +
-    "AQEFBQADgYEAQo4j5DAC04trL3nKDm54/COAEKmT0PGg87BvC88S5sTsWTF4jZdj\n" +
-    "dgxV4FeBF6hW2pnchveJK4Kh56ShKF8SK1P8wiqHqV04O9p1OrkB6GxlIO37eq1U\n" +
-    "xQMaMCUsZCWPP3ujKAVL7m3HY2FQ7EJBVoqvSvqSaHfnhog3WpgdyMw=\n" +
-    "-----END CERTIFICATE-----\n";
-
-    const options = {
-      key: fs.readFileSync('server-key.pem'),
-      cert: fs.readFileSync('server-crt.pem'),
-      ca: fs.readFileSync('ca-crt.pem'),
-      // key: key, //fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
-      // cert: cert //fs.readFileSync('test/fixtures/keys/agent2-cert.pem')
-    };
-
-
-
-    start(443,options);
