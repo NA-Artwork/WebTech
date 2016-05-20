@@ -145,7 +145,8 @@ function handlePostRequest(request, response, url){
       i1 = cred[1].indexOf('=');
       password = cred[1].substring(i1+1, cred[1].length);
       console.log(cred +"\n"+userName+"\n"+password );
-      if (userName =="Nikos" && password == "2108"){redirectInternal(request,response,loginRedirCallbackUrl);}
+      if (userName =="Nikos" && password == "2108"){
+        redirectInternal(request,response,loginRedirCallbackUrl);}
     }
   });
 }
