@@ -43,9 +43,9 @@ var types = defineTypes();
 //or send a session cookie
 //  At the moment these global variables are changed from
 // the login.html form submision.
-userName = null;
-password = null;
-
+var userName = null;
+var password = null;
+var loginRedirCallbackUrl = null;
 // The options for httpsService
 const options = {
   key:  fs.readFileSync('server-key.pem'),
@@ -65,7 +65,7 @@ function start(ports, options) {
   commentFormSql.test();
   buildInfo.test();
   buildMessgP.test();
-  var httpService = http.createServer(redir);
+  var httpService = http.createServer(redirectToHTTPS);
   httpService.listen(ports[0], 'localhost');
   var httpsService = https.createServer(options, handle);
   httpsService.listen(ports[1], 'localhost');
@@ -97,24 +97,33 @@ function handle(request, response) {
   if (! valid(url)) return fail(response, NotFound, "Invalid URL");
   if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
   if (!free(url)){
-    if (userName =="Nikos" && password == "2108"){}
-    else url = "/login.html";// return fail(response, NotFound, "Administrator access only");
+    if (userName =="Nikos" && password == "2108"){console.log("loggedin");}
+    else {
+      loginRedirCallbackUrl = url;
+      redirectInternal(request, response, "/login.html");// return fail(response, NotFound, "Administrator access only");
+    }
   }
   if (! open(url))  return fail(response, NotFound, "URL has been banned");
   var type = findType(url);
   if (type == null) return fail(response, BadType, "File type unsupported");
   if (type == "text/html") type = negotiate(request.headers.accept);
-  if(method == 'POST') handlePostRequest(request,url);
+  if(method == 'POST') handlePostRequest(request, response, url);
 
   url = redirects(url);
   reply(response, url, type);
 }
 
-function redir(request,response){
+function redirectToHTTPS(request, response){
+  var redirectLocation = {Location : ("https://localhost" + request.url)};
+  response.writeHead(Redirect, redirectLocation);
   response.end();
 }
-
-function handlePostRequest(request,url){
+function redirectInternal(request, response, url){
+  var redirectLocation = {Location : ("https://localhost" + url)};
+  response.writeHead(Redirect, redirectLocation);
+  response.end();
+}
+function handlePostRequest(request, response, url){
   var body="";
   request.on('data', function (data) {
     body += data;
@@ -125,16 +134,19 @@ function handlePostRequest(request,url){
       console.log(body+" logged Out");
       userName = null;
       password = null;
+      redirectInternal(request,response,"");
     }
     if(url == "/client/contact.html"){
       commentFormSql.insertMessage(body, db, fs);
-    }else if(url == "/login.html"){
+    }else if(body.indexOf("password")>0){
       var cred = body.split('&');
       var i1 = cred[0].indexOf('=');
       userName = cred[0].substring(i1+1,cred[0].length);
       i1 = cred[1].indexOf('=');
       password = cred[1].substring(i1+1, cred[1].length);
       console.log(cred +"\n"+userName+"\n"+password );
+      if (userName =="Nikos" && password == "2108"){
+        redirectInternal(request,response,loginRedirCallbackUrl);}
     }
   });
 }
