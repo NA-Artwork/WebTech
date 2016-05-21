@@ -1,5 +1,11 @@
 var t = require("./test.js");
-module.exports.buildMessagesPage = function buildMessagesPage(db, fs){
+
+module.exports = {
+  buildMessagesPage:buildMessagesPage,
+  test:test
+}
+
+function buildMessagesPage(db, fs){
   var rows;
   var url = {value : "empty" };
   db.all("SELECT * FROM Message ORDER BY tstamp DESC",buildMessageError.bind(null, fs));
@@ -50,7 +56,7 @@ function addlineBreak(list){
 }
 
 
-module.exports.test = function test(){
+function test(){
   t.check(addListItem("nikos","","details"),"<li class='details'>nikos</li>\n");
   t.check(addListItem("nikos","line\n","details"),"line\n<li class='details'>nikos</li>\n");
   t.check(addlineBreak(""), "<br/>");

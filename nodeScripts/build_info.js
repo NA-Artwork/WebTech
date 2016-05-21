@@ -1,6 +1,12 @@
 "use strict";
 var t = require("./test.js");
-module.exports.buildInfoPage = function buildInfoPage(query, fs){
+
+module.exports = {
+  buildInfoPage:buildInfoPage,
+  test:test
+}
+
+function buildInfoPage(query, fs){
    var file = "./client/info.html";
    var fileOut ="./client/infotemp.html"
    var index = fs.readFileSync(file, 'utf8');
@@ -11,5 +17,5 @@ module.exports.buildInfoPage = function buildInfoPage(query, fs){
 }
 
 
-module.exports.test = function test(){
+function test(){
 }
