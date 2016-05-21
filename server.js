@@ -97,7 +97,8 @@ function handle(request, response) {
   if (! valid(url)) return fail(response, NotFound, "Invalid URL");
   if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
   if (!free(url)){
-    if (userName =="Nikos" && password == "2108"){console.log("loggedin");}
+    if(authenticateCheck(userName, password)==true){console.log("loggedin");}
+    // if (userName =="1" && password == "1" ){console.log("loggedin");}
     else {
       loginRedirCallbackUrl = url;
       redirectInternal(request, response, "/login.html");// return fail(response, NotFound, "Administrator access only");
@@ -111,6 +112,18 @@ function handle(request, response) {
 
   url = redirects(url);
   reply(response, url, type);
+}
+
+function authenticateCheck(u, p){
+  var returnval=authenticate.verify(u, p, db);
+  console.log(returnval);
+  return returnval;
+  // if(u ==="1" && p === "1"){
+  //   return true;
+  // }
+  // else{
+  //   return false;
+  // }
 }
 
 function redirectToHTTPS(request, response){
@@ -145,8 +158,9 @@ function handlePostRequest(request, response, url){
       i1 = cred[1].indexOf('=');
       password = cred[1].substring(i1+1, cred[1].length);
       console.log(cred +"\n"+userName+"\n"+password );
-      if (userName =="Nikos" && password == "2108"){
-        redirectInternal(request,response,loginRedirCallbackUrl);}
+      if (authenticateCheck(userName, password)==true){redirectInternal(request,response,loginRedirCallbackUrl);}
+
+      // if (userName =="1" && password == "1"){redirectInternal(request,response,loginRedirCallbackUrl);}
     }
   });
 }
