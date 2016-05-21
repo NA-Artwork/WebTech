@@ -17,8 +17,7 @@ var fs = require('fs');
 var cry = require("crypto");
 var auth = require("basic-auth");
 var authenticate = require('./nodeScripts/authenticate.js')
-var sql = require('sqlite3');
-sql.verbose();
+var sql = require('sqlite3').verbose();
 var db = new sql.Database('./database/database.sqlite3');
 
 //redirect directly
@@ -45,6 +44,7 @@ var types = defineTypes();
 // the login.html form submision.
 var userName = null;
 var password = null;
+var loggedin = false;
 var loginRedirCallbackUrl = null;
 // The options for httpsService
 const options = {
@@ -65,6 +65,7 @@ function start(ports, options) {
   commentFormSql.test();
   buildInfo.test();
   buildMessgP.test();
+  authenticate.test();
   var httpService = http.createServer(redirectToHTTPS);
   httpService.listen(ports[0], 'localhost');
   var httpsService = https.createServer(options, handle);
@@ -97,7 +98,7 @@ function handle(request, response) {
   if (! valid(url)) return fail(response, NotFound, "Invalid URL");
   if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
   if (!free(url)){
-    if (userName =="Nikos" && password == "2108"){console.log("loggedin");}
+    if (loggedin==true){console.log("loggedin");}
     else {
       loginRedirCallbackUrl = url;
       redirectInternal(request, response, "/login.html");// return fail(response, NotFound, "Administrator access only");
@@ -134,6 +135,7 @@ function handlePostRequest(request, response, url){
       console.log(body+" logged Out");
       userName = null;
       password = null;
+      loggedin = false;
       redirectInternal(request,response,"");
     }
     if(url == "/client/contact.html"){
@@ -145,9 +147,13 @@ function handlePostRequest(request, response, url){
       i1 = cred[1].indexOf('=');
       password = cred[1].substring(i1+1, cred[1].length);
       console.log(cred +"\n"+userName+"\n"+password );
-      if (userName =="Nikos" && password == "2108"){
-        redirectInternal(request,response,loginRedirCallbackUrl);}
-    }
+      authenticate.verify(userName,password,db,verifyThis)
+      function verifyThis(){
+        redirectInternal(request,response,loginRedirCallbackUrl);
+        loggedin = true;
+      }
+      }
+
   });
 }
 
