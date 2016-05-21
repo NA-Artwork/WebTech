@@ -4,60 +4,54 @@
 // verify("alex", "password1");
 
 var returnval=false;
-module.exports.verify=function verify(un,p, db){
-// function verify(un,p){
-  var userNameMatch;
-  var passWordMatch;
+module.exports.verify=function verify(un, p, db){
+  var userName;
+  var passWord;
   var ps = db.prepare("SELECT userName as username from User where username=?");
-  // db.each("SELECT username as username from User", function(err, row) {
-  //     console.log("\n" + row.username);
-  //     });
   ps.get(un, function(err, row) {
-    if(row){
-      // console.log("database ussername= " +  row.username );
-      if(un===row.username){
-        console.log("user match");
-        var ps = db.prepare("SELECT pass AS password from User where password=?");
-
-        ps.get(p, function(err, row) {
-          if(row){
-            if(p===row.password){
-              passWordMatch=true;
-              console.log("pass match");
-
-                console.log("full match");
-                returnval = true;
-            }
-            else{
-              console.log("fail match");
-              returnval = false;
-            }
-          }
-        });
-      }
-      else{
-        returnval = false;
-      }
+    if(row!=undefined){
+      userName=row.username;
+      console.log("un=" + un + "username=" + userName);
+    }
+    });
+  var pspass = db.prepare("SELECT pass AS password from User where password=?");
+  pspass.get(p, function(err, row) {
+    if(row!=undefined){
+      passWord=row.password;
+      console.log("!!!!!!!!!!!!!!!!!!!!!!p=" + p + "password=" + passWord);
     }
   });
-    return returnval;
-  }
+  setTimeout(function () {
+    if(p===passWord && un===userName){
+      console.log("full match");
+      returnval= true;
+    }
+    else{
+      console.log("fail");
+      returnval= false;
+    }
+  }, 2000);
+}
+
+
+
 
   module.exports.getValue=function getValue(){
     return returnval;
   }
 
+  //
+  // function passMatch(passWordMatch, userNameMatch){
+  //   // console.log("passWordMatch userNameMatch=" + passWordMatch + " " + userNameMatch)
+  //   if(passWordMatch==true && userNameMatch==true){
+  //     console.log("full match");
+  //     return true;
+  //   }
+  //   else{
+  //     console.log("fail match");
+  //     return false;
+  //   }
 
-  function passMatch(passWordMatch, userNameMatch){
-    // console.log("passWordMatch userNameMatch=" + passWordMatch + " " + userNameMatch)
-    if(passWordMatch==true && userNameMatch==true){
-      console.log("full match");
-      return true;
-    }
-    else{
-      console.log("fail match");
-      return false;
-    }
   // if(passWordMatch==true && userNameMatch==true){
   //   console.log("full match");
   //   return true;
@@ -68,7 +62,7 @@ module.exports.verify=function verify(un,p, db){
   // }
   // if(un==="Nikos"&&p==="pa") return true;
   // else return false;
-}
+
 
 
 

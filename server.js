@@ -115,9 +115,16 @@ function handle(request, response) {
 }
 
 function authenticateCheck(u, p){
-  var returnval=authenticate.verify(u, p, db);
-  console.log(returnval);
-  return returnval;
+  authenticate.verify(u, p, db);
+  var rValue= authenticate.getValue();
+  console.log(rValue);
+  return rValue;
+
+//   function myFunction() {
+//     myVar = setTimeout(authenticate.getvalue(), 300);
+// }
+// console.log(authenticate.getValue());
+// return authenticate.getvalue();
   // if(u ==="1" && p === "1"){
   //   return true;
   // }
