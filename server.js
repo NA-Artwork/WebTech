@@ -15,7 +15,6 @@ var http = require('http');
 var https = require('https');
 var fs = require('fs');
 var cry = require("crypto");
-var auth = require("basic-auth");
 var authenticate = require('./nodeScripts/authenticate.js')
 var sql = require('sqlite3').verbose();
 var db = new sql.Database('./database/database.sqlite3');
@@ -38,14 +37,14 @@ var banned = defineBanned();
 var types = defineTypes();
 
 //global variable ipaddress
-//
 //or send a session cookie
-//  At the moment these global variables are changed from
-// the login.html form submision.
+
+// Global variables used for the authentication.
 var userName = null;
 var password = null;
 var loggedin = false;
 var loginRedirCallbackUrl = null;
+
 // The options for httpsService
 const options = {
   key:  fs.readFileSync('server-key.pem'),
@@ -58,7 +57,8 @@ var ports = [80, 443];
 // Start the server (including tests)
 start(ports,options);
 
-// Start the http service.
+// Start the http and https services.
+// The http service redirects everything to https for security (login)
 // Accept only requests from localhost, for security.
 function start(ports, options) {
   test();
@@ -97,11 +97,11 @@ function handle(request, response) {
 
   if (! valid(url)) return fail(response, NotFound, "Invalid URL");
   if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
-  if (!free(url)){
+  if (! free(url)){
     if (loggedin==true){console.log("loggedin");}
     else {
       loginRedirCallbackUrl = url;
-      redirectInternal(request, response, "/login.html");// return fail(response, NotFound, "Administrator access only");
+      redirectInternal(request, response, "/login.html");
     }
   }
   if (! open(url))  return fail(response, NotFound, "URL has been banned");
@@ -114,16 +114,22 @@ function handle(request, response) {
   reply(response, url, type);
 }
 
+// Every http request is being redirected to the https service.
 function redirectToHTTPS(request, response){
   var redirectLocation = {Location : ("https://localhost" + request.url)};
   response.writeHead(Redirect, redirectLocation);
   response.end();
 }
+
+// Redirection of requests with a 302 response code.
+// @param url is appended to https://localhost
 function redirectInternal(request, response, url){
   var redirectLocation = {Location : ("https://localhost" + url)};
   response.writeHead(Redirect, redirectLocation);
   response.end();
 }
+// This method is handling the message form, login  and logout
+// POST requests.
 function handlePostRequest(request, response, url){
   var body="";
   request.on('data', function (data) {
@@ -148,15 +154,17 @@ function handlePostRequest(request, response, url){
       password = cred[1].substring(i1+1, cred[1].length);
       console.log(cred +"\n"+userName+"\n"+password );
       authenticate.verify(userName,password,db,verifyThis)
+
       function verifyThis(){
         redirectInternal(request,response,loginRedirCallbackUrl);
         loggedin = true;
       }
-      }
-
+    }
   });
 }
 
+// Redirects internally without the browser knowing for
+// a neater URL.
 function redirects(url){
   if(url === "/client/info.html"){
     url = "/client/infotemp.html";
@@ -215,6 +223,9 @@ function valid(url) {
   return true;
 }
 
+// Checks if the file is in a restricted folder
+// The lower(url) has run so any other combination of
+// lower and uppercase cannot be accessed either.
 function free(url){
   if(url.indexOf("admin") > 0) return false;
   return true;
@@ -292,9 +303,16 @@ function fail(response, code, text) {
 function starts(s, x) { return s.lastIndexOf(x, 0) == 0; }
 function ends(s, x) { return s.indexOf(x, s.length-x.length) >= 0; }
 
-// Avoid delivering the server source file.  Also call banUpperCase.
+// Avoid delivering the server source file.
+// Also call banUpperCase.
+// Although the authenticate.js file is in a folder with both upper and
+// lower case and cannot be accessed through a server running in linux,
+// it is banned anyway just in case the server gets moved to other platforms.
 function defineBanned() {
-  var banned = ["/server.js"];
+  var banned = [
+    "/server.js",
+    "/nodeScripts/authenticate.js"
+  ];
   banUpperCase(".", banned);
   return banned;
 }
@@ -379,4 +397,6 @@ function test() {
   t.check(negotiate("xxx,text/html"), "text/html");
   t.check(negotiate("xxx,application/xhtml+xml"), "application/xhtml+xml");
   t.check(fs.existsSync('./index.html'), true, "site contains no index.html");
+  // additional tests to the original.
+  t.check(free("/admin/messages.html"),false);
 }

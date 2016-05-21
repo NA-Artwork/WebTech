@@ -270,6 +270,10 @@ img#info{
   height: auto;
   max-height: 450px;
   width: auto;
+  margin-bottom: 3em;
+}
+img#info1{
+  width:70%;
 }
 .disc{
   margin: 3em auto;
