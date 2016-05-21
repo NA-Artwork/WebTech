@@ -7,30 +7,15 @@ var returnval=false;
 module.exports.verify=function verify(un, p, db){
   var userName;
   var passWord;
-  var ps = db.prepare("SELECT userName as username from User where username=?");
-  ps.get(un, function(err, row) {
+  var ps = db.prepare("SELECT userName, pass from User where username=? and pass=?");
+  ps.get(un, p, function(err, row) {
     if(row!=undefined){
-      userName=row.userName;
-      console.log("un=" + un + "username=" + userName);
-    }
-    });
-  var pspass = db.prepare("SELECT pass AS password from User where password=?");
-  pspass.get(p, function(err, row) {
-    if(row!=undefined){
-      passWord=row.password;
-      console.log("!!!!!!!!!!!!!!!!!!!!!!p=" + p + "password=" + passWord);
-    }
-  });
-  setTimeout(function () {
-    if(p===passWord && un===userName){
-      console.log("full match");
-      returnval= true;
+      returnval=true
     }
     else{
-      console.log("fail");
-      returnval= false;
+      returnval=false;
     }
-  }, 2000);
+    });
 }
 
 

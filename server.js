@@ -119,18 +119,6 @@ function authenticateCheck(u, p){
   var rValue= authenticate.getValue();
   console.log(rValue);
   return rValue;
-
-//   function myFunction() {
-//     myVar = setTimeout(authenticate.getvalue(), 300);
-// }
-// console.log(authenticate.getValue());
-// return authenticate.getvalue();
-  // if(u ==="1" && p === "1"){
-  //   return true;
-  // }
-  // else{
-  //   return false;
-  // }
 }
 
 function redirectToHTTPS(request, response){
