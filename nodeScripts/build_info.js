@@ -24,7 +24,6 @@ function fillInfo(query, fs){
   for(var i = 0; i <= 1; i++){
     var img = key+index[i]+".jpg";
     console.log("looking for: "+folder+img);
-    console.log(fs.existsSync(folder+img));
     if(fs.existsSync(folder+img)){
       console.log("found: "+folder+img);
       query += addImage(folder,img);
@@ -40,5 +39,5 @@ function addImage(folder,img){
   return str;
 }
 function test(){
-  t.check(addImage("/painting/","k2"),"<divpainting");
+  // t.check(addImage("/painting/","k2"),"<divpainting");
 }

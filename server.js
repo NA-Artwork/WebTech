@@ -98,9 +98,16 @@ function handle(request, response) {
   if (! valid(url)) return fail(response, NotFound, "Invalid URL");
   if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
   if (! free(url)){
-    if (loggedin==true){console.log("loggedin");}
+    if (loggedin==true) console.log("loggedin");
     else {
       loginRedirCallbackUrl = url;
+      authenticate.verify(userName,password,db,verifyThis);
+
+      function verifyThis(){
+        loggedin = true;
+        redirectInternal(request,response,loginRedirCallbackUrl);
+      }
+
       redirectInternal(request, response, "/login.html");
     }
   }
@@ -136,12 +143,9 @@ function handlePostRequest(request, response, url){
     body += data;
   });
   request.on('end',function(){
-    console.log(body + " url " +url);
     if(body.indexOf("foo=logout")==0){
       console.log(body+" logged Out");
-      userName = null;
-      password = null;
-      loggedin = false;
+      logout();
       redirectInternal(request,response,"");
     }
     if(url == "/client/contact.html"){
@@ -152,17 +156,22 @@ function handlePostRequest(request, response, url){
       userName = cred[0].substring(i1+1,cred[0].length);
       i1 = cred[1].indexOf('=');
       password = cred[1].substring(i1+1, cred[1].length);
-      console.log(cred +"\n"+userName+"\n"+password );
-      authenticate.verify(userName,password,db,verifyThis)
+      authenticate.verify(userName,password,db,verifyThis);
 
       function verifyThis(){
-        redirectInternal(request,response,loginRedirCallbackUrl);
         loggedin = true;
+        redirectInternal(request,response,loginRedirCallbackUrl);
       }
     }
   });
 }
 
+// Turns the authentication keys to null
+function logout(){
+  userName = null;
+  password = null;
+  loggedin = false;
+}
 // Redirects internally without the browser knowing for
 // a neater URL.
 function redirects(url){
@@ -170,8 +179,6 @@ function redirects(url){
     url = "/client/infotemp.html";
   }else if(url === "/admin/messages.html"){
     url = "/admin/messagestemp.html";
-  } else if (url === '/client/login.html'){
-    url = "/admin/messages.html";
   }
   return url;
 }
@@ -187,7 +194,6 @@ function retrieveQuery(url) {
   var n = url.indexOf('?');
   if (n >= 0){
     var query = url.substring(n+1, url.length);
-    console.log(query);
     return query;
   }
   return null;
@@ -277,7 +283,6 @@ function negotiate(accept) {
 // Read and deliver the url as a file within the site.
 function reply(response, url, type) {
   var file = "." + url;
-  console.log(file);
   fs.readFile(file, deliver.bind(null, response, type));
 }
 
