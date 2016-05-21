@@ -138,7 +138,7 @@ function handlePostRequest(request, response, url){
     }
     if(url == "/client/contact.html"){
       commentFormSql.insertMessage(body, db, fs);
-    }else if(body.indexOf("password")>0){
+    }else if(body.indexOf("login=login")>0){
       var cred = body.split('&');
       var i1 = cred[0].indexOf('=');
       userName = cred[0].substring(i1+1,cred[0].length);
