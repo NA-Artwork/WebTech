@@ -115,8 +115,9 @@ function handle(request, response) {
 }
 
 function authenticateCheck(u, p){
-  authenticate.verify(u, p, db);
-  var rValue= authenticate.getValue();
+  console.log("authenticateCheck");
+  var rValue=  authenticate.getValue(u, p, db);
+  // var rValue=authenticate.getValue();
   console.log(rValue);
   return rValue;
 }
