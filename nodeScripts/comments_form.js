@@ -3,7 +3,12 @@ var t = require("./test.js");
 var urlencode = require('urlencode');
 var messageUpdate = require("./build_messages.js");
 
-module.exports.insertMessage = function insertMessage(query, db, fs){
+module.exports = {
+  insertMessage:insertMessage,
+  test:test
+}
+
+function insertMessage(query, db, fs){
   if(query!=null){
     var index;
     var querySplit = query.split('&');
@@ -44,7 +49,7 @@ function decodingProcess(str){
   return str;
 }
 
-module.exports.test = function test(){
+function test(){
   t.check(decodingProcess("a+%2B+b+is"), "a + b is");
   t.check(decodingProcess("nikos+40gmail.com"),"nikos 40gmail.com");
 }
