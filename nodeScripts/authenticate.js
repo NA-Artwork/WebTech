@@ -1,60 +1,21 @@
 "use strict";
-var sql = require('sqlite3');
-var db = new sql.Database("./database/database.sqlite3");
-verify("alex", "password1");
-
-// module.exports.verify=function verify(un,p){
-function verify(un,p){
-
-  var userNameMatch;
-  var passWordMatch;
-  var ps = db.prepare("SELECT userName as username from User where username=?");
-  // db.each("SELECT username as username from User", function(err, row) {
-  //     console.log("\n" + row.username);
-  //     });
-  ps.get(un, function(err, row) {
-    if(row){
-      // console.log("database ussername= " +  row.username );
-      if(un===row.username){
-        userNameMatch=true;
-        console.log("user match");
-        var ps = db.prepare("SELECT pass AS password from User where password=?");
-
-        ps.get(p, function(err, row) {
-          if(row){
-            if(p===row.password){
-              passWordMatch=true;
-              console.log("pass match");
-              return passMatch(passWordMatch, userNameMatch);
-            }
-          }
-        });
-      }
-    }
-  });
-  return false;
-  }
-
-  function passMatch(passWordMatch, userNameMatch){
-    // console.log("passWordMatch userNameMatch=" + passWordMatch + " " + userNameMatch)
-    if(passWordMatch==true && userNameMatch==true){
-      console.log("full match");
-      return true;
-    }
-    else{
-      console.log("fail match");
+module.exports.verify = function verify(un,p,db){
+  console.log(un+p);
+  return db.run(
+    "SELECT userName,pass from User WHERE username='"+un+"' AND pass='"+p+"'",
+     getResults);
+  function getResults(err, row,verified){
+    if(err) {
+      console.error(err);
       return false;
     }
-  // if(passWordMatch==true && userNameMatch==true){
-  //   console.log("full match");
-  //   return true;
-  // }
-  // else{
-  //   console.log("fail");
-  //   return false;
-  // }
-  // if(un==="Nikos"&&p==="pa") return true;
-  // else return false;
+    if(row){
+      console.log("row"+row.userName+row.pass);
+    }
+  }
+  function verified(){
+    console.log("complete");
+  }
 }
 
 
