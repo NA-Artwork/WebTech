@@ -18,12 +18,6 @@ var cry = require("crypto");
 var authenticate = require('./nodeScripts/authenticate.js')
 var sql = require('sqlite3').verbose();
 var db = new sql.Database('./database/database.sqlite3');
-
-//redirect directly
-//
-// var createDB = require('./database/setup/create.js');
-// create.startup();
-
 var t = require("./nodeScripts/test.js");
 var commentFormSql = require("./nodeScripts/comments_form.js");
 var buildInfo = require("./nodeScripts/build_info.js");
@@ -89,12 +83,10 @@ function handle(request, response) {
   var url = request.url;
   var method = request.method;
   var query = retrieveQuery(url);
-
   url = removeQuery(url);
   url = lower(url);
   url = addIndex(url);
   executeQuery(query,url);
-
   if (! valid(url)) return fail(response, NotFound, "Invalid URL");
   if (! safe(url))  return fail(response, NotFound, "Unsafe URL");
   if (! free(url)){
@@ -102,12 +94,10 @@ function handle(request, response) {
     else {
       loginRedirCallbackUrl = url;
       authenticate.verify(userName,password,db,verifyThis);
-
       function verifyThis(){
         loggedin = true;
         redirectInternal(request,response,loginRedirCallbackUrl);
       }
-
       redirectInternal(request, response, "/login.html");
     }
   }
@@ -116,7 +106,6 @@ function handle(request, response) {
   if (type == null) return fail(response, BadType, "File type unsupported");
   if (type == "text/html") type = negotiate(request.headers.accept);
   if(method == 'POST') handlePostRequest(request, response, url);
-
   url = redirects(url);
   reply(response, url, type);
 }
@@ -135,6 +124,7 @@ function redirectInternal(request, response, url){
   response.writeHead(Redirect, redirectLocation);
   response.end();
 }
+
 // This method is handling the message form, login  and logout
 // POST requests.
 function handlePostRequest(request, response, url){
@@ -157,7 +147,6 @@ function handlePostRequest(request, response, url){
       i1 = cred[1].indexOf('=');
       password = cred[1].substring(i1+1, cred[1].length);
       authenticate.verify(userName,password,db,verifyThis);
-
       function verifyThis(){
         loggedin = true;
         redirectInternal(request,response,loginRedirCallbackUrl);
@@ -172,6 +161,7 @@ function logout(){
   password = null;
   loggedin = false;
 }
+
 // Redirects internally without the browser knowing for
 // a neater URL.
 function redirects(url){
@@ -182,6 +172,7 @@ function redirects(url){
   }
   return url;
 }
+
 // Remove the query part of a url.
 function removeQuery(url) {
   var n = url.indexOf('?');
@@ -236,6 +227,7 @@ function free(url){
   if(url.indexOf("admin") > 0) return false;
   return true;
 }
+
 // Restrict the url to visible ascii characters, excluding control characters,
 // spaces, and unicode characters beyond ascii.  Such characters aren't
 // technically illegal, but (a) need to be escaped which causes confusion for
