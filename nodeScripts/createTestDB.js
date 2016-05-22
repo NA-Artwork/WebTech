@@ -1,3 +1,4 @@
+// creates a test database if required
 "use strict";
 var sql = require("sqlite3");
 sql.verbose();
@@ -17,6 +18,7 @@ function startup() {
           "userName VARCHAR(100) NOT NULL UNIQUE, pass VARCHAR(100) NOT NULL, "+
           "CONSTRAINT pkUid PRIMARY KEY(usId))", err);
   testDB.run("INSERT INTO USER (userName, pass) VALUES ('Nikos', '2108')", err)
+  testDB.run("INSERT INTO USER (userName, pass) VALUES ('admin', 'admin')", err)
 
   testDB.close();
 }
