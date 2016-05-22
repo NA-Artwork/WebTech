@@ -1,3 +1,4 @@
+//this creates a database for use by server.js
 "use strict";
 var sql = require("sqlite3").verbose();
 module.exports = {

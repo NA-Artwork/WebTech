@@ -4,6 +4,7 @@ module.exports = {
   buildMessagesPage:buildMessagesPage,
   test:test
 }
+
 // This function is called every time a message is sent so
 // that the messages page is updated. It finds every entry in the
 // database and it populates the messages.html page.
@@ -15,6 +16,8 @@ function buildMessagesPage(db, fs){
     if(!rows) throw err;
     else readMessageHTML(fs, rows);
   }
+
+  //this function reads the message from the server
   function readMessageHTML(fs, rows){
     var file = "./admin/messages.html";
     var list = "";
@@ -28,11 +31,10 @@ function buildMessagesPage(db, fs){
         list = addListItem(row.body, list, "message");
         list = addlineBreak(list);
       })
-
     fs.readFile(file,'utf8', writeMessageHTML.bind(null,fs,list));
   }
-
 }
+
 // This is the function that actually executes the writing to
 // the messages.html file
 function writeMessageHTML(fs, list, err, data){
@@ -44,10 +46,13 @@ function writeMessageHTML(fs, list, err, data){
   }
 }
 
+//this adds an item to the list
 function addListItem(item, list, classId){
   list = list + "<li class='"+classId+"'>"+item+"</li>\n";
   return list;
 }
+
+// this adds the html linebreak to a list
 function addlineBreak(list){
   return list +"<br/>";
 

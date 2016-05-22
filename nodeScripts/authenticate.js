@@ -30,7 +30,4 @@ function test(){ // used for testing
   verify("Nikos","2108",testDB,returnValue);
   verify("Nikos","999",testDB,returnValue);
   function returnValue(){}
-
-  // t.check(verify("Nikos","2108",db,returnValue).callback(), true);
-  // t.check(verify("Nikos","9999",db),false);
 }
