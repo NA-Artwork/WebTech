@@ -6,6 +6,7 @@ module.exports = {
   test:test
 }
 
+// this is the main funcyion in build_info.js and controls the other functions
 function buildInfoPage(query, fs){
    var file = "./client/info.html";
    var fileOut ="./client/infotemp.html"
@@ -16,6 +17,7 @@ function buildInfoPage(query, fs){
    fs.writeFileSync(fileOut,index);
    return "/client/infotemp.html";
 }
+
 // This function looks for the detail images
 // that some of the big artwork have, saved in the same folder
 // for example k7.jpg also corresponds to k7d.jpg and k7e.jpg
@@ -40,11 +42,11 @@ function fillInfo(query, fs){
 
 // This function appends the string with a <div> <img>
 function addImage(folder,img){
-  var div = "<div class="+'"'+"img"+'"'
-  var str = div+"><img id="+'"'+"info1"+'"'+
-  " src="+ '"' + folder + img +'"'+ "/></div>";
+  var div = "<div class=\"img\""; // the escape character \" is used
+  var str = div+"><img id=\"info1\" src=\"" + folder + img +"\"/></div>";
   return str;
 }
+
 function test(){
-  // t.check(addImage("/painting/","k2"),"<divpainting");
+  t.check(addImage("/painting/","k2"),"<div class=\"img\"><img id=\"info1\" src=\"/painting/k2\"/></div>");
 }
