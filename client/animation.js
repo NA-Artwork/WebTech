@@ -122,17 +122,5 @@ var animate = function() {
            counter++;
     }
 }
-var transit = function() {
-  var counter2=10;
-  var id2 = setInterval(frame2, 100);
-  function frame2() {
-    if(counter2 <= 0){
-      clearInterval(id2);
-    } else if (counter2 >0){
-      counter2--;
-      mainImage.style.left="10px";
-    }
-  }
-}
-window.onload = animate().pipe(transit());
-setTimeout( "window.location.href = 'home.html'",8000);
+
+window.onload = animate();

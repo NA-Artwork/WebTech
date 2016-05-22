@@ -16,26 +16,33 @@ function buildInfoPage(query, fs){
    fs.writeFileSync(fileOut,index);
    return "/client/infotemp.html";
 }
-
+// This function looks for the detail images
+// that some of the big artwork have, saved in the same folder
+// for example k7.jpg also corresponds to k7d.jpg and k7e.jpg
 function fillInfo(query, fs){
   var index=['d','e'];
   var key = query;
-  var folder = "./client/images/gallery_pictures/painting/";
+  query="";
+  var folder= "./client/"
+  var subfolder = "images/gallery_pictures/painting/";
   for(var i = 0; i <= 1; i++){
     var img = key+index[i]+".jpg";
-    console.log("looking for: "+folder+img);
-    if(fs.existsSync(folder+img)){
+    console.log("looking for: "+folder+subfolder+img);
+    if(fs.existsSync(folder+subfolder+img)){
       console.log("found: "+folder+img);
-      query += addImage(folder,img);
+      query += addImage(subfolder,img);
     }
+    else if(query.length<5) query =" ";
     else query +=" ";
   }
   return query;
 }
+
+// This function appends the string with a <div> <img>
 function addImage(folder,img){
   var div = "<div class="+'"'+"img"+'"'
-  var str = div+"><img id="+'"'+"info1"+'"'+" src="+'"'+
-  folder.substring(1,folder.length)+img+'"'+"/></div>";
+  var str = div+"><img id="+'"'+"info1"+'"'+
+  " src="+ '"' + folder + img +'"'+ "/></div>";
   return str;
 }
 function test(){
