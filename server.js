@@ -47,9 +47,9 @@ var loginRedirCallbackUrl = null;
 
 // The options for httpsService
 const options = {
-  key:  fs.readFileSync('server-key.pem'),
-  cert: fs.readFileSync('server-crt.pem'),
-  ca:   fs.readFileSync('ca-crt.pem'),
+  key:  fs.readFileSync('certificates/server-key.pem'),
+  cert: fs.readFileSync('certificates/server-crt.pem'),
+  ca:   fs.readFileSync('certificates/ca-crt.pem'),
 };
 // Declaring the ports to listen, ports[0]:http and ports[1]:https
 var ports = [80, 443];
@@ -316,7 +316,10 @@ function ends(s, x) { return s.indexOf(x, s.length-x.length) >= 0; }
 function defineBanned() {
   var banned = [
     "/server.js",
-    "/nodeScripts/authenticate.js"
+    "/nodeScripts/authenticate.js",
+    "/certificates/server-key.pem",
+    "/certificates/server-crt.pem",
+    "/certificates/ca-crt.pem"
   ];
   banUpperCase(".", banned);
   return banned;
