@@ -7,24 +7,24 @@
 // file system is treated as case sensitive, even on Windows.
 
 // Load the library modules, and define the response codes:
-// see http://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
 // Define the list of banned urls, and the table of file types, and run tests.
 // Then start the server on the given port: use the default 80, or use 8080 to
 // avoid privilege or port number clash problems or to add firewall protection.
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
-var cry = require("crypto");
-var authenticate = require('./nodeScripts/authenticate.js')
 var sql = require('sqlite3').verbose();
+
+// Create the database if there isn't one and load it
+if(!fs.existsSync("./database/database.sqlite3")){
+  var createDB = require('./database/setup/create.js');
+  createDB.startup();
+}
 var db = new sql.Database('./database/database.sqlite3');
 
-//redirect directly
-//
-// var createDB = require('./database/setup/create.js');
-// create.startup();
-
+// Load up the modules that were developed around this server.js
 var t = require("./nodeScripts/test.js");
+var authenticate = require('./nodeScripts/authenticate.js')
 var commentFormSql = require("./nodeScripts/comments_form.js");
 var buildInfo = require("./nodeScripts/build_info.js");
 var buildMessgP = require("./nodeScripts/build_messages.js");

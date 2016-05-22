@@ -1,6 +1,8 @@
 "use strict";
-var sql = require("sqlite3");
-sql.verbose();
+var sql = require("sqlite3").verbose();
+module.exports = {
+  startup:startup
+}
 var db = new sql.Database("../database.sqlite3");
 db.serialize(startup);
 
