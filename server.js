@@ -7,18 +7,24 @@
 // file system is treated as case sensitive, even on Windows.
 
 // Load the library modules, and define the response codes:
-// see http://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
 // Define the list of banned urls, and the table of file types, and run tests.
 // Then start the server on the given port: use the default 80, or use 8080 to
 // avoid privilege or port number clash problems or to add firewall protection.
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
-var cry = require("crypto");
-var authenticate = require('./nodeScripts/authenticate.js')
 var sql = require('sqlite3').verbose();
+ 
+// Create the database if there isn't one and load it
+if(!fs.existsSync("./database/database.sqlite3")){
+  var createDB = require('./database/setup/create.js');
+  createDB.startup();
+}
 var db = new sql.Database('./database/database.sqlite3');
+
+// Load up the modules that were developed around this server.js
 var t = require("./nodeScripts/test.js");
+var authenticate = require('./nodeScripts/authenticate.js')
 var commentFormSql = require("./nodeScripts/comments_form.js");
 var buildInfo = require("./nodeScripts/build_info.js");
 var buildMessgP = require("./nodeScripts/build_messages.js");
@@ -41,9 +47,9 @@ var loginRedirCallbackUrl = null;
 
 // The options for httpsService
 const options = {
-  key:  fs.readFileSync('server-key.pem'),
-  cert: fs.readFileSync('server-crt.pem'),
-  ca:   fs.readFileSync('ca-crt.pem'),
+  key:  fs.readFileSync('certificates/server-key.pem'),
+  cert: fs.readFileSync('certificates/server-crt.pem'),
+  ca:   fs.readFileSync('certificates/ca-crt.pem'),
 };
 // Declaring the ports to listen, ports[0]:http and ports[1]:https
 var ports = [80, 443];
@@ -308,7 +314,10 @@ function ends(s, x) { return s.indexOf(x, s.length-x.length) >= 0; }
 function defineBanned() {
   var banned = [
     "/server.js",
-    "/nodeScripts/authenticate.js"
+    "/nodeScripts/authenticate.js",
+    "/certificates/server-key.pem",
+    "/certificates/server-crt.pem",
+    "/certificates/ca-crt.pem"
   ];
   banUpperCase(".", banned);
   return banned;

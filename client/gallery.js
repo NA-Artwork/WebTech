@@ -1,6 +1,6 @@
 // This piece of code is originated from:
 // http://www.w3schools.com/css/tryit.asp?filename=trycss_image_gallery_responsive_js
-
+// and has been subject to changes
 var modal = document.getElementById('myModal');
 var span = document.getElementById('close');
 span.onclick = function() {
