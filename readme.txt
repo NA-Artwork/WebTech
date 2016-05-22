@@ -1,38 +1,39 @@
-Alex (ab15236) and I (np15685) have been asked by a local artist to create a website to
-showcase her artwork. We have been given drawings and briefs on the design that she
-would like and we hope at the end of the project to host the website for here. At times we
-have implemented features to only go back to the drawing board after showing these
-features to the client.
+The user first needs to install npm dependencies with npm install basic-auth
+sqlite3 urlencode
 
-Please can you mark for feedback. We expect to add further client side features therefore a
-final client side submission on May the 22nd after feedback would be appreciated.
+To run the server file type 	sudo nodejs server.js    The website can then
+be accessed from https://localhost
 
-Website features
-  1. home.html
-    a. Custom made music in intro.html
-    b. Long animation in javascript creating a paint like feature
-    c. animations gradually darkens so that it appears like the paint is drying
-  2. info.html (where user can see the entire picture instead of a rectangular thumbnail)
-    a. image enlarging
-      i. darkens the background
-      ii. has an exit button
-      iii. appears gradually so that it does not come abruptly
-    b. content will be auto generated for a custom page for each image with server
-    side work
-  3. islamic_art.html
-    a. svg spinning picture which stops on mouse hover to make the page
-    construction look dynamic.
-    b. svg logo created with inkscape at the bottom right of the page
-  4. contact.html
-    a. textarea forms
-    b. javascript which clears all the forms on click
-    c. javascript which clears “Please insert message here text” on click ­
-    programmed for only one use so that it does not clear users text on click
-  5. about.html
-    a. image enlarging function from info.html
-  6. Throughout website
-    a. dropdown menu throughout website
-    b. menu changes colour on different items using tags for a fun feel
-    c. use of “Fredericka the Great” throughout
-    d. extensive styling using style.css
-    e. back to top link where scrollable
+
+When the server runs the following will appear:
+user match
+Wrong combination of username and password
+
+This is to be expected and shows that the tests for accessing the database
+ have run successfully. The other tests are run in the background.
+
+
+The database files have been included as part of the upload. However the
+/database/setup/create.js and /nodeScripts/createTestDB.js nodejs scripts
+ have been included if the databases need to be re-installed.
+
+The webpages are as follows:
+https://localhost/admin/messages.html - login with username admin and
+password admin if using the supplied database file to view the comments
+from the database
+https://localhost/client/home.html starts the page and has a javascript
+animation
+https://localhost/client/painting.html - click on a painting for a server
+generated html page
+https://localhost/client/mix_tech.html - click on painting for javascript
+image enlarging
+https://localhost/client/islamic_art.html - spinning svg image
+https://localhost/client/contact.html - form for leaving comments -
+comments are kept in a database for future viewing
+https://localhost/admin/adminpage.html - this is a proof of concept for
+adding new photos
+
+All of these web pages apart from  https://localhost/admin/messages.html
+can be accessed from links from the other pages
+
+The username admin and password admin can be used to access the website
